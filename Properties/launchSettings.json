@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "RevoluteConfigApp (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "RevoluteConfigApp (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
