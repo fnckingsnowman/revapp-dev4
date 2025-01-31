@@ -10,16 +10,26 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <!-- Button to start BLE scan -->
         <Button 
             Content="Scan for BLE Devices" 
             Click="StartBLEScan_Click"
             Margin="50,50,50,0"
             Width="200"/>
 
+        <!-- ListBox to display BLE devices -->
         <ListBox 
             ItemsSource="{Binding Devices}"
             Margin="50,100,50,0"
             Width="400"
             x:Name="DevicesList"/>
+
+        <!-- TextBlock to display output with scanned UUIDs -->
+        <TextBlock 
+            x:Name="OutputTextBlock"
+            Margin="50,250,50,0"
+            Text="Advertising UUIDs will appear here..."
+            TextWrapping="Wrap"
+            Width="400"/>
     </Grid>
 </Page>
