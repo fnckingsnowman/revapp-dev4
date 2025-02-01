@@ -121,16 +121,21 @@ namespace RevoluteConfigApp.Pages
         // Function to pair a device
         private async Task PairDeviceAsync(DeviceInfo deviceInfo)
         {
+            BluetoothLEDevice bluetoothLeDevice = null;
             try
             {
-                var bluetoothLeDevice = await BluetoothLEDevice.FromBluetoothAddressAsync(deviceInfo.AdvertisementArgs.BluetoothAddress);
+                bluetoothLeDevice = await BluetoothLEDevice.FromBluetoothAddressAsync(deviceInfo.AdvertisementArgs.BluetoothAddress);
                 if (bluetoothLeDevice != null)
                 {
+                    Debug.WriteLine($"Attempting to pair with {deviceInfo.Name}...");
                     var pairingResult = await bluetoothLeDevice.DeviceInformation.Pairing.PairAsync();
+                    Debug.WriteLine($"Pairing result: {pairingResult.Status}");
+
                     if (pairingResult.Status == DevicePairingResultStatus.Paired)
                     {
                         deviceInfo.IsPaired = true;
                         OutputTextBlock.Text = $"Successfully paired with {deviceInfo.Name}.";
+                        await RefreshDeviceListAsync();
                     }
                     else
                     {
@@ -140,10 +145,14 @@ namespace RevoluteConfigApp.Pages
             }
             catch (Exception ex)
             {
+                Debug.WriteLine($"Error pairing with {deviceInfo.Name}: {ex.Message}");
                 OutputTextBlock.Text = $"Error pairing with {deviceInfo.Name}: {ex.Message}";
             }
+            finally
+            {
+                bluetoothLeDevice?.Dispose();
+            }
         }
-
         // Function to connect to a device
         private async Task ConnectToDeviceAsync(DeviceInfo deviceInfo)
         {
@@ -187,6 +196,16 @@ namespace RevoluteConfigApp.Pages
             catch (Exception ex)
             {
                 Debug.WriteLine($"Error discovering services: {ex.Message}");
+            }
+        }
+
+        private async Task RefreshDeviceListAsync()
+        {
+            foreach (var deviceInfo in Devices)
+            {
+                var deviceSelector = BluetoothLEDevice.GetDeviceSelectorFromDeviceName(deviceInfo.Name);
+                var devices = await DeviceInformation.FindAllAsync(deviceSelector);
+                deviceInfo.IsPaired = devices.Count > 0 && devices[0].Pairing.IsPaired;
             }
         }
 
