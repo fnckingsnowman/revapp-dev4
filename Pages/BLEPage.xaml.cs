@@ -121,36 +121,70 @@ namespace RevoluteConfigApp.Pages
         // Function to pair a device
         private async Task PairDeviceAsync(DeviceInfo deviceInfo)
         {
-            BluetoothLEDevice bluetoothLeDevice = null;
             try
             {
-                bluetoothLeDevice = await BluetoothLEDevice.FromBluetoothAddressAsync(deviceInfo.AdvertisementArgs.BluetoothAddress);
-                if (bluetoothLeDevice != null)
-                {
-                    Debug.WriteLine($"Attempting to pair with {deviceInfo.Name}...");
-                    var pairingResult = await bluetoothLeDevice.DeviceInformation.Pairing.PairAsync();
-                    Debug.WriteLine($"Pairing result: {pairingResult.Status}");
+                Debug.WriteLine($"Attempting to pair with {deviceInfo.Name}...");
 
-                    if (pairingResult.Status == DevicePairingResultStatus.Paired)
+                // Find the device by name
+                var deviceSelector = BluetoothLEDevice.GetDeviceSelectorFromDeviceName(deviceInfo.Name);
+                var devices = await DeviceInformation.FindAllAsync(deviceSelector);
+
+                Debug.WriteLine($"Found {devices.Count} devices matching the name {deviceInfo.Name}.");
+
+                if (devices.Count > 0)
+                {
+                    var deviceInfoObj = devices[0];
+                    Debug.WriteLine($"Device ID: {deviceInfoObj.Id}, IsPaired: {deviceInfoObj.Pairing.IsPaired}");
+
+                    // Check if the device is already paired
+                    if (deviceInfoObj.Pairing.IsPaired)
                     {
+                        Debug.WriteLine($"{deviceInfo.Name} is already paired.");
+                        OutputTextBlock.Text = $"{deviceInfo.Name} is already paired.";
                         deviceInfo.IsPaired = true;
-                        OutputTextBlock.Text = $"Successfully paired with {deviceInfo.Name}.";
-                        await RefreshDeviceListAsync();
+                        return;
                     }
-                    else
+
+                    // Use the Bluetooth address to connect to the device
+                    using (var bluetoothLeDevice = await BluetoothLEDevice.FromIdAsync(deviceInfoObj.Id))
                     {
-                        OutputTextBlock.Text = $"Failed to pair with {deviceInfo.Name}. Status: {pairingResult.Status}";
+                        if (bluetoothLeDevice != null)
+                        {
+                            Debug.WriteLine($"Connected to {deviceInfo.Name}.");
+
+                            // Attempt to pair with the device
+                            var pairingResult = await deviceInfoObj.Pairing.PairAsync();
+                            Debug.WriteLine($"Pairing result: {pairingResult.Status}");
+
+                            if (pairingResult.Status == DevicePairingResultStatus.Paired)
+                            {
+                                OutputTextBlock.Text = $"Successfully paired with {deviceInfo.Name}.";
+                                deviceInfo.IsPaired = true;
+
+                                // Force UI refresh
+                                Devices.Remove(deviceInfo);
+                                Devices.Add(deviceInfo);
+                            }
+                            else
+                            {
+                                OutputTextBlock.Text = $"Failed to pair with {deviceInfo.Name}. Status: {pairingResult.Status}";
+                            }
+                        }
+                        else
+                        {
+                            OutputTextBlock.Text = $"Failed to connect to {deviceInfo.Name}.";
+                        }
                     }
+                }
+                else
+                {
+                    OutputTextBlock.Text = $"Device {deviceInfo.Name} not found.";
                 }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"Error pairing with {deviceInfo.Name}: {ex.Message}");
                 OutputTextBlock.Text = $"Error pairing with {deviceInfo.Name}: {ex.Message}";
-            }
-            finally
-            {
-                bluetoothLeDevice?.Dispose();
             }
         }
         // Function to connect to a device
