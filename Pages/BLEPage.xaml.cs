@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System;
 using System.Threading.Tasks;
+using Windows.Devices.Bluetooth.GenericAttributeProfile;
 
 namespace RevoluteConfigApp.Pages
 {
@@ -112,6 +113,19 @@ namespace RevoluteConfigApp.Pages
                         if (pairingResult.Status == DevicePairingResultStatus.Paired)
                         {
                             OutputTextBlock.Text = $"Successfully paired with {deviceName}.";
+
+                            // Establish a GATT connection to the device
+                            if (bluetoothLeDevice.ConnectionStatus == BluetoothConnectionStatus.Connected)
+                            {
+                                OutputTextBlock.Text = $"{deviceName} is connected to the app.";
+                            }
+                            else
+                            {
+                                OutputTextBlock.Text = $"{deviceName} is paired but not connected to the app.";
+                            }
+
+                            // Optionally, discover services and characteristics
+                            await DiscoverServicesAsync(bluetoothLeDevice);
                         }
                         else
                         {
@@ -131,6 +145,44 @@ namespace RevoluteConfigApp.Pages
             catch (Exception ex)
             {
                 OutputTextBlock.Text = $"Error connecting to {deviceName}: {ex.Message}";
+            }
+        }
+
+        // Method to discover services and characteristics
+        private async Task DiscoverServicesAsync(BluetoothLEDevice bluetoothLeDevice)
+        {
+            try
+            {
+                // Get the GATT services
+                var gattServicesResult = await bluetoothLeDevice.GetGattServicesAsync();
+
+                if (gattServicesResult.Status == GattCommunicationStatus.Success)
+                {
+                    foreach (var service in gattServicesResult.Services)
+                    {
+                        Debug.WriteLine($"Service UUID: {service.Uuid}");
+
+                        // Get the characteristics for each service
+                        var gattCharacteristicsResult = await service.GetCharacteristicsAsync();
+                        if (gattCharacteristicsResult.Status == GattCommunicationStatus.Success)
+                        {
+                            foreach (var characteristic in gattCharacteristicsResult.Characteristics)
+                            {
+                                Debug.WriteLine($"Characteristic UUID: {characteristic.Uuid}");
+                            }
+                        }
+                    }
+
+                    OutputTextBlock.Text = $"Discovered services and characteristics for {bluetoothLeDevice.Name}.";
+                }
+                else
+                {
+                    OutputTextBlock.Text = $"Failed to discover services for {bluetoothLeDevice.Name}.";
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error discovering services: {ex.Message}");
             }
         }
 

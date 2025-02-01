@@ -20,19 +20,28 @@
 
         <!-- ListBox to display BLE devices -->
         <ListBox 
-            ItemsSource="{Binding Devices}"
-            Margin="50,100,50,50"
-            HorizontalAlignment="Stretch"
-            x:Name="DevicesList">
+    ItemsSource="{Binding Devices}"
+    Margin="50,100,50,50"
+    HorizontalAlignment="Stretch"
+    x:Name="DevicesList">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding}" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                        <TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                        <!-- Show "Pair" button if the device is not paired -->
                         <Button 
-                            Content="Connect" 
-                            Click="ConnectButton_Click"
-                            Tag="{Binding}"
-                            Margin="10,0,0,0"/>
+                    Content="Pair" 
+                    Click="PairButton_Click"
+                    Tag="{Binding}"
+                    Margin="10,0,0,0"
+                    Visibility="{Binding IsPaired, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Inverse}"/>
+                        <!-- Show "Connect" button if the device is paired -->
+                        <Button 
+                    Content="Connect" 
+                    Click="ConnectButton_Click"
+                    Tag="{Binding}"
+                    Margin="10,0,0,0"
+                    Visibility="{Binding IsPaired, Converter={StaticResource BoolToVisibilityConverter}}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

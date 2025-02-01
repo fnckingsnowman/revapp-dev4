@@ -13,97 +13,90 @@
         <DesktopAcrylicBackdrop />
     </Window.SystemBackdrop>
      -->
-    
+
     <NavigationView PaneTitle="Revolute Configurator" x:Name="nvSample" IsBackButtonVisible="Collapsed">
         <!-- Replace the Header with a SelectorBar -->
         <NavigationView.Header>
-            <Expander HorizontalAlignment="Stretch" Padding="0" Margin="0,0,50,0">
-                <Expander.Header>
-                    <Grid>
-                        <TextBlock HorizontalAlignment="Center" Margin="50,5,0,0" Text="Device name"/>
-                        <DropDownButton Margin="-10,0,0,0" AutomationProperties.Name="More">
-                            <DropDownButton.Content>
-                                <FontIcon Glyph="&#xE712;"/>
-                            </DropDownButton.Content>
-                            <DropDownButton.Flyout>
-                                <MenuFlyout Placement="Bottom">
-                                    <MenuFlyoutItem Icon="Cancel" Text="Disconnect">
-                                    </MenuFlyoutItem>
-                                    <MenuFlyoutItem Icon="Rename" Text="Rename">
-                                    </MenuFlyoutItem>
-                                </MenuFlyout>
-                            </DropDownButton.Flyout>
-                        </DropDownButton>
-                    </Grid>
-                    
-                    
-                    
-                </Expander.Header>
-                <Expander.Content>
-                    <Grid>
-                        
-                        <!-- add a list here which each item in the list has a icon aligned to the left, the name of the item next to the icon, and a button that says 'connect' aligned to the right-->
-                        <ListBox>
-                            <ListBoxItem>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
+            <Grid Margin="0,-45,0,0">
+                <TextBlock HorizontalAlignment="Center" Margin="0,19,15,0" Text="Device name"/>
+                <DropDownButton Margin="-6,0,0,0" AutomationProperties.Name="More">
+                    <DropDownButton.Content>
+                        <FontIcon Glyph="&#xE712;"/>
+                    </DropDownButton.Content>
+                    <DropDownButton.Flyout>
+                        <MenuFlyout Placement="Bottom">
+                            <MenuFlyoutItem Icon="Cancel" Text="Disconnect">
+                            </MenuFlyoutItem>
+                            <MenuFlyoutItem Icon="Rename" Text="Rename">
+                            </MenuFlyoutItem>
+                        </MenuFlyout>
+                    </DropDownButton.Flyout>
+                </DropDownButton>
+                <Button x:Name="ExpandButton" Content="&#xE70D;" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,50,0">
+                    <Button.Flyout>
+                        <Flyout Placement="Bottom">
+                            <Grid>
+                                <!-- Use a StackPanel to display the list of devices -->
+                                <StackPanel>
+                                    <!-- Device 1 -->
+                                    <Grid Margin="0,5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
 
-                                    <!-- Icon aligned to the left -->
-                                    <FontIcon Glyph="&#xE8A7;" VerticalAlignment="Center" Grid.Column="0"/>
+                                        <!-- Icon aligned to the left -->
+                                        <FontIcon Glyph="&#xE8A7;" VerticalAlignment="Center" Grid.Column="0"/>
 
-                                    <!-- Name of the item next to the icon -->
-                                    <TextBlock Text="Item 1" VerticalAlignment="Center" Margin="10,0" Grid.Column="1"/>
+                                        <!-- Name of the device next to the icon -->
+                                        <TextBlock Text="Device 1" VerticalAlignment="Center" Margin="10,0" Grid.Column="1"/>
 
-                                    <!-- Connect button aligned to the right -->
-                                    <Button Content="Connect" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="2"/>
-                                </Grid>
-                            </ListBoxItem>
-                            <ListBoxItem>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
+                                        <!-- Connect button aligned to the right -->
+                                        <Button Content="Connect" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="2"/>
+                                    </Grid>
 
-                                    <!-- Icon aligned to the left -->
-                                    <FontIcon Glyph="&#xE8A7;" VerticalAlignment="Center" Grid.Column="0"/>
+                                    <!-- Device 2 -->
+                                    <Grid Margin="0,5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
 
-                                    <!-- Name of the item next to the icon -->
-                                    <TextBlock Text="Item 2" VerticalAlignment="Center" Margin="10,0" Grid.Column="1"/>
+                                        <!-- Icon aligned to the left -->
+                                        <FontIcon Glyph="&#xE8A7;" VerticalAlignment="Center" Grid.Column="0"/>
 
-                                    <!-- Connect button aligned to the right -->
-                                    <Button Content="Connect" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="2"/>
-                                </Grid>
-                            </ListBoxItem>
-                            <ListBoxItem>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
+                                        <!-- Name of the device next to the icon -->
+                                        <TextBlock Text="Device 2" VerticalAlignment="Center" Margin="10,0" Grid.Column="1"/>
 
-                                    <!-- Icon aligned to the left -->
-                                    <FontIcon Glyph="&#xE8A7;" VerticalAlignment="Center" Grid.Column="0"/>
+                                        <!-- Connect button aligned to the right -->
+                                        <Button Content="Connect" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="2"/>
+                                    </Grid>
 
-                                    <!-- Name of the item next to the icon -->
-                                    <TextBlock Text="Item 3" VerticalAlignment="Center" Margin="10,0" Grid.Column="1"/>
+                                    <!-- Device 3 -->
+                                    <Grid Margin="0,5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
 
-                                    <!-- Connect button aligned to the right -->
-                                    <Button Content="Connect" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="2"/>
-                                </Grid>
-                            </ListBoxItem>
-                        </ListBox>
-                    </Grid>
+                                        <!-- Icon aligned to the left -->
+                                        <FontIcon Glyph="&#xE8A7;" VerticalAlignment="Center" Grid.Column="0"/>
 
-                    
-                </Expander.Content>
-            </Expander>
+                                        <!-- Name of the device next to the icon -->
+                                        <TextBlock Text="Device 3" VerticalAlignment="Center" Margin="10,0" Grid.Column="1"/>
+
+                                        <!-- Connect button aligned to the right -->
+                                        <Button Content="Connect" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="2"/>
+                                    </Grid>
+                                </StackPanel>
+                            </Grid>
+                        </Flyout>
+                    </Button.Flyout>
+                </Button>
+            </Grid>
         </NavigationView.Header>
 
         <NavigationView.MenuItems>
@@ -117,31 +110,12 @@
                     <FontIcon Glyph="&#xE702;"/>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
-            
-            <NavigationViewItemSeparator/>
-            
-            <AutoSuggestBox QueryIcon="Find" AutomationProperties.Name="Search" />
 
-            <NavigationViewItem Icon="GlobalNavigationButton"  Tag="None" >
-                <!--
-                <Grid>
-                    <TextBlock Margin="0,12.5,0,0">asdfua</TextBlock>
-                    <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right">
-                    <CommandBar.SecondaryCommands>
-                        <AppBarButton Icon="Rename" Label="Rename"/>
-                        <AppBarButton Icon="Delete" Label="Delete"/>
-                    </CommandBar.SecondaryCommands>
-                </CommandBar>
-                </Grid>
-                
-               
-                <Grid>
-                    <TextBlock Margin="0,5,0,0">asdfa</TextBlock>
-                    <Button Background="Transparent" HorizontalAlignment="Right">dfasdf</Button>
-                </Grid>
-                -->
-                
-                <!-- formatting for the sidebar config tab -->
+            <NavigationViewItemSeparator/>
+
+            <AutoSuggestBox PlaceholderText="Type a control name" QueryIcon="Find" AutomationProperties.Name="Search" />
+
+            <NavigationViewItem Icon="GlobalNavigationButton"  Tag="ConfigPage1" >
                 <Grid>
                     <TextBlock Margin="0,2.5,40,0">Config 1</TextBlock>
 
@@ -160,25 +134,7 @@
                     </AppBarButton>
                 </Grid>
             </NavigationViewItem>
-            <NavigationViewItem Icon="GlobalNavigationButton"  Tag="None">
-                <Grid>
-                    <TextBlock Margin="0,2.5,40,0">Config 1</TextBlock>
-
-                    <AppBarButton HorizontalAlignment="Right"
-                        Margin="0,-10, -25,-25" 
-                        Icon="More"
-                        IsCompact="True" 
-                        ToolTipService.ToolTip="More"
-                        AutomationProperties.Name="More">
-                        <AppBarButton.Flyout>
-                            <MenuFlyout>
-                                <MenuFlyoutItem Icon="Delete" Text="Delete"  Tag="rating"/>
-                                <MenuFlyoutItem Icon="Rename" Text="Rename"  Tag="match"/>
-                            </MenuFlyout>
-                        </AppBarButton.Flyout>
-                    </AppBarButton>
-                </Grid>
-            </NavigationViewItem>
+            
         </NavigationView.MenuItems>
 
         <NavigationView.FooterMenuItems>
