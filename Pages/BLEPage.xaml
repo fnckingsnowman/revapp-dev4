@@ -4,10 +4,18 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:RevoluteConfigApp.Pages"
+    xmlns:converters="using:RevoluteConfigApp.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    >
+
+    <!-- Add the converters as resources -->
+    <Page.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <converters:InverseBoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter"/>
+    </Page.Resources>
 
     <Grid>
         <!-- Button to start BLE scan -->
@@ -20,34 +28,34 @@
 
         <!-- ListBox to display BLE devices -->
         <ListBox 
-    ItemsSource="{Binding Devices}"
-    Margin="50,100,50,50"
-    HorizontalAlignment="Stretch"
-    x:Name="DevicesList">
+            ItemsSource="{Binding Devices}"
+            Margin="50,100,50,50"
+            HorizontalAlignment="Stretch"
+            x:Name="DevicesList">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                        <!-- Show "Pair" button if the device is not paired -->
+                        <!-- Connect Button (Visible if Paired) -->
                         <Button 
-                    Content="Pair" 
-                    Click="PairButton_Click"
-                    Tag="{Binding}"
-                    Margin="10,0,0,0"
-                    Visibility="{Binding IsPaired, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Inverse}"/>
-                        <!-- Show "Connect" button if the device is paired -->
+                            Content="Connect" 
+                            Click="ConnectButton_Click"
+                            Tag="{Binding}"
+                            Margin="10,0,0,0"
+                            Visibility="{Binding IsPaired, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                        <!-- Pair Button (Visible if Not Paired) -->
                         <Button 
-                    Content="Connect" 
-                    Click="ConnectButton_Click"
-                    Tag="{Binding}"
-                    Margin="10,0,0,0"
-                    Visibility="{Binding IsPaired, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                            Content="Pair" 
+                            Click="PairButton_Click"
+                            Tag="{Binding}"
+                            Margin="10,0,0,0"
+                            Visibility="{Binding IsPaired, Converter={StaticResource InverseBoolToVisibilityConverter}}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <!-- TextBlock to display output with scanned UUIDs -->
+        <!-- TextBlock to display output -->
         <TextBlock 
             x:Name="OutputTextBlock"
             Margin="50,25,50,0"
