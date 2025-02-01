@@ -15,21 +15,36 @@
             Content="Scan for BLE Devices" 
             Click="StartBLEScan_Click"
             Margin="50,50,50,0"
-            Width="200"/>
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Top"/>
 
         <!-- ListBox to display BLE devices -->
         <ListBox 
             ItemsSource="{Binding Devices}"
-            Margin="50,100,50,0"
-            Width="400"
-            x:Name="DevicesList"/>
+            Margin="50,100,50,50"
+            HorizontalAlignment="Stretch"
+            x:Name="DevicesList">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding}" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                        <Button 
+                            Content="Connect" 
+                            Click="ConnectButton_Click"
+                            Tag="{Binding}"
+                            Margin="10,0,0,0"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
 
         <!-- TextBlock to display output with scanned UUIDs -->
         <TextBlock 
             x:Name="OutputTextBlock"
-            Margin="50,250,50,0"
+            Margin="50,25,50,0"
             Text="Advertising UUIDs will appear here..."
             TextWrapping="Wrap"
-            Width="400"/>
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"/>
     </Grid>
 </Page>

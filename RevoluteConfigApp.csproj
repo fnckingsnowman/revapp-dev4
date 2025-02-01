@@ -11,6 +11,10 @@
     <UseWinUI>true</UseWinUI>
     <EnableMsixTooling>true</EnableMsixTooling>
     <Nullable>enable</Nullable>
+
+	<WindowsPackageType>None</WindowsPackageType>
+	<WindowsAppSDKSelfcontained>true</WindowsAppSDKSelfcontained>
+	  
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Pages\BLEPage.xaml" />

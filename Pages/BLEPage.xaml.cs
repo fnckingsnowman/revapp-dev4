@@ -1,15 +1,12 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Navigation;
 using Windows.Devices.Bluetooth;
 using Windows.Devices.Enumeration;
 using Windows.Devices.Bluetooth.Advertisement;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Diagnostics;
-using System;  // Added for Exception class
+using System;
+using System.Threading.Tasks;
 
 namespace RevoluteConfigApp.Pages
 {
@@ -77,6 +74,63 @@ namespace RevoluteConfigApp.Pages
             catch (Exception ex)
             {
                 Debug.WriteLine($"Error processing advertisement: {ex.Message}");
+            }
+        }
+
+        // Event handler for the "Connect" button click
+        private async void ConnectButton_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            if (button != null)
+            {
+                string deviceName = button.Tag as string;
+                OutputTextBlock.Text = $"Connecting to {deviceName}...";
+
+                // Find the device by name and attempt to pair/connect
+                await PairAndConnectToDeviceAsync(deviceName);
+            }
+        }
+
+        // Function to pair and connect to a BLE device
+        private async Task PairAndConnectToDeviceAsync(string deviceName)
+        {
+            try
+            {
+                // Find the device by name
+                var deviceSelector = BluetoothLEDevice.GetDeviceSelectorFromDeviceName(deviceName);
+                var devices = await DeviceInformation.FindAllAsync(deviceSelector);
+
+                if (devices.Count > 0)
+                {
+                    var deviceInfo = devices[0];
+                    var bluetoothLeDevice = await BluetoothLEDevice.FromIdAsync(deviceInfo.Id);
+
+                    if (bluetoothLeDevice != null)
+                    {
+                        // Attempt to pair with the device
+                        var pairingResult = await bluetoothLeDevice.DeviceInformation.Pairing.PairAsync();
+                        if (pairingResult.Status == DevicePairingResultStatus.Paired)
+                        {
+                            OutputTextBlock.Text = $"Successfully paired with {deviceName}.";
+                        }
+                        else
+                        {
+                            OutputTextBlock.Text = $"Failed to pair with {deviceName}. Status: {pairingResult.Status}";
+                        }
+                    }
+                    else
+                    {
+                        OutputTextBlock.Text = $"Failed to connect to {deviceName}.";
+                    }
+                }
+                else
+                {
+                    OutputTextBlock.Text = $"Device {deviceName} not found.";
+                }
+            }
+            catch (Exception ex)
+            {
+                OutputTextBlock.Text = $"Error connecting to {deviceName}: {ex.Message}";
             }
         }
 
