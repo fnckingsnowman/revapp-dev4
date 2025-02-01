@@ -1,12 +1,14 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Windows.Devices.Bluetooth;
-using Windows.Devices.Enumeration;
 using Windows.Devices.Bluetooth.Advertisement;
+using Windows.Devices.Enumeration;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using System;
 using Windows.Devices.Bluetooth.GenericAttributeProfile;
 
 namespace RevoluteConfigApp.Pages
@@ -14,9 +16,10 @@ namespace RevoluteConfigApp.Pages
     public sealed partial class BLEPage : Page
     {
         // Observable collection to bind to ListBox
-        public ObservableCollection<string> Devices { get; set; } = new ObservableCollection<string>();
+        public ObservableCollection<DeviceInfo> Devices { get; set; } = new ObservableCollection<DeviceInfo>();
 
         private BluetoothLEAdvertisementWatcher _watcher;
+        private Dictionary<string, BluetoothLEAdvertisementReceivedEventArgs> _discoveredDevices = new Dictionary<string, BluetoothLEAdvertisementReceivedEventArgs>();
 
         public BLEPage()
         {
@@ -29,6 +32,7 @@ namespace RevoluteConfigApp.Pages
         {
             // Clear any existing devices
             Devices.Clear();
+            _discoveredDevices.Clear();
             OutputTextBlock.Text = "Scanning for BLE devices...";
 
             // Initialize and start BLE scanning
@@ -49,32 +53,53 @@ namespace RevoluteConfigApp.Pages
         }
 
         // Event handler for receiving BLE advertisements
-        private void Watcher_Received(BluetoothLEAdvertisementWatcher sender, BluetoothLEAdvertisementReceivedEventArgs args)
+        private async void Watcher_Received(BluetoothLEAdvertisementWatcher sender, BluetoothLEAdvertisementReceivedEventArgs args)
         {
             try
             {
-                // Extract the device's name (from advertisement data)
                 string deviceName = args.Advertisement.LocalName;
 
-                // Add the device name to the devices collection (thread-safe)
+                // Check if the device is already paired
+                var deviceSelector = BluetoothLEDevice.GetDeviceSelectorFromDeviceName(deviceName);
+                var devices = await DeviceInformation.FindAllAsync(deviceSelector);
+                bool isPaired = devices.Count > 0 && devices[0].Pairing.IsPaired;
+
                 DispatcherQueue.TryEnqueue(() =>
                 {
-                    if (!Devices.Contains(deviceName))  // Avoid adding duplicates
+                    var existingDevice = Devices.FirstOrDefault(d => d.Name == deviceName);
+                    if (existingDevice == null)
                     {
-                        Devices.Add(deviceName);
+                        Devices.Add(new DeviceInfo
+                        {
+                            Name = deviceName,
+                            IsPaired = isPaired,
+                            AdvertisementArgs = args
+                        });
+                    }
+                    else
+                    {
+                        existingDevice.IsPaired = isPaired; // Update pairing status
                     }
                 });
-
-                // Extract and log the service UUIDs from the advertisement data
-                foreach (var uuid in args.Advertisement.ServiceUuids)
-                {
-                    Debug.WriteLine($"Device: {deviceName}, UUID: {uuid}");
-                }
-
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"Error processing advertisement: {ex.Message}");
+            }
+        }
+
+        // Event handler for the "Pair" button click
+        private async void PairButton_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            if (button != null)
+            {
+                var deviceInfo = button.Tag as DeviceInfo;
+                if (deviceInfo != null)
+                {
+                    OutputTextBlock.Text = $"Pairing with {deviceInfo.Name}...";
+                    await PairDeviceAsync(deviceInfo);
+                }
             }
         }
 
@@ -84,100 +109,79 @@ namespace RevoluteConfigApp.Pages
             var button = sender as Button;
             if (button != null)
             {
-                string deviceName = button.Tag as string;
-                OutputTextBlock.Text = $"Connecting to {deviceName}...";
-
-                // Find the device by name and attempt to pair/connect
-                await PairAndConnectToDeviceAsync(deviceName);
+                var deviceInfo = button.Tag as DeviceInfo;
+                if (deviceInfo != null)
+                {
+                    OutputTextBlock.Text = $"Connecting to {deviceInfo.Name}...";
+                    await ConnectToDeviceAsync(deviceInfo);
+                }
             }
         }
 
-        // Function to pair and connect to a BLE device
-        private async Task PairAndConnectToDeviceAsync(string deviceName)
+        // Function to pair a device
+        private async Task PairDeviceAsync(DeviceInfo deviceInfo)
         {
             try
             {
-                // Find the device by name
-                var deviceSelector = BluetoothLEDevice.GetDeviceSelectorFromDeviceName(deviceName);
-                var devices = await DeviceInformation.FindAllAsync(deviceSelector);
-
-                if (devices.Count > 0)
+                var bluetoothLeDevice = await BluetoothLEDevice.FromBluetoothAddressAsync(deviceInfo.AdvertisementArgs.BluetoothAddress);
+                if (bluetoothLeDevice != null)
                 {
-                    var deviceInfo = devices[0];
-                    var bluetoothLeDevice = await BluetoothLEDevice.FromIdAsync(deviceInfo.Id);
-
-                    if (bluetoothLeDevice != null)
+                    var pairingResult = await bluetoothLeDevice.DeviceInformation.Pairing.PairAsync();
+                    if (pairingResult.Status == DevicePairingResultStatus.Paired)
                     {
-                        // Attempt to pair with the device
-                        var pairingResult = await bluetoothLeDevice.DeviceInformation.Pairing.PairAsync();
-                        if (pairingResult.Status == DevicePairingResultStatus.Paired)
-                        {
-                            OutputTextBlock.Text = $"Successfully paired with {deviceName}.";
-
-                            // Establish a GATT connection to the device
-                            if (bluetoothLeDevice.ConnectionStatus == BluetoothConnectionStatus.Connected)
-                            {
-                                OutputTextBlock.Text = $"{deviceName} is connected to the app.";
-                            }
-                            else
-                            {
-                                OutputTextBlock.Text = $"{deviceName} is paired but not connected to the app.";
-                            }
-
-                            // Optionally, discover services and characteristics
-                            await DiscoverServicesAsync(bluetoothLeDevice);
-                        }
-                        else
-                        {
-                            OutputTextBlock.Text = $"Failed to pair with {deviceName}. Status: {pairingResult.Status}";
-                        }
+                        deviceInfo.IsPaired = true;
+                        OutputTextBlock.Text = $"Successfully paired with {deviceInfo.Name}.";
                     }
                     else
                     {
-                        OutputTextBlock.Text = $"Failed to connect to {deviceName}.";
+                        OutputTextBlock.Text = $"Failed to pair with {deviceInfo.Name}. Status: {pairingResult.Status}";
                     }
-                }
-                else
-                {
-                    OutputTextBlock.Text = $"Device {deviceName} not found.";
                 }
             }
             catch (Exception ex)
             {
-                OutputTextBlock.Text = $"Error connecting to {deviceName}: {ex.Message}";
+                OutputTextBlock.Text = $"Error pairing with {deviceInfo.Name}: {ex.Message}";
             }
         }
 
-        // Method to discover services and characteristics
+        // Function to connect to a device
+        private async Task ConnectToDeviceAsync(DeviceInfo deviceInfo)
+        {
+            try
+            {
+                var bluetoothLeDevice = await BluetoothLEDevice.FromBluetoothAddressAsync(deviceInfo.AdvertisementArgs.BluetoothAddress);
+                if (bluetoothLeDevice != null)
+                {
+                    if (bluetoothLeDevice.ConnectionStatus == BluetoothConnectionStatus.Connected)
+                    {
+                        OutputTextBlock.Text = $"{deviceInfo.Name} is already connected to the app.";
+                    }
+                    else
+                    {
+                        OutputTextBlock.Text = $"{deviceInfo.Name} is connected to the app.";
+                        await DiscoverServicesAsync(bluetoothLeDevice);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                OutputTextBlock.Text = $"Error connecting to {deviceInfo.Name}: {ex.Message}";
+            }
+        }
+
+        // Function to discover services and characteristics
         private async Task DiscoverServicesAsync(BluetoothLEDevice bluetoothLeDevice)
         {
             try
             {
-                // Get the GATT services
                 var gattServicesResult = await bluetoothLeDevice.GetGattServicesAsync();
-
                 if (gattServicesResult.Status == GattCommunicationStatus.Success)
                 {
                     foreach (var service in gattServicesResult.Services)
                     {
                         Debug.WriteLine($"Service UUID: {service.Uuid}");
-
-                        // Get the characteristics for each service
-                        var gattCharacteristicsResult = await service.GetCharacteristicsAsync();
-                        if (gattCharacteristicsResult.Status == GattCommunicationStatus.Success)
-                        {
-                            foreach (var characteristic in gattCharacteristicsResult.Characteristics)
-                            {
-                                Debug.WriteLine($"Characteristic UUID: {characteristic.Uuid}");
-                            }
-                        }
                     }
-
-                    OutputTextBlock.Text = $"Discovered services and characteristics for {bluetoothLeDevice.Name}.";
-                }
-                else
-                {
-                    OutputTextBlock.Text = $"Failed to discover services for {bluetoothLeDevice.Name}.";
+                    OutputTextBlock.Text = $"Discovered services for {bluetoothLeDevice.Name}.";
                 }
             }
             catch (Exception ex)
