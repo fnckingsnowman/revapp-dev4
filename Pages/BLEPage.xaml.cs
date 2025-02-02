@@ -9,6 +9,7 @@ using System;
 using System.Threading.Tasks;
 using Windows.Devices.Bluetooth.GenericAttributeProfile;
 using Windows.Storage.Streams;
+using System.Collections.Generic;
 
 namespace RevoluteConfigApp.Pages
 {
@@ -18,6 +19,7 @@ namespace RevoluteConfigApp.Pages
         private BluetoothLEAdvertisementWatcher _watcher;
         private GattCharacteristic _targetCharacteristic;
         private Button _lastClickedButton;
+        private Dictionary<ulong, DeviceInfo> _deviceInfoMap = new Dictionary<ulong, DeviceInfo>();
 
         public BLEPage()
         {
@@ -28,13 +30,17 @@ namespace RevoluteConfigApp.Pages
         private void StartBLEScan_Click(object sender, RoutedEventArgs e)
         {
             Devices.Clear();
+            _deviceInfoMap.Clear();
             OutputTextBlock.Text = "Scanning for BLE devices...";
             StartBLEScan();
         }
 
         private void StartBLEScan()
         {
-            _watcher = new BluetoothLEAdvertisementWatcher();
+            _watcher = new BluetoothLEAdvertisementWatcher
+            {
+                ScanningMode = BluetoothLEScanningMode.Active // Requests scan responses
+            };
             _watcher.Received += Watcher_Received;
             _watcher.Start();
         }
@@ -44,11 +50,51 @@ namespace RevoluteConfigApp.Pages
             try
             {
                 string deviceName = args.Advertisement.LocalName;
+                ulong bluetoothAddress = args.BluetoothAddress;
+
+                Debug.WriteLine($"Discovered Device: {deviceName}");
+                Debug.WriteLine("Service UUIDs:");
+                foreach (var uuid in args.Advertisement.ServiceUuids)
+                {
+                    Debug.WriteLine(uuid.ToString());
+                }
+
+                // Check if the device includes the target UUID
+                bool hasTargetUuid = args.Advertisement.ServiceUuids.Contains(Guid.Parse("00001523-1212-efde-1523-785feabcd133"));
+
+                if (!_deviceInfoMap.ContainsKey(bluetoothAddress))
+                {
+                    _deviceInfoMap[bluetoothAddress] = new DeviceInfo
+                    {
+                        Name = deviceName,
+                        ServiceUuids = new HashSet<Guid>(args.Advertisement.ServiceUuids),
+                        HasTargetUuid = hasTargetUuid // Track whether the device has the target UUID
+                    };
+                }
+                else
+                {
+                    var deviceInfo = _deviceInfoMap[bluetoothAddress];
+                    if (string.IsNullOrEmpty(deviceInfo.Name) && !string.IsNullOrEmpty(deviceName))
+                    {
+                        deviceInfo.Name = deviceName;
+                    }
+                    foreach (var uuid in args.Advertisement.ServiceUuids)
+                    {
+                        deviceInfo.ServiceUuids.Add(uuid);
+                    }
+                    deviceInfo.HasTargetUuid = deviceInfo.HasTargetUuid || hasTargetUuid; // Update the flag if the target UUID is found
+                }
+
                 DispatcherQueue.TryEnqueue(() =>
                 {
-                    if (!Devices.Contains(deviceName))
+                    Devices.Clear();
+                    foreach (var deviceInfo in _deviceInfoMap.Values)
                     {
-                        Devices.Add(deviceName);
+                        // Only add devices that have the target UUID
+                        if (deviceInfo.HasTargetUuid && !string.IsNullOrEmpty(deviceInfo.Name))
+                        {
+                            Devices.Add($"{deviceInfo.Name} - {string.Join(", ", deviceInfo.ServiceUuids)}");
+                        }
                     }
                 });
             }
@@ -56,6 +102,13 @@ namespace RevoluteConfigApp.Pages
             {
                 Debug.WriteLine($"Error processing advertisement: {ex.Message}");
             }
+        }
+
+        private class DeviceInfo
+        {
+            public string Name { get; set; }
+            public HashSet<Guid> ServiceUuids { get; set; }
+            public bool HasTargetUuid { get; set; } // Flag to track if the device has the target UUID
         }
 
         private async void ConnectButton_Click(object sender, RoutedEventArgs e)
@@ -74,8 +127,7 @@ namespace RevoluteConfigApp.Pages
         {
             try
             {
-                var deviceSelector = BluetoothLEDevice.GetDeviceSelectorFromDeviceName(deviceName);
-                var devices = await DeviceInformation.FindAllAsync(deviceSelector);
+                var devices = await DeviceInformation.FindAllAsync(BluetoothLEDevice.GetDeviceSelector());
 
                 if (devices.Count > 0)
                 {
@@ -119,33 +171,12 @@ namespace RevoluteConfigApp.Pages
 
                 if (gattServicesResult.Status == GattCommunicationStatus.Success)
                 {
+                    Debug.WriteLine($"Discovered {gattServicesResult.Services.Count} services:");
                     foreach (var service in gattServicesResult.Services)
                     {
-                        if (service.Uuid == Guid.Parse("00000000000000000000003323de1223"))
-                        {
-                            var gattCharacteristicsResult = await service.GetCharacteristicsAsync();
-                            if (gattCharacteristicsResult.Status == GattCommunicationStatus.Success)
-                            {
-                                foreach (var characteristic in gattCharacteristicsResult.Characteristics)
-                                {
-                                    if (characteristic.Uuid == Guid.Parse("00000000000000000000003323de1226"))
-                                    {
-                                        _targetCharacteristic = characteristic;
-                                        DispatcherQueue.TryEnqueue(() =>
-                                        {
-                                            if (_lastClickedButton != null)
-                                            {
-                                                _lastClickedButton.Content = "Write";
-                                                _lastClickedButton.Click -= ConnectButton_Click;
-                                                _lastClickedButton.Click += WriteButton_Click;
-                                            }
-                                        });
-                                    }
-                                }
-                            }
-                        }
+                        Debug.WriteLine($"Service UUID: {service.Uuid}");
                     }
-                    OutputTextBlock.Text = $"Discovered services and characteristics for {bluetoothLeDevice.Name}.";
+                    OutputTextBlock.Text = $"Discovered {gattServicesResult.Services.Count} services for {bluetoothLeDevice.Name}.";
                 }
                 else
                 {
@@ -171,6 +202,30 @@ namespace RevoluteConfigApp.Pages
                 writer.WriteBytes(data);
                 await _targetCharacteristic.WriteValueAsync(writer.DetachBuffer());
                 OutputTextBlock.Text = "Data written successfully.";
+            }
+        }
+
+        private async void ScanForSpecificUUID_Click(object sender, RoutedEventArgs e)
+        {
+            string targetUUID = "00001523-1212-efde-1523-785feabcd133";
+            OutputTextBlock.Text = $"Scanning for devices advertising {targetUUID}...";
+
+            var selector = GattDeviceService.GetDeviceSelectorFromUuid(Guid.Parse(targetUUID));
+            var devices = await DeviceInformation.FindAllAsync(selector);
+
+            Devices.Clear();
+            if (devices.Count > 0)
+            {
+                foreach (var device in devices)
+                {
+                    Devices.Add(device.Name);
+                    Debug.WriteLine($"Found device advertising {targetUUID}: {device.Name}");
+                }
+                OutputTextBlock.Text = $"Found {devices.Count} devices advertising {targetUUID}.";
+            }
+            else
+            {
+                OutputTextBlock.Text = $"No devices found advertising {targetUUID}.";
             }
         }
     }
