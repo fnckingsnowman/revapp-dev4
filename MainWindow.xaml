@@ -15,17 +15,17 @@
      -->
 
     <NavigationView PaneTitle="Revolute Configurator" x:Name="nvSample" IsBackButtonVisible="Collapsed">
-        <!-- Replace the Header with a SelectorBar -->
         <NavigationView.Header>
             <Grid Margin="0,-45,0,0">
-                <TextBlock HorizontalAlignment="Center" Margin="0,19,15,0" Text="Device name"/>
+                <TextBlock x:Name="ConnectedDeviceNameTextBlock" HorizontalAlignment="Center" Margin="0,19,15,0" Text="No device connected"/>
                 <DropDownButton Margin="-6,0,0,0" AutomationProperties.Name="More">
                     <DropDownButton.Content>
                         <FontIcon Glyph="&#xE712;"/>
                     </DropDownButton.Content>
+                    <!-- DROPDOWN FOR DISCONNECTING AND RENAMING THE CONNECTED DEVICE -->
                     <DropDownButton.Flyout>
                         <MenuFlyout Placement="Bottom">
-                            <MenuFlyoutItem Icon="Cancel" Text="Disconnect">
+                            <MenuFlyoutItem Icon="Cancel" Text="Disconnect" Click="DisconnectButton_Click">
                             </MenuFlyoutItem>
                             <MenuFlyoutItem Icon="Rename" Text="Rename">
                             </MenuFlyoutItem>
@@ -113,7 +113,7 @@
 
             <NavigationViewItemSeparator/>
 
-            <AutoSuggestBox PlaceholderText="Type a control name" QueryIcon="Find" AutomationProperties.Name="Search" />
+            <AutoSuggestBox PlaceholderText="Search for Configurations" QueryIcon="Find" AutomationProperties.Name="Search" />
 
             <NavigationViewItem Icon="GlobalNavigationButton"  Tag="ConfigPage1" >
                 <Grid>
@@ -134,7 +134,7 @@
                     </AppBarButton>
                 </Grid>
             </NavigationViewItem>
-            
+
         </NavigationView.MenuItems>
 
         <NavigationView.FooterMenuItems>

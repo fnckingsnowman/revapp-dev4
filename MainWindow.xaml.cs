@@ -3,6 +3,7 @@ using Microsoft.UI.Xaml;
 using System;
 using System.Windows;
 using Microsoft.UI.Xaml.Input;
+using RevoluteConfigApp.Pages;
 
 namespace RevoluteConfigApp
 {
@@ -14,6 +15,8 @@ namespace RevoluteConfigApp
         {
             InitializeComponent();
             nvSample.ItemInvoked += NvSample_ItemInvoked;
+            BLEPage.DeviceConnected += OnDeviceConnected;
+            BLEPage.DeviceDisconnected += OnDeviceDisconnected;
 
             // Add event handler for the "Add Configuration" button
             var addConfigItem = nvSample.FooterMenuItems[0] as NavigationViewItem;
@@ -73,6 +76,21 @@ namespace RevoluteConfigApp
             }
         }
 
+        private void OnDeviceConnected(object sender, string deviceName)
+        {
+            ConnectedDeviceNameTextBlock.Text = deviceName;
+        }
+
+        private void OnDeviceDisconnected(object sender, EventArgs e)
+        {
+            ConnectedDeviceNameTextBlock.Text = "No device connected";
+            var blePage = contentFrame.Content as BLEPage;
+            if (blePage != null)
+            {
+                blePage.UpdateOutputText("Device has disconnected.");
+            }
+        }
+
         private void AddConfigItem_Tapped(object sender, TappedRoutedEventArgs e)
         {
             // Create a new NavigationViewItem for the new configuration
@@ -89,6 +107,12 @@ namespace RevoluteConfigApp
 
             // Increment the counter for the next configuration
             _configCounter++;
+        }
+
+        private void DisconnectButton_Click(object sender, RoutedEventArgs e)
+        {
+            BLEPage.DisconnectDevice();
+            ConnectedDeviceNameTextBlock.Text = "No device connected";
         }
     }
 }

@@ -14,6 +14,10 @@ namespace RevoluteConfigApp.Pages
 {
     public sealed partial class BLEPage : Page
     {
+        public static event EventHandler<string> DeviceConnected;
+        public static event EventHandler DeviceDisconnected;
+        private static BluetoothLEDevice _connectedDevice;
+
         public ObservableCollection<string> Devices { get; set; } = new ObservableCollection<string>();
         private BluetoothLEAdvertisementWatcher _watcher;
         private GattCharacteristic _targetCharacteristic;
@@ -101,6 +105,8 @@ namespace RevoluteConfigApp.Pages
                         if (pairingResult.Status == DevicePairingResultStatus.Paired || pairingResult.Status == DevicePairingResultStatus.AlreadyPaired)
                         {
                             OutputTextBlock.Text = $"Successfully paired or already paired with {deviceName}.";
+                            _connectedDevice = bluetoothLeDevice;
+                            DeviceConnected?.Invoke(this, deviceName);
                             await DiscoverServicesAsync(bluetoothLeDevice);
                         }
                         else
@@ -186,6 +192,21 @@ namespace RevoluteConfigApp.Pages
                 await _targetCharacteristic.WriteValueAsync(writer.DetachBuffer());
                 OutputTextBlock.Text = "Data written successfully.";
             }
+        }
+
+        public static void DisconnectDevice()
+        {
+            if (_connectedDevice != null)
+            {
+                _connectedDevice.Dispose();
+                _connectedDevice = null;
+                DeviceDisconnected?.Invoke(null, EventArgs.Empty);
+            }
+        }
+
+        public void UpdateOutputText(string message)
+        {
+            OutputTextBlock.Text = message;
         }
     }
 }
