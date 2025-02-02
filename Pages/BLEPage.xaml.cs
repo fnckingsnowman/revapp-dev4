@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System;
 using System.Threading.Tasks;
 using Windows.Devices.Bluetooth.GenericAttributeProfile;
+using Windows.Storage.Streams;
 
 namespace RevoluteConfigApp.Pages
 {
@@ -15,6 +16,8 @@ namespace RevoluteConfigApp.Pages
     {
         public ObservableCollection<string> Devices { get; set; } = new ObservableCollection<string>();
         private BluetoothLEAdvertisementWatcher _watcher;
+        private GattCharacteristic _targetCharacteristic;
+        private Button _lastClickedButton;
 
         public BLEPage()
         {
@@ -48,11 +51,6 @@ namespace RevoluteConfigApp.Pages
                         Devices.Add(deviceName);
                     }
                 });
-
-                foreach (var uuid in args.Advertisement.ServiceUuids)
-                {
-                    Debug.WriteLine($"Device: {deviceName}, UUID: {uuid}");
-                }
             }
             catch (Exception ex)
             {
@@ -66,6 +64,7 @@ namespace RevoluteConfigApp.Pages
             if (button != null)
             {
                 string deviceName = button.Tag as string;
+                _lastClickedButton = button;
                 OutputTextBlock.Text = $"Connecting to {deviceName}...";
                 await PairAndConnectToDeviceAsync(deviceName);
             }
@@ -89,16 +88,6 @@ namespace RevoluteConfigApp.Pages
                         if (pairingResult.Status == DevicePairingResultStatus.Paired || pairingResult.Status == DevicePairingResultStatus.AlreadyPaired)
                         {
                             OutputTextBlock.Text = $"Successfully paired or already paired with {deviceName}.";
-
-                            if (bluetoothLeDevice.ConnectionStatus == BluetoothConnectionStatus.Connected)
-                            {
-                                OutputTextBlock.Text = $"{deviceName} is connected to the app.";
-                            }
-                            else
-                            {
-                                OutputTextBlock.Text = $"{deviceName} is paired but not yet connected. Attempting connection...";
-                            }
-
                             await DiscoverServicesAsync(bluetoothLeDevice);
                         }
                         else
@@ -132,13 +121,27 @@ namespace RevoluteConfigApp.Pages
                 {
                     foreach (var service in gattServicesResult.Services)
                     {
-                        Debug.WriteLine($"Service UUID: {service.Uuid}");
-                        var gattCharacteristicsResult = await service.GetCharacteristicsAsync();
-                        if (gattCharacteristicsResult.Status == GattCommunicationStatus.Success)
+                        if (service.Uuid == Guid.Parse("00000000000000000000003323de1223"))
                         {
-                            foreach (var characteristic in gattCharacteristicsResult.Characteristics)
+                            var gattCharacteristicsResult = await service.GetCharacteristicsAsync();
+                            if (gattCharacteristicsResult.Status == GattCommunicationStatus.Success)
                             {
-                                Debug.WriteLine($"Characteristic UUID: {characteristic.Uuid}");
+                                foreach (var characteristic in gattCharacteristicsResult.Characteristics)
+                                {
+                                    if (characteristic.Uuid == Guid.Parse("00000000000000000000003323de1226"))
+                                    {
+                                        _targetCharacteristic = characteristic;
+                                        DispatcherQueue.TryEnqueue(() =>
+                                        {
+                                            if (_lastClickedButton != null)
+                                            {
+                                                _lastClickedButton.Content = "Write";
+                                                _lastClickedButton.Click -= ConnectButton_Click;
+                                                _lastClickedButton.Click += WriteButton_Click;
+                                            }
+                                        });
+                                    }
+                                }
                             }
                         }
                     }
@@ -155,11 +158,19 @@ namespace RevoluteConfigApp.Pages
             }
         }
 
-        private void StopBLEScan()
+        private async void WriteButton_Click(object sender, RoutedEventArgs e)
         {
-            if (_watcher != null && _watcher.Status == BluetoothLEAdvertisementWatcherStatus.Started)
+            if (_targetCharacteristic != null)
             {
-                _watcher.Stop();
+                byte[] data = new byte[] {
+                    0x01, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17,
+                    0x02, 0x03, 0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27,
+                    0x04, 0x05
+                };
+                var writer = new DataWriter();
+                writer.WriteBytes(data);
+                await _targetCharacteristic.WriteValueAsync(writer.DetachBuffer());
+                OutputTextBlock.Text = "Data written successfully.";
             }
         }
     }
