@@ -13,9 +13,7 @@ namespace RevoluteConfigApp.Pages
 {
     public sealed partial class BLEPage : Page
     {
-        // Observable collection to bind to ListBox
         public ObservableCollection<string> Devices { get; set; } = new ObservableCollection<string>();
-
         private BluetoothLEAdvertisementWatcher _watcher;
 
         public BLEPage()
@@ -24,53 +22,37 @@ namespace RevoluteConfigApp.Pages
             this.DataContext = this;
         }
 
-        // Event handler for the "Scan for BLE Devices" button click
         private void StartBLEScan_Click(object sender, RoutedEventArgs e)
         {
-            // Clear any existing devices
             Devices.Clear();
             OutputTextBlock.Text = "Scanning for BLE devices...";
-
-            // Initialize and start BLE scanning
             StartBLEScan();
         }
 
-        // Function to start BLE scan using BluetoothLEAdvertisementWatcher
         private void StartBLEScan()
         {
-            // Initialize the watcher
             _watcher = new BluetoothLEAdvertisementWatcher();
-
-            // Set up event handler when an advertisement is found
             _watcher.Received += Watcher_Received;
-
-            // Start the scan
             _watcher.Start();
         }
 
-        // Event handler for receiving BLE advertisements
         private void Watcher_Received(BluetoothLEAdvertisementWatcher sender, BluetoothLEAdvertisementReceivedEventArgs args)
         {
             try
             {
-                // Extract the device's name (from advertisement data)
                 string deviceName = args.Advertisement.LocalName;
-
-                // Add the device name to the devices collection (thread-safe)
                 DispatcherQueue.TryEnqueue(() =>
                 {
-                    if (!Devices.Contains(deviceName))  // Avoid adding duplicates
+                    if (!Devices.Contains(deviceName))
                     {
                         Devices.Add(deviceName);
                     }
                 });
 
-                // Extract and log the service UUIDs from the advertisement data
                 foreach (var uuid in args.Advertisement.ServiceUuids)
                 {
                     Debug.WriteLine($"Device: {deviceName}, UUID: {uuid}");
                 }
-
             }
             catch (Exception ex)
             {
@@ -78,7 +60,6 @@ namespace RevoluteConfigApp.Pages
             }
         }
 
-        // Event handler for the "Connect" button click
         private async void ConnectButton_Click(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
@@ -86,18 +67,14 @@ namespace RevoluteConfigApp.Pages
             {
                 string deviceName = button.Tag as string;
                 OutputTextBlock.Text = $"Connecting to {deviceName}...";
-
-                // Find the device by name and attempt to pair/connect
                 await PairAndConnectToDeviceAsync(deviceName);
             }
         }
 
-        // Function to pair and connect to a BLE device
         private async Task PairAndConnectToDeviceAsync(string deviceName)
         {
             try
             {
-                // Find the device by name
                 var deviceSelector = BluetoothLEDevice.GetDeviceSelectorFromDeviceName(deviceName);
                 var devices = await DeviceInformation.FindAllAsync(deviceSelector);
 
@@ -108,23 +85,20 @@ namespace RevoluteConfigApp.Pages
 
                     if (bluetoothLeDevice != null)
                     {
-                        // Attempt to pair with the device
                         var pairingResult = await bluetoothLeDevice.DeviceInformation.Pairing.PairAsync();
-                        if (pairingResult.Status == DevicePairingResultStatus.Paired)
+                        if (pairingResult.Status == DevicePairingResultStatus.Paired || pairingResult.Status == DevicePairingResultStatus.AlreadyPaired)
                         {
-                            OutputTextBlock.Text = $"Successfully paired with {deviceName}.";
+                            OutputTextBlock.Text = $"Successfully paired or already paired with {deviceName}.";
 
-                            // Establish a GATT connection to the device
                             if (bluetoothLeDevice.ConnectionStatus == BluetoothConnectionStatus.Connected)
                             {
                                 OutputTextBlock.Text = $"{deviceName} is connected to the app.";
                             }
                             else
                             {
-                                OutputTextBlock.Text = $"{deviceName} is paired but not connected to the app.";
+                                OutputTextBlock.Text = $"{deviceName} is paired but not yet connected. Attempting connection...";
                             }
 
-                            // Optionally, discover services and characteristics
                             await DiscoverServicesAsync(bluetoothLeDevice);
                         }
                         else
@@ -148,12 +122,10 @@ namespace RevoluteConfigApp.Pages
             }
         }
 
-        // Method to discover services and characteristics
         private async Task DiscoverServicesAsync(BluetoothLEDevice bluetoothLeDevice)
         {
             try
             {
-                // Get the GATT services
                 var gattServicesResult = await bluetoothLeDevice.GetGattServicesAsync();
 
                 if (gattServicesResult.Status == GattCommunicationStatus.Success)
@@ -161,8 +133,6 @@ namespace RevoluteConfigApp.Pages
                     foreach (var service in gattServicesResult.Services)
                     {
                         Debug.WriteLine($"Service UUID: {service.Uuid}");
-
-                        // Get the characteristics for each service
                         var gattCharacteristicsResult = await service.GetCharacteristicsAsync();
                         if (gattCharacteristicsResult.Status == GattCommunicationStatus.Success)
                         {
@@ -172,7 +142,6 @@ namespace RevoluteConfigApp.Pages
                             }
                         }
                     }
-
                     OutputTextBlock.Text = $"Discovered services and characteristics for {bluetoothLeDevice.Name}.";
                 }
                 else
@@ -186,7 +155,6 @@ namespace RevoluteConfigApp.Pages
             }
         }
 
-        // Stop the BLE scan (optional)
         private void StopBLEScan()
         {
             if (_watcher != null && _watcher.Status == BluetoothLEAdvertisementWatcherStatus.Started)
