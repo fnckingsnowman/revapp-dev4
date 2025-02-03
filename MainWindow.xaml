@@ -8,11 +8,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Title="RevoluteConfigApp">
-    <!--
+    <!---->
     <Window.SystemBackdrop>
-        <DesktopAcrylicBackdrop />
+        <MicaBackdrop />
     </Window.SystemBackdrop>
-     -->
 
     <NavigationView PaneTitle="Revolute Configurator" x:Name="nvSample" IsBackButtonVisible="Collapsed">
         <NavigationView.Header>

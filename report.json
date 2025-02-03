@@ -1,0 +1,1336 @@
+[
+    {
+        "name": "HID_KEY_A",
+        "report": [0, 0, 0, 0, 0, 0, 0, 4],
+        "transport": "5",
+        "description": "Keyboard - key A"
+    },
+    {
+        "name": "HID_KEY_B",
+        "report": [0, 0, 0, 0, 0, 0, 0, 5],
+        "transport": "5",
+        "description": "Keyboard - key B"
+    },
+    {
+        "name": "HID_KEY_C",
+        "report": [0, 0, 0, 0, 0, 0, 0, 6],
+        "transport": "5",
+        "description": "Keyboard - key C"
+    },
+    {
+        "name": "HID_KEY_D",
+        "report": [0, 0, 0, 0, 0, 0, 0, 7],
+        "transport": "5",
+        "description": "Keyboard - key D"
+    },
+    {
+        "name": "HID_KEY_E",
+        "report": [0, 0, 0, 0, 0, 0, 0, 8],
+        "transport": "5",
+        "description": "Keyboard - key E"
+    },
+    {
+        "name": "HID_KEY_F",
+        "report": [0, 0, 0, 0, 0, 0, 0, 9],
+        "transport": "5",
+        "description": "Keyboard - key F"
+    },
+    {
+        "name": "HID_KEY_G",
+        "report": [0, 0, 0, 0, 0, 0, 0, 10],
+        "transport": "5",
+        "description": "Keyboard - key G"
+    },
+    {
+        "name": "HID_KEY_H",
+        "report": [0, 0, 0, 0, 0, 0, 0, 11],
+        "transport": "5",
+        "description": "Keyboard - key H"
+    },
+    {
+        "name": "HID_KEY_I",
+        "report": [0, 0, 0, 0, 0, 0, 0, 12],
+        "transport": "5",
+        "description": "Keyboard - key I"
+    },
+    {
+        "name": "HID_KEY_J",
+        "report": [0, 0, 0, 0, 0, 0, 0, 13],
+        "transport": "5",
+        "description": "Keyboard - key J"
+    },
+    {
+        "name": "HID_KEY_K",
+        "report": [0, 0, 0, 0, 0, 0, 0, 14],
+        "transport": "5",
+        "description": "Keyboard - key K"
+    },
+    {
+        "name": "HID_KEY_L",
+        "report": [0, 0, 0, 0, 0, 0, 0, 15],
+        "transport": "5",
+        "description": "Keyboard - key L"
+    },
+    {
+        "name": "HID_KEY_M",
+        "report": [0, 0, 0, 0, 0, 0, 0, 16],
+        "transport": "5",
+        "description": "Keyboard - key M"
+    },
+    {
+        "name": "HID_KEY_N",
+        "report": [0, 0, 0, 0, 0, 0, 0, 17],
+        "transport": "5",
+        "description": "Keyboard - key N"
+    },
+    {
+        "name": "HID_KEY_O",
+        "report": [0, 0, 0, 0, 0, 0, 0, 18],
+        "transport": "5",
+        "description": "Keyboard - key O"
+    },
+    {
+        "name": "HID_KEY_P",
+        "report": [0, 0, 0, 0, 0, 0, 0, 19],
+        "transport": "5",
+        "description": "Keyboard - key P"
+    },
+    {
+        "name": "HID_KEY_Q",
+        "report": [0, 0, 0, 0, 0, 0, 0, 20],
+        "transport": "5",
+        "description": "Keyboard - key Q"
+    },
+    {
+        "name": "HID_KEY_R",
+        "report": [0, 0, 0, 0, 0, 0, 0, 21],
+        "transport": "5",
+        "description": "Keyboard - key R"
+    },
+    {
+        "name": "HID_KEY_S",
+        "report": [0, 0, 0, 0, 0, 0, 0, 22],
+        "transport": "5",
+        "description": "Keyboard - key S"
+    },
+    {
+        "name": "HID_KEY_T",
+        "report": [0, 0, 0, 0, 0, 0, 0, 23],
+        "transport": "5",
+        "description": "Keyboard - key T"
+    },
+    {
+        "name": "HID_KEY_U",
+        "report": [0, 0, 0, 0, 0, 0, 0, 24],
+        "transport": "5",
+        "description": "Keyboard - key U"
+    },
+    {
+        "name": "HID_KEY_V",
+        "report": [0, 0, 0, 0, 0, 0, 0, 25],
+        "transport": "5",
+        "description": "Keyboard - key V"
+    },
+    {
+        "name": "HID_KEY_W",
+        "report": [0, 0, 0, 0, 0, 0, 0, 26],
+        "transport": "5",
+        "description": "Keyboard - key W"
+    },
+    {
+        "name": "HID_KEY_X",
+        "report": [0, 0, 0, 0, 0, 0, 0, 27],
+        "transport": "5",
+        "description": "Keyboard - key X"
+    },
+    {
+        "name": "HID_KEY_Y",
+        "report": [0, 0, 0, 0, 0, 0, 0, 28],
+        "transport": "5",
+        "description": "Keyboard - key Y"
+    },
+    {
+        "name": "HID_KEY_Z",
+        "report": [0, 0, 0, 0, 0, 0, 0, 29],
+        "transport": "5",
+        "description": "Keyboard - key Z"
+    },
+    {
+        "name": "HID_KEY_F1",
+        "report": [0, 0, 0, 0, 0, 0, 0, 58],
+        "transport": "5",
+        "description": "Keyboard - Function Key F1"
+    },
+    {
+        "name": "HID_KEY_F2",
+        "report": [0, 0, 0, 0, 0, 0, 0, 59],
+        "transport": "5",
+        "description": "Keyboard - Function Key F2"
+    },
+    {
+        "name": "HID_KEY_F3",
+        "report": [0, 0, 0, 0, 0, 0, 0, 60],
+        "transport": "5",
+        "description": "Keyboard - Function Key F3"
+    },
+    {
+        "name": "HID_KEY_F4",
+        "report": [0, 0, 0, 0, 0, 0, 0, 61],
+        "transport": "5",
+        "description": "Keyboard - Function Key F4"
+    },
+    {
+        "name": "HID_KEY_F5",
+        "report": [0, 0, 0, 0, 0, 0, 0, 62],
+        "transport": "5",
+        "description": "Keyboard - Function Key F5"
+    },
+    {
+        "name": "HID_KEY_F6",
+        "report": [0, 0, 0, 0, 0, 0, 0, 63],
+        "transport": "5",
+        "description": "Keyboard - Function Key F6"
+    },
+    {
+        "name": "HID_KEY_F7",
+        "report": [0, 0, 0, 0, 0, 0, 0, 64],
+        "transport": "5",
+        "description": "Keyboard - Function Key F7"
+    },
+    {
+        "name": "HID_KEY_F8",
+        "report": [0, 0, 0, 0, 0, 0, 0, 65],
+        "transport": "5",
+        "description": "Keyboard - Function Key F8"
+    },
+    {
+        "name": "HID_KEY_F9",
+        "report": [0, 0, 0, 0, 0, 0, 0, 66],
+        "transport": "5",
+        "description": "Keyboard - Function Key F9"
+    },
+    {
+        "name": "HID_KEY_F10",
+        "report": [0, 0, 0, 0, 0, 0, 0, 67],
+        "transport": "5",
+        "description": "Keyboard - Function Key F10"
+    },
+    {
+        "name": "HID_KEY_F11",
+        "report": [0, 0, 0, 0, 0, 0, 0, 68],
+        "transport": "5",
+        "description": "Keyboard - Function Key F11"
+    },
+    {
+        "name": "HID_KEY_F12",
+        "report": [0, 0, 0, 0, 0, 0, 0, 69],
+        "transport": "5",
+        "description": "Keyboard - Function Key F12"
+    },
+    {
+        "name": "HID_KEY_F13",
+        "report": [0, 0, 0, 0, 0, 0, 0, 104],
+        "transport": "5",
+        "description": "Keyboard - F13"
+    },
+    {
+        "name": "HID_KEY_F14",
+        "report": [0, 0, 0, 0, 0, 0, 0, 105],
+        "transport": "5",
+        "description": "Keyboard - F14"
+    },
+    {
+        "name": "HID_KEY_F15",
+        "report": [0, 0, 0, 0, 0, 0, 0, 106],
+        "transport": "5",
+        "description": "Keyboard - F15"
+    },
+    {
+        "name": "HID_KEY_F16",
+        "report": [0, 0, 0, 0, 0, 0, 0, 107],
+        "transport": "5",
+        "description": "Keyboard - F16"
+    },
+    {
+        "name": "HID_KEY_F17",
+        "report": [0, 0, 0, 0, 0, 0, 0, 108],
+        "transport": "5",
+        "description": "Keyboard - F17"
+    },
+    {
+        "name": "HID_KEY_F18",
+        "report": [0, 0, 0, 0, 0, 0, 0, 109],
+        "transport": "5",
+        "description": "Keyboard - F18"
+    },
+    {
+        "name": "HID_KEY_F19",
+        "report": [0, 0, 0, 0, 0, 0, 0, 110],
+        "transport": "5",
+        "description": "Keyboard - F19"
+    },
+    {
+        "name": "HID_KEY_F20",
+        "report": [0, 0, 0, 0, 0, 0, 0, 111],
+        "transport": "5",
+        "description": "Keyboard - F20"
+    },
+    {
+        "name": "HID_KEY_F21",
+        "report": [0, 0, 0, 0, 0, 0, 0, 112],
+        "transport": "5",
+        "description": "Keyboard - F21"
+    },
+    {
+        "name": "HID_KEY_F22",
+        "report": [0, 0, 0, 0, 0, 0, 0, 113],
+        "transport": "5",
+        "description": "Keyboard - F22"
+    },
+    {
+        "name": "HID_KEY_F23",
+        "report": [0, 0, 0, 0, 0, 0, 0, 114],
+        "transport": "5",
+        "description": "Keyboard - F23"
+    },
+    {
+        "name": "HID_KEY_F24",
+        "report": [0, 0, 0, 0, 0, 0, 0, 115],
+        "transport": "5",
+        "description": "Keyboard - F24"
+    },
+    {
+        "name": "HID_KEY_1_AND_EXCLAMATION",
+        "report": [0, 0, 0, 0, 0, 0, 0, 30],
+        "transport": "5",
+        "description": "Keyboard - 1 and Exclamation"
+    },
+    {
+        "name": "HID_KEY_2_AND_AT",
+        "report": [0, 0, 0, 0, 0, 0, 0, 31],
+        "transport": "5",
+        "description": "Keyboard - 2 and At"
+    },
+    {
+        "name": "HID_KEY_3_AND_HASH",
+        "report": [0, 0, 0, 0, 0, 0, 0, 32],
+        "transport": "5",
+        "description": "Keyboard - 3 and Hash"
+    },
+    {
+        "name": "HID_KEY_4_AND_DOLLAR",
+        "report": [0, 0, 0, 0, 0, 0, 0, 33],
+        "transport": "5",
+        "description": "Keyboard - 4 and Dollar"
+    },
+    {
+        "name": "HID_KEY_5_AND_PERCENT",
+        "report": [0, 0, 0, 0, 0, 0, 0, 34],
+        "transport": "5",
+        "description": "Keyboard - 5 and Percent"
+    },
+    {
+        "name": "HID_KEY_6_AND_CARET",
+        "report": [0, 0, 0, 0, 0, 0, 0, 35],
+        "transport": "5",
+        "description": "Keyboard - 6 and Caret"
+    },
+    {
+        "name": "HID_KEY_7_AND_AMPERSAND",
+        "report": [0, 0, 0, 0, 0, 0, 0, 36],
+        "transport": "5",
+        "description": "Keyboard - 7 and Ampersand"
+    },
+    {
+        "name": "HID_KEY_8_AND_ASTERISK",
+        "report": [0, 0, 0, 0, 0, 0, 0, 37],
+        "transport": "5",
+        "description": "Keyboard - 8 and Asterisk"
+    },
+    {
+        "name": "HID_KEY_9_AND_LEFT_PARENTHESIS",
+        "report": [0, 0, 0, 0, 0, 0, 0, 38],
+        "transport": "5",
+        "description": "Keyboard - 9 and Left Parenthesis"
+    },
+    {
+        "name": "HID_KEY_0_AND_RIGHT_PARENTHESIS",
+        "report": [0, 0, 0, 0, 0, 0, 0, 39],
+        "transport": "5",
+        "description": "Keyboard - 0 and Right Parenthesis"
+    },
+    {
+        "name": "HID_KEY_RETURN_ENTER",
+        "report": [0, 0, 0, 0, 0, 0, 0, 40],
+        "transport": "5",
+        "description": "Keyboard - Return/Enter"
+    },
+    {
+        "name": "HID_KEY_ESCAPE",
+        "report": [0, 0, 0, 0, 0, 0, 0, 41],
+        "transport": "5",
+        "description": "Keyboard - Escape"
+    },
+    {
+        "name": "HID_KEY_DELETE_BACKSPACE",
+        "report": [0, 0, 0, 0, 0, 0, 0, 42],
+        "transport": "5",
+        "description": "Keyboard - Delete/Backspace"
+    },
+    {
+        "name": "HID_KEY_TAB",
+        "report": [0, 0, 0, 0, 0, 0, 0, 43],
+        "transport": "5",
+        "description": "Keyboard - Tab"
+    },
+    {
+        "name": "HID_KEY_SPACEBAR",
+        "report": [0, 0, 0, 0, 0, 0, 0, 44],
+        "transport": "5",
+        "description": "Keyboard - Spacebar"
+    },
+    {
+        "name": "HID_KEY_MINUS_AND_UNDERSCORE",
+        "report": [0, 0, 0, 0, 0, 0, 0, 45],
+        "transport": "5",
+        "description": "Keyboard - Minus and Underscore"
+    },
+    {
+        "name": "HID_KEY_EQUAL_AND_PLUS",
+        "report": [0, 0, 0, 0, 0, 0, 0, 46],
+        "transport": "5",
+        "description": "Keyboard - Equal and Plus"
+    },
+    {
+        "name": "HID_KEY_LEFT_BRACKET_AND_LEFT_BRACE",
+        "report": [0, 0, 0, 0, 0, 0, 0, 47],
+        "transport": "5",
+        "description": "Keyboard - Left Bracket and Left Brace"
+    },
+    {
+        "name": "HID_KEY_RIGHT_BRACKET_AND_RIGHT_BRACE",
+        "report": [0, 0, 0, 0, 0, 0, 0, 48],
+        "transport": "5",
+        "description": "Keyboard - Right Bracket and Right Brace"
+    },
+    {
+        "name": "HID_KEY_BACKSLASH_AND_PIPE",
+        "report": [0, 0, 0, 0, 0, 0, 0, 49],
+        "transport": "5",
+        "description": "Keyboard - Backslash and Pipe"
+    },
+    {
+        "name": "HID_KEY_NON_US_HASH_AND_TILDE",
+        "report": [0, 0, 0, 0, 0, 0, 0, 50],
+        "transport": "5",
+        "description": "Keyboard - Non-US Hash and Tilde"
+    },
+    {
+        "name": "HID_KEY_SEMICOLON_AND_COLON",
+        "report": [0, 0, 0, 0, 0, 0, 0, 51],
+        "transport": "5",
+        "description": "Keyboard - Semicolon and Colon"
+    },
+    {
+        "name": "HID_KEY_APOSTROPHE_AND_QUOTE",
+        "report": [0, 0, 0, 0, 0, 0, 0, 52],
+        "transport": "5",
+        "description": "Keyboard - Apostrophe and Quote"
+    },
+    {
+        "name": "HID_KEY_GRAVE_ACCENT_AND_TILDE",
+        "report": [0, 0, 0, 0, 0, 0, 0, 53],
+        "transport": "5",
+        "description": "Keyboard - Grave Accent and Tilde"
+    },
+    {
+        "name": "HID_KEY_COMMA_AND_LESS_THAN",
+        "report": [0, 0, 0, 0, 0, 0, 0, 54],
+        "transport": "5",
+        "description": "Keyboard - Comma and Less Than"
+    },
+    {
+        "name": "HID_KEY_PERIOD_AND_GREATER_THAN",
+        "report": [0, 0, 0, 0, 0, 0, 0, 55],
+        "transport": "5",
+        "description": "Keyboard - Period and Greater Than"
+    },
+    {
+        "name": "HID_KEY_SLASH_AND_QUESTION_MARK",
+        "report": [0, 0, 0, 0, 0, 0, 0, 56],
+        "transport": "5",
+        "description": "Keyboard - Slash and Question Mark"
+    },
+    {
+        "name": "HID_KEY_CAPS_LOCK",
+        "report": [0, 0, 0, 0, 0, 0, 0, 57],
+        "transport": "5",
+        "description": "Keyboard - Caps Lock"
+    },
+    {
+        "name": "HID_KEY_PRINTSCREEN",
+        "report": [0, 0, 0, 0, 0, 0, 0, 70],
+        "transport": "5",
+        "description": "Keyboard - Print Screen"
+    },
+    {
+        "name": "HID_KEY_SCROLL_LOCK",
+        "report": [0, 0, 0, 0, 0, 0, 0, 71],
+        "transport": "5",
+        "description": "Keyboard - Scroll Lock"
+    },
+    {
+        "name": "HID_KEY_PAUSE",
+        "report": [0, 0, 0, 0, 0, 0, 0, 72],
+        "transport": "5",
+        "description": "Keyboard - Pause"
+    },
+    {
+        "name": "HID_KEY_INSERT",
+        "report": [0, 0, 0, 0, 0, 0, 0, 73],
+        "transport": "5",
+        "description": "Keyboard - Insert"
+    },
+    {
+        "name": "HID_KEY_HOME",
+        "report": [0, 0, 0, 0, 0, 0, 0, 74],
+        "transport": "5",
+        "description": "Keyboard - Home"
+    },
+    {
+        "name": "HID_KEY_PAGEUP",
+        "report": [0, 0, 0, 0, 0, 0, 0, 75],
+        "transport": "5",
+        "description": "Keyboard - Page Up"
+    },
+    {
+        "name": "HID_KEY_DELETE_FORWARD",
+        "report": [0, 0, 0, 0, 0, 0, 0, 76],
+        "transport": "5",
+        "description": "Keyboard - Delete Forward"
+    },
+    {
+        "name": "HID_KEY_END",
+        "report": [0, 0, 0, 0, 0, 0, 0, 77],
+        "transport": "5",
+        "description": "Keyboard - End"
+    },
+    {
+        "name": "HID_KEY_PAGEDOWN",
+        "report": [0, 0, 0, 0, 0, 0, 0, 78],
+        "transport": "5",
+        "description": "Keyboard - Page Down"
+    },
+    {
+        "name": "HID_KEY_RIGHTARROW",
+        "report": [0, 0, 0, 0, 0, 0, 0, 79],
+        "transport": "5",
+        "description": "Keyboard - Right Arrow"
+    },
+    {
+        "name": "HID_KEY_LEFTARROW",
+        "report": [0, 0, 0, 0, 0, 0, 0, 80],
+        "transport": "5",
+        "description": "Keyboard - Left Arrow"
+    },
+    {
+        "name": "HID_KEY_DOWNARROW",
+        "report": [0, 0, 0, 0, 0, 0, 0, 81],
+        "transport": "5",
+        "description": "Keyboard - Down Arrow"
+    },
+    {
+        "name": "HID_KEY_UPARROW",
+        "report": [0, 0, 0, 0, 0, 0, 0, 82],
+        "transport": "5",
+        "description": "Keyboard - Up Arrow"
+    },
+        {
+        "name": "HID_KEY_INTERNATIONAL1",
+        "report": [0, 0, 0, 0, 0, 0, 0, 135],
+        "transport": "5",
+        "description": "Keyboard - International 1"
+    },
+    {
+        "name": "HID_KEY_INTERNATIONAL2",
+        "report": [0, 0, 0, 0, 0, 0, 0, 136],
+        "transport": "5",
+        "description": "Keyboard - International 2"
+    },
+    {
+        "name": "HID_KEY_INTERNATIONAL3",
+        "report": [0, 0, 0, 0, 0, 0, 0, 137],
+        "transport": "5",
+        "description": "Keyboard - International 3"
+    },
+    {
+        "name": "HID_KEY_INTERNATIONAL4",
+        "report": [0, 0, 0, 0, 0, 0, 0, 138],
+        "transport": "5",
+        "description": "Keyboard - International 4"
+    },
+    {
+        "name": "HID_KEY_INTERNATIONAL5",
+        "report": [0, 0, 0, 0, 0, 0, 0, 139],
+        "transport": "5",
+        "description": "Keyboard - International 5"
+    },
+    {
+        "name": "HID_KEY_INTERNATIONAL6",
+        "report": [0, 0, 0, 0, 0, 0, 0, 140],
+        "transport": "5",
+        "description": "Keyboard - International 6"
+    },
+    {
+        "name": "HID_KEY_INTERNATIONAL7",
+        "report": [0, 0, 0, 0, 0, 0, 0, 141],
+        "transport": "5",
+        "description": "Keyboard - International 7"
+    },
+    {
+        "name": "HID_KEY_INTERNATIONAL8",
+        "report": [0, 0, 0, 0, 0, 0, 0, 142],
+        "transport": "5",
+        "description": "Keyboard - International 8"
+    },
+    {
+        "name": "HID_KEY_INTERNATIONAL9",
+        "report": [0, 0, 0, 0, 0, 0, 0, 143],
+        "transport": "5",
+        "description": "Keyboard - International 9"
+    },
+    {
+        "name": "HID_KEY_LANG1",
+        "report": [0, 0, 0, 0, 0, 0, 0, 144],
+        "transport": "5",
+        "description": "Keyboard - Lang 1"
+    },
+    {
+        "name": "HID_KEY_LANG2",
+        "report": [0, 0, 0, 0, 0, 0, 0, 145],
+        "transport": "5",
+        "description": "Keyboard - Lang 2"
+    },
+    {
+        "name": "HID_KEY_LANG3",
+        "report": [0, 0, 0, 0, 0, 0, 0, 146],
+        "transport": "5",
+        "description": "Keyboard - Lang 3"
+    },
+    {
+        "name": "HID_KEY_LANG4",
+        "report": [0, 0, 0, 0, 0, 0, 0, 147],
+        "transport": "5",
+        "description": "Keyboard - Lang 4"
+    },
+    {
+        "name": "HID_KEY_LANG5",
+        "report": [0, 0, 0, 0, 0, 0, 0, 148],
+        "transport": "5",
+        "description": "Keyboard - Lang 5"
+    },
+    {
+        "name": "HID_KEY_LANG6",
+        "report": [0, 0, 0, 0, 0, 0, 0, 149],
+        "transport": "5",
+        "description": "Keyboard - Lang 6"
+    },
+    {
+        "name": "HID_KEY_LANG7",
+        "report": [0, 0, 0, 0, 0, 0, 0, 150],
+        "transport": "5",
+        "description": "Keyboard - Lang 7"
+    },
+    {
+        "name": "HID_KEY_LANG8",
+        "report": [0, 0, 0, 0, 0, 0, 0, 151],
+        "transport": "5",
+        "description": "Keyboard - Lang 8"
+    },
+    {
+        "name": "HID_KEY_LANG9",
+        "report": [0, 0, 0, 0, 0, 0, 0, 152],
+        "transport": "5",
+        "description": "Keyboard - Lang 9"
+    },
+    {
+        "name": "HID_KEY_ALTERNATE_ERASE",
+        "report": [0, 0, 0, 0, 0, 0, 0, 153],
+        "transport": "5",
+        "description": "Keyboard - Alternate Erase"
+    },
+    {
+        "name": "HID_KEY_SYSREQ_ATTENTION",
+        "report": [0, 0, 0, 0, 0, 0, 0, 154],
+        "transport": "5",
+        "description": "Keyboard - SysReq Attention"
+    },
+    {
+        "name": "HID_KEY_CANCEL",
+        "report": [0, 0, 0, 0, 0, 0, 0, 155],
+        "transport": "5",
+        "description": "Keyboard - Cancel"
+    },
+    {
+        "name": "HID_KEY_CLEAR",
+        "report": [0, 0, 0, 0, 0, 0, 0, 156],
+        "transport": "5",
+        "description": "Keyboard - Clear"
+    },
+    {
+        "name": "HID_KEY_PRIOR",
+        "report": [0, 0, 0, 0, 0, 0, 0, 157],
+        "transport": "5",
+        "description": "Keyboard - Prior"
+    },
+    {
+        "name": "HID_KEY_RETURN",
+        "report": [0, 0, 0, 0, 0, 0, 0, 158],
+        "transport": "5",
+        "description": "Keyboard - Return"
+    },
+    {
+        "name": "HID_KEY_SEPARATOR",
+        "report": [0, 0, 0, 0, 0, 0, 0, 159],
+        "transport": "5",
+        "description": "Keyboard - Separator"
+    },
+    {
+        "name": "HID_KEY_OUT",
+        "report": [0, 0, 0, 0, 0, 0, 0, 160],
+        "transport": "5",
+        "description": "Keyboard - Out"
+    },
+    {
+        "name": "HID_KEY_OPER",
+        "report": [0, 0, 0, 0, 0, 0, 0, 161],
+        "transport": "5",
+        "description": "Keyboard - Oper"
+    },
+    {
+        "name": "HID_KEY_CLEAR_AGAIN",
+        "report": [0, 0, 0, 0, 0, 0, 0, 162],
+        "transport": "5",
+        "description": "Keyboard - Clear Again"
+    },
+    {
+        "name": "HID_KEY_CRSEL_PROPS",
+        "report": [0, 0, 0, 0, 0, 0, 0, 163],
+        "transport": "5",
+        "description": "Keyboard - CRSel Properties"
+    },
+    {
+        "name": "HID_KEY_EXSEL",
+        "report": [0, 0, 0, 0, 0, 0, 0, 164],
+        "transport": "5",
+        "description": "Keyboard - ExSel"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_00",
+        "report": [0, 0, 0, 0, 0, 0, 0, 176],
+        "transport": "5",
+        "description": "Keypad - 00"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_000",
+        "report": [0, 0, 0, 0, 0, 0, 0, 177],
+        "transport": "5",
+        "description": "Keypad - 000"
+    },
+    {
+        "name": "HID_KEY_THOUSANDS_SEPARATOR",
+        "report": [0, 0, 0, 0, 0, 0, 0, 178],
+        "transport": "5",
+        "description": "Keypad - Thousands Separator"
+    },
+    {
+        "name": "HID_KEY_DECIMAL_SEPARATOR",
+        "report": [0, 0, 0, 0, 0, 0, 0, 179],
+        "transport": "5",
+        "description": "Keypad - Decimal Separator"
+    },
+    {
+        "name": "HID_KEY_CURRENCY_UNIT",
+        "report": [0, 0, 0, 0, 0, 0, 0, 180],
+        "transport": "5",
+        "description": "Keypad - Currency Unit"
+    },
+    {
+        "name": "HID_KEY_CURRENCY_SUB_UNIT",
+        "report": [0, 0, 0, 0, 0, 0, 0, 181],
+        "transport": "5",
+        "description": "Keypad - Currency Sub Unit"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_LEFT_PARENTHESIS",
+        "report": [0, 0, 0, 0, 0, 0, 0, 182],
+        "transport": "5",
+        "description": "Keypad - Left Parenthesis"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_RIGHT_PARENTHESIS",
+        "report": [0, 0, 0, 0, 0, 0, 0, 183],
+        "transport": "5",
+        "description": "Keypad - Right Parenthesis"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_LEFT_BRACE",
+        "report": [0, 0, 0, 0, 0, 0, 0, 184],
+        "transport": "5",
+        "description": "Keypad - Left Brace"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_RIGHT_BRACE",
+        "report": [0, 0, 0, 0, 0, 0, 0, 185],
+        "transport": "5",
+        "description": "Keypad - Right Brace"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_TAB",
+        "report": [0, 0, 0, 0, 0, 0, 0, 186],
+        "transport": "5",
+        "description": "Keypad - Tab"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_BACKSPACE",
+        "report": [0, 0, 0, 0, 0, 0, 0, 187],
+        "transport": "5",
+        "description": "Keypad - Backspace"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_A",
+        "report": [0, 0, 0, 0, 0, 0, 0, 188],
+        "transport": "5",
+        "description": "Keypad - A"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_B",
+        "report": [0, 0, 0, 0, 0, 0, 0, 189],
+        "transport": "5",
+        "description": "Keypad - B"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_C",
+        "report": [0, 0, 0, 0, 0, 0, 0, 190],
+        "transport": "5",
+        "description": "Keypad - C"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_D",
+        "report": [0, 0, 0, 0, 0, 0, 0, 191],
+        "transport": "5",
+        "description": "Keypad - D"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_E",
+        "report": [0, 0, 0, 0, 0, 0, 0, 192],
+        "transport": "5",
+        "description": "Keypad - E"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_F",
+        "report": [0, 0, 0, 0, 0, 0, 0, 193],
+        "transport": "5",
+        "description": "Keypad - F"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_XOR",
+        "report": [0, 0, 0, 0, 0, 0, 0, 194],
+        "transport": "5",
+        "description": "Keypad - XOR"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_CARET",
+        "report": [0, 0, 0, 0, 0, 0, 0, 195],
+        "transport": "5",
+        "description": "Keypad - Caret"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_PERCENT",
+        "report": [0, 0, 0, 0, 0, 0, 0, 196],
+        "transport": "5",
+        "description": "Keypad - Percent"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_LESS_THAN",
+        "report": [0, 0, 0, 0, 0, 0, 0, 197],
+        "transport": "5",
+        "description": "Keypad - Less Than"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_GREATER_THAN",
+        "report": [0, 0, 0, 0, 0, 0, 0, 198],
+        "transport": "5",
+        "description": "Keypad - Greater Than"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_AMPERSAND",
+        "report": [0, 0, 0, 0, 0, 0, 0, 199],
+        "transport": "5",
+        "description": "Keypad - Ampersand"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_AMPERSAND_AMPERSAND",
+        "report": [0, 0, 0, 0, 0, 0, 0, 200],
+        "transport": "5",
+        "description": "Keypad - Ampersand Ampersand"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_PIPE",
+        "report": [0, 0, 0, 0, 0, 0, 0, 201],
+        "transport": "5",
+        "description": "Keypad - Pipe"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_PIPE_PIPE",
+        "report": [0, 0, 0, 0, 0, 0, 0, 202],
+        "transport": "5",
+        "description": "Keypad - Pipe Pipe"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_COLON",
+        "report": [0, 0, 0, 0, 0, 0, 0, 203],
+        "transport": "5",
+        "description": "Keypad - Colon"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_HASH",
+        "report": [0, 0, 0, 0, 0, 0, 0, 204],
+        "transport": "5",
+        "description": "Keypad - Hash"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_SPACE",
+        "report": [0, 0, 0, 0, 0, 0, 0, 205],
+        "transport": "5",
+        "description": "Keypad - Space"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_AT",
+        "report": [0, 0, 0, 0, 0, 0, 0, 206],
+        "transport": "5",
+        "description": "Keypad - At"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_EXCLAMATION",
+        "report": [0, 0, 0, 0, 0, 0, 0, 207],
+        "transport": "5",
+        "description": "Keypad - Exclamation"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_MEMORY_STORE",
+        "report": [0, 0, 0, 0, 0, 0, 0, 208],
+        "transport": "5",
+        "description": "Keypad - Memory Store"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_MEMORY_RECALL",
+        "report": [0, 0, 0, 0, 0, 0, 0, 209],
+        "transport": "5",
+        "description": "Keypad - Memory Recall"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_MEMORY_CLEAR",
+        "report": [0, 0, 0, 0, 0, 0, 0, 210],
+        "transport": "5",
+        "description": "Keypad - Memory Clear"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_MEMORY_ADD",
+        "report": [0, 0, 0, 0, 0, 0, 0, 211],
+        "transport": "5",
+        "description": "Keypad - Memory Add"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_MEMORY_SUBTRACT",
+        "report": [0, 0, 0, 0, 0, 0, 0, 212],
+        "transport": "5",
+        "description": "Keypad - Memory Subtract"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_MEMORY_MULTIPLY",
+        "report": [0, 0, 0, 0, 0, 0, 0, 213],
+        "transport": "5",
+        "description": "Keypad - Memory Multiply"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_MEMORY_DIVIDE",
+        "report": [0, 0, 0, 0, 0, 0, 0, 214],
+        "transport": "5",
+        "description": "Keypad - Memory Divide"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_PLUS_MINUS",
+        "report": [0, 0, 0, 0, 0, 0, 0, 215],
+        "transport": "5",
+        "description": "Keypad - Plus Minus"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_CLEAR",
+        "report": [0, 0, 0, 0, 0, 0, 0, 216],
+        "transport": "5",
+        "description": "Keypad - Clear"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_CLEAR_ENTRY",
+        "report": [0, 0, 0, 0, 0, 0, 0, 217],
+        "transport": "5",
+        "description": "Keypad - Clear Entry"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_BINARY",
+        "report": [0, 0, 0, 0, 0, 0, 0, 218],
+        "transport": "5",
+        "description": "Keypad - Binary"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_OCTAL",
+        "report": [0, 0, 0, 0, 0, 0, 0, 219],
+        "transport": "5",
+        "description": "Keypad - Octal"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_DECIMAL",
+        "report": [0, 0, 0, 0, 0, 0, 0, 220],
+        "transport": "5",
+        "description": "Keypad - Decimal"
+    },
+    {
+        "name": "HID_KEY_KEYPAD_HEXADECIMAL",
+        "report": [0, 0, 0, 0, 0, 0, 0, 221],
+        "transport": "5",
+        "description": "Keypad - Hexadecimal"
+    },
+    {
+        "name": "HID_KEYPAD_NUM_LOCK_AND_CLEAR",
+        "report": [0, 0, 0, 0, 0, 0, 0, 83],
+        "transport": "5",
+        "description": "Keypad - Num Lock and Clear"
+    },
+    {
+        "name": "HID_KEYPAD_SLASH",
+        "report": [0, 0, 0, 0, 0, 0, 0, 84],
+        "transport": "5",
+        "description": "Keypad - Slash"
+    },
+    {
+        "name": "HID_KEYPAD_ASTERISK",
+        "report": [0, 0, 0, 0, 0, 0, 0, 85],
+        "transport": "5",
+        "description": "Keypad - Asterisk"
+    },
+    {
+        "name": "HID_KEYPAD_MINUS",
+        "report": [0, 0, 0, 0, 0, 0, 0, 86],
+        "transport": "5",
+        "description": "Keypad - Minus"
+    },
+    {
+        "name": "HID_KEYPAD_PLUS",
+        "report": [0, 0, 0, 0, 0, 0, 0, 87],
+        "transport": "5",
+        "description": "Keypad - Plus"
+    },
+    {
+        "name": "HID_KEYPAD_ENTER",
+        "report": [0, 0, 0, 0, 0, 0, 0, 88],
+        "transport": "5",
+        "description": "Keypad - Enter"
+    },
+    {
+        "name": "HID_KEYPAD_1_AND_END",
+        "report": [0, 0, 0, 0, 0, 0, 0, 89],
+        "transport": "5",
+        "description": "Keypad - 1 and End"
+    },
+    {
+        "name": "HID_KEYPAD_2_AND_DOWN_ARROW",
+        "report": [0, 0, 0, 0, 0, 0, 0, 90],
+        "transport": "5",
+        "description": "Keypad - 2 and Down Arrow"
+    },
+    {
+        "name": "HID_KEYPAD_3_AND_PAGEDN",
+        "report": [0, 0, 0, 0, 0, 0, 0, 91],
+        "transport": "5",
+        "description": "Keypad - 3 and Page Down"
+    },
+    {
+        "name": "HID_KEYPAD_4_AND_LEFT_ARROW",
+        "report": [0, 0, 0, 0, 0, 0, 0, 92],
+        "transport": "5",
+        "description": "Keypad - 4 and Left Arrow"
+    },
+    {
+        "name": "HID_KEYPAD_5",
+        "report": [0, 0, 0, 0, 0, 0, 0, 93],
+        "transport": "5",
+        "description": "Keypad - 5"
+    },
+    {
+        "name": "HID_KEYPAD_6_AND_RIGHT_ARROW",
+        "report": [0, 0, 0, 0, 0, 0, 0, 94],
+        "transport": "5",
+        "description": "Keypad - 6 and Right Arrow"
+    },
+    {
+        "name": "HID_KEYPAD_7_AND_HOME",
+        "report": [0, 0, 0, 0, 0, 0, 0, 95],
+        "transport": "5",
+        "description": "Keypad - 7 and Home"
+    },
+    {
+        "name": "HID_KEYPAD_8_AND_UP_ARROW",
+        "report": [0, 0, 0, 0, 0, 0, 0, 96],
+        "transport": "5",
+        "description": "Keypad - 8 and Up Arrow"
+    },
+    {
+        "name": "HID_KEYPAD_9_AND_PAGEUP",
+        "report": [0, 0, 0, 0, 0, 0, 0, 97],
+        "transport": "5",
+        "description": "Keypad - 9 and Page Up"
+    },
+    {
+        "name": "HID_KEYPAD_0_AND_INSERT",
+        "report": [0, 0, 0, 0, 0, 0, 0, 98],
+        "transport": "5",
+        "description": "Keypad - 0 and Insert"
+    },
+    {
+        "name": "HID_KEYPAD_PERIOD_AND_DELETE",
+        "report": [0, 0, 0, 0, 0, 0, 0, 99],
+        "transport": "5",
+        "description": "Keypad - Period and Delete"
+    },
+    {
+        "name": "HID_KEY_NON_US_BACKSLASH_AND_PIPE",
+        "report": [0, 0, 0, 0, 0, 0, 0, 100],
+        "transport": "5",
+        "description": "Keyboard - Non-US Backslash and Pipe"
+    },
+    {
+        "name": "HID_KEY_APPLICATION",
+        "report": [0, 0, 0, 0, 0, 0, 0, 101],
+        "transport": "5",
+        "description": "Keyboard - Application"
+    },
+    {
+        "name": "HID_KEY_POWER",
+        "report": [0, 0, 0, 0, 0, 0, 0, 102],
+        "transport": "5",
+        "description": "Keyboard - Power"
+    },
+    {
+        "name": "HID_KEYPAD_EQUAL",
+        "report": [0, 0, 0, 0, 0, 0, 0, 103],
+        "transport": "5",
+        "description": "Keypad - Equal"
+    },
+    {
+        "name": "HID_KEY_EXECUTE",
+        "report": [0, 0, 0, 0, 0, 0, 0, 116],
+        "transport": "5",
+        "description": "Keyboard - Execute"
+    },
+    {
+        "name": "HID_KEY_HELP",
+        "report": [0, 0, 0, 0, 0, 0, 0, 117],
+        "transport": "5",
+        "description": "Keyboard - Help"
+    },
+    {
+        "name": "HID_KEY_MENU",
+        "report": [0, 0, 0, 0, 0, 0, 0, 118],
+        "transport": "5",
+        "description": "Keyboard - Menu"
+    },
+    {
+        "name": "HID_KEY_SELECT",
+        "report": [0, 0, 0, 0, 0, 0, 0, 119],
+        "transport": "5",
+        "description": "Keyboard - Select"
+    },
+    {
+        "name": "HID_KEY_STOP",
+        "report": [0, 0, 0, 0, 0, 0, 0, 120],
+        "transport": "5",
+        "description": "Keyboard - Stop"
+    },
+    {
+        "name": "HID_KEY_AGAIN",
+        "report": [0, 0, 0, 0, 0, 0, 0, 121],
+        "transport": "5",
+        "description": "Keyboard - Again"
+    },
+    {
+        "name": "HID_KEY_UNDO",
+        "report": [0, 0, 0, 0, 0, 0, 0, 122],
+        "transport": "5",
+        "description": "Keyboard - Undo"
+    },
+    {
+        "name": "HID_KEY_CUT",
+        "report": [0, 0, 0, 0, 0, 0, 0, 123],
+        "transport": "5",
+        "description": "Keyboard - Cut"
+    },
+    {
+        "name": "HID_KEY_COPY",
+        "report": [0, 0, 0, 0, 0, 0, 0, 124],
+        "transport": "5",
+        "description": "Keyboard - Copy"
+    },
+    {
+        "name": "HID_KEY_PASTE",
+        "report": [0, 0, 0, 0, 0, 0, 0, 125],
+        "transport": "5",
+        "description": "Keyboard - Paste"
+    },
+    {
+        "name": "Mouse X",
+        "report": [0, 1, 0, 0, 0, 0, 0, 0],
+        "transport": "13",
+        "description": "Mouse - X axis movement"
+    },
+    {
+        "name": "Mouse Y",
+        "report": [0, 0, 1, 0, 0, 0, 0, 0],
+        "transport": "13",
+        "description": "Mouse - Y axis movement"
+    },
+    {
+        "name": "Mouse Vertical Wheel",
+        "report": [0, 0, 0, 1, 0, 0, 0, 0],
+        "transport": "13",
+        "description": "Mouse - Vertical Scroll Wheel"
+    },
+    {
+        "name": "Mouse Horizontal Wheel",
+        "report": [0, 0, 0, 0, 1, 0, 0, 0],
+        "transport": "13",
+        "description": "Mouse - Horizontal Scroll Wheel"
+    },
+    {
+        "name": "Left Click",
+        "report": [1, 0, 0, 0, 0, 0, 0, 0],
+        "transport": "13",
+        "description": "Mouse - Primary Click"
+    },
+    {
+        "name": "Right Click",
+        "report": [2, 0, 0, 0, 0, 0, 0, 0],
+        "transport": "13",
+        "description": "Mouse - Secondary Click"
+    },
+    {
+        "name": "Middle Click",
+        "report": [3, 0, 0, 0, 0, 0, 0, 0],
+        "transport": "13",
+        "description": "Mouse - Middle Click"
+    },
+    {
+        "name": "Mouse Side Button 1",
+        "report": [4, 0, 0, 0, 0, 0, 0, 0],
+        "transport": "13",
+        "description": "Mouse - Side Button 1"
+    },
+    {
+        "name": "Mouse Side Button 2",
+        "report": [5, 0, 0, 0, 0, 0, 0, 0],
+        "transport": "13",
+        "description": "Mouse - Side Button 2"
+    },
+    {
+        "name": "Consumer Volume up",
+        "report": [233, 0, 0, 0, 0, 0, 0, 0],
+        "transport": "9",
+        "description": "Consumer - Increases the volume"
+    },
+    {
+        "name": "Consumer Volume down",
+        "report": [234, 0, 0, 0, 0, 0, 0, 0],
+        "transport": "9",
+        "description": "Consumer - Decreases the volume"
+    },
+    {
+      "name": "HID_USAGE_CONSUMER_KEYBOARD_BRIGHTNESS_INCREMENT",
+      "report": [0, 0, 0, 0, 0, 0, 0, 121],
+      "transport": "9",
+      "description": "Consumer - Keyboard Brightness Increment"
+    },
+    {
+      "name": "HID_USAGE_CONSUMER_KEYBOARD_BRIGHTNESS_DECREMENT",
+      "report": [0, 0, 0, 0, 0, 0, 0, 122],
+      "transport": "9",
+      "description": "Consumer - Keyboard Brightness Decrement"
+    },
+    {
+      "name": "HID_USAGE_CONSUMER_DISPLAY_BRIGHTNESS_INCREMENT",
+      "report": [0, 0, 0, 0, 0, 0, 0, 111],
+      "transport": "9",
+      "description": "Consumer - Display Brightness Increment"
+    },
+    {
+      "name": "HID_USAGE_CONSUMER_DISPLAY_BRIGHTNESS_DECREMENT",
+      "report": [0, 0, 0, 0, 0, 0, 0, 112],
+      "transport": "9",
+      "description": "Consumer - Display Brightness Decrement"
+    },
+    {
+      "name": "HID_USAGE_CONSUMER_PLAY",
+      "report": [0, 0, 0, 0, 0, 0, 0, 176],
+      "transport": "9",
+      "description": "Consumer - Play"
+    },
+    {
+      "name": "HID_USAGE_CONSUMER_PAUSE",
+      "report": [0, 0, 0, 0, 0, 0, 0, 177],
+      "transport": "9",
+      "description": "Consumer - Pause"
+    },
+    {
+      "name": "HID_USAGE_CONSUMER_RECORD",
+      "report": [0, 0, 0, 0, 0, 0, 0, 178],
+      "transport": "9",
+      "description": "Consumer - Record"
+    },
+    {
+      "name": "HID_USAGE_CONSUMER_FAST_FORWARD",
+      "report": [0, 0, 0, 0, 0, 0, 0, 179],
+      "transport": "9",
+      "description": "Consumer - Fast Forward"
+    },
+    {
+      "name": "HID_USAGE_CONSUMER_REWIND",
+      "report": [0, 0, 0, 0, 0, 0, 0, 180],
+      "transport": "9",
+      "description": "Consumer - Rewind"
+    },
+    {
+      "name": "HID_USAGE_CONSUMER_SCAN_NEXT_TRACK",
+      "report": [0, 0, 0, 0, 0, 0, 0, 181],
+      "transport": "9",
+      "description": "Consumer - Scan Next Track"
+    },
+    {
+      "name": "HID_USAGE_CONSUMER_SCAN_PREVIOUS_TRACK",
+      "report": [0, 0, 0, 0, 0, 0, 0, 182],
+      "transport": "9",
+      "description": "Consumer - Scan Previous Track"
+    },
+    {
+      "name": "HID_USAGE_CONSUMER_STOP",
+      "report": [0, 0, 0, 0, 0, 0, 0, 183],
+      "transport": "9",
+      "description": "Consumer - Stop"
+    },
+    {
+      "name": "HID_USAGE_CONSUMER_RANDOM_PLAY",
+      "report": [0, 0, 0, 0, 0, 0, 0, 185],
+      "transport": "9",
+      "description": "Consumer - Random Play"
+    },
+
+]
+

@@ -7,7 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="Transparent">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -19,8 +19,78 @@
 
         <!-- Left side (empty for now) -->
         <Grid Grid.Column="0">
-            <TextBlock x:Name="ConfigTitle" Text="Default Config Name" FontSize="30" Margin="20,10,0,0"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <!-- Config Title -->
+                <RowDefinition Height="Auto"/>
+                <!-- Top Controls -->
+                <RowDefinition Height="*"/>
+                <!-- Image (takes remaining space) -->
+                <RowDefinition Height="Auto"/>
+                <!-- Bottom Controls -->
+            </Grid.RowDefinitions>
+
+            <!-- Config Title -->
+            <TextBlock x:Name="ConfigTitle" Text="Default Config Name" FontSize="30" Margin="20,0,0,0" Grid.Row="0"/>
+
+            <!-- Top Controls -->
+            <Grid x:Name="top" Grid.Row="1" Margin="10" HorizontalAlignment="Center">
+                <StackPanel HorizontalAlignment="Center">
+                    <TextBlock HorizontalAlignment="Center" x:Name="Clockwise" Text="Clockwise"/>
+
+                    <RelativePanel x:Name="ActSens" RelativePanel.Below="Clockwise" HorizontalAlignment="Center" MinWidth="200" MaxWidth="1000">
+                        <RelativePanel x:Name="Action" Margin="0,0,10,0" MinWidth="100" MaxWidth="200">
+                            <TextBlock x:Name="ActionHeader" Margin="0,10,0,0" Text="Action" FontSize="20"/>
+                            <TextBlock x:Name="Act" RelativePanel.Below="ActionHeader" Margin="0,10,0,0" Text="---"/>
+                        </RelativePanel>
+                        <Grid RelativePanel.RightOf="Action" MinWidth="100" MaxWidth="200">
+                            <NumberBox 
+                        Margin="0,10,0,0"
+                        x:Name="NumberBoxSpinButtonPlacementExample"
+                        Header="Sensitivity"
+                        FontSize="20"
+                        Value="1"
+                        SpinButtonPlacementMode="Compact"
+                        SmallChange="10"
+                        LargeChange="100"/>
+                        </Grid>
+                    </RelativePanel>
+                </StackPanel>
+            </Grid>
+
+            <!-- Image -->
+            <Image Grid.Row="2" MinHeight="200" MaxHeight="700" Margin="0,-20,0,-20" Stretch="Uniform">
+                <Image.Source>
+                    <BitmapImage UriSource="/Assets/Rev/rev1.png" DecodePixelHeight="400"/>
+                </Image.Source>
+            </Image>
+
+            <!-- Bottom Controls -->
+            <Grid x:Name="bottom" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                <StackPanel HorizontalAlignment="Center">
+                    <RelativePanel x:Name="ActSens1" RelativePanel.Above="Anticlockwise" HorizontalAlignment="Center" MinWidth="200" MaxWidth="1000">
+                        <RelativePanel x:Name="Action1" Margin="0,0,10,0" MinWidth="100" MaxWidth="200">
+                            <TextBlock x:Name="ActionHeader1" Margin="0,10,0,0" Text="Action" FontSize="20"/>
+                            <TextBlock x:Name="Act1" RelativePanel.Below="ActionHeader1" Margin="0,10,0,0" Text="---"/>
+                        </RelativePanel>
+                        <Grid RelativePanel.RightOf="Action1" MinWidth="100" MaxWidth="200">
+                            <NumberBox 
+                        Margin="0,10,0,0"
+                        x:Name="NumberBoxSpinButtonPlacementExample1"
+                        Header="Sensitivity"
+                        FontSize="20"
+                        Value="1"
+                        SpinButtonPlacementMode="Compact"
+                        SmallChange="10"
+                        LargeChange="100"/>
+                        </Grid>
+                    </RelativePanel>
+                    <TextBlock HorizontalAlignment="Center" x:Name="Anticlockwise" Text="Anticlockwise" Margin="20"/>
+                </StackPanel>
+            </Grid>
         </Grid>
+
+
 
         <!-- Right side Grid -->
         <Grid Grid.Column="1" Padding="10">
@@ -34,39 +104,62 @@
             <!-- Title or other elements (optional) -->
             <StackPanel>
                 <TextBlock Text="Actions" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
-                <AutoSuggestBox PlaceholderText="Search Action"
-                    QueryIcon="Find"/>
-                    <!--TextChanged="Control2_TextChanged"
-                        QuerySubmitted="Control2_QuerySubmitted"
-                        SuggestionChosen="Control2_SuggestionChosen"-->
-                    
-                    
-                    
-                <Button HorizontalAlignment="Stretch"  Margin="0,10,0,0">
+                <AutoSuggestBox PlaceholderText="Search Action" QueryIcon="Find"/>
+                <Button HorizontalAlignment="Stretch" Margin="0,10,0,0">
                     Customize Action
                 </Button>
             </StackPanel>
-            
-            <ListView Grid.Row="1" Margin="-5,10,-5,0">
-                <ListViewItem Content="Item 1"/>
-                <ListViewItem Content="Item 2"/>
-                <ListViewItem Content="Item 3"/>
-                <ListViewItem Content="Item 3"/>
-                <ListViewItem Content="Item 3"/>
-                <ListViewItem Content="Item 3"/>
-                <ListViewItem Content="Item 3"/>
-                <ListViewItem Content="Item 3"/>
-                <ListViewItem Content="Item 3"/>
-                <ListViewItem Content="Item 3"/>
-                <ListViewItem Content="Item 3"/>
-                <ListViewItem Content="Item 3"/>
-                <ListViewItem Content="Item 3"/>
-                <ListViewItem Content="Item 3"/>
-                <ListViewItem Content="Item 3"/>
-                <ListViewItem Content="Item 3"/>
-                <ListViewItem Content="Item 3"/>
-                <ListViewItem Content="Item 3"/>
+
+            <ListView Grid.Row="1" Margin="-5,10,0,0" SelectionMode="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <!-- Left button -->
+                                <ColumnDefinition Width="*"/>
+                                <!-- Center text -->
+                                <ColumnDefinition Width="Auto"/>
+                                <!-- Right button -->
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Left Button -->
+                            <ToggleButton Grid.Column="0" Padding="5">
+                                <FontIcon Glyph="&#xE76B;"/>
+                                <!-- Left chevron -->
+                            </ToggleButton>
+
+                            <!-- Item Text (Centered) -->
+                            <TextBlock Grid.Column="1" Text="{Binding}" FontSize="16"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                            <!-- Right Button -->
+                            <ToggleButton Grid.Column="2" Padding="5">
+                                <FontIcon Glyph="&#xE76C;"/>
+                                <!-- Right chevron -->
+                            </ToggleButton>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+                <!-- Sample Items -->
+                <x:String>Item 1</x:String>
+                <x:String>Item 2</x:String>
+                <x:String>Item 3</x:String>
+                <x:String>Item 3</x:String>
+                <x:String>Item 3</x:String>
+                <x:String>Item 3</x:String>
+                <x:String>Item 3</x:String>
+                <x:String>Item 3</x:String>
+                <x:String>Item 3</x:String>
+                <x:String>Item 3</x:String>
+                <x:String>Item 3</x:String>
+                <x:String>Item 3</x:String>
+                <x:String>Item 3</x:String>
+                <x:String>Item 3</x:String>
+                <x:String>Item 3</x:String>
             </ListView>
+
         </Grid>
     </Grid>
 </Page>
