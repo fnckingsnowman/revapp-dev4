@@ -40,8 +40,23 @@ namespace RevoluteConfigApp
                 string json = File.ReadAllText(ConfigFilePath);
                 configNames = JsonSerializer.Deserialize<Dictionary<string, string>>(json) ?? new();
 
-                nvSample.MenuItems.Clear(); //  Clear existing items to prevent duplicates
-                _configPages.Clear();       //  Reset list to match saved data
+                //  Remove only the config-related items, keeping Discover, BLE, Search, etc.
+                var itemsToRemove = new List<NavigationViewItem>();
+
+                foreach (var item in nvSample.MenuItems)
+                {
+                    if (item is NavigationViewItem navItem && navItem.Tag != null && navItem.Tag.ToString().StartsWith("ConfigPage"))
+                    {
+                        itemsToRemove.Add(navItem);
+                    }
+                }
+
+                foreach (var item in itemsToRemove)
+                {
+                    nvSample.MenuItems.Remove(item);
+                }
+
+                _configPages.Clear(); //  Reset list to match saved data
 
                 foreach (var entry in configNames)
                 {
@@ -53,6 +68,7 @@ namespace RevoluteConfigApp
                 _configCounter = configNames.Count + 1;
             }
         }
+
 
         private void SaveConfigurations()
         {
