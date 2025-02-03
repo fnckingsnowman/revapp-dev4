@@ -10,6 +10,63 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBlock Text="ConfigPage Layout Here" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <!-- Left half -->
+            <ColumnDefinition Width="*" />
+            <!-- Right half -->
+        </Grid.ColumnDefinitions>
+
+        <!-- Left side (empty for now) -->
+        <Grid Grid.Column="0">
+            <!-- Add more elements here later -->
+        </Grid>
+
+        <!-- Right side Grid -->
+        <Grid Grid.Column="1" Padding="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <!-- Adjusts to content -->
+                <RowDefinition Height="*"/>
+                <!-- Fills remaining space -->
+            </Grid.RowDefinitions>
+
+            <!-- Title or other elements (optional) -->
+            <StackPanel>
+                <TextBlock Text="Actions" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+                <AutoSuggestBox PlaceholderText="Search Action"
+                    QueryIcon="Find"/>
+                    <!--TextChanged="Control2_TextChanged"
+                        QuerySubmitted="Control2_QuerySubmitted"
+                        SuggestionChosen="Control2_SuggestionChosen"-->
+                    
+                    
+                    
+                <Button HorizontalAlignment="Stretch"  Margin="0,10,0,0">
+                    Customize Action
+                </Button>
+            </StackPanel>
+            
+            <ListView Grid.Row="1" Margin="-5,10,-5,0">
+                <ListViewItem Content="Item 1"/>
+                <ListViewItem Content="Item 2"/>
+                <ListViewItem Content="Item 3"/>
+                <ListViewItem Content="Item 3"/>
+                <ListViewItem Content="Item 3"/>
+                <ListViewItem Content="Item 3"/>
+                <ListViewItem Content="Item 3"/>
+                <ListViewItem Content="Item 3"/>
+                <ListViewItem Content="Item 3"/>
+                <ListViewItem Content="Item 3"/>
+                <ListViewItem Content="Item 3"/>
+                <ListViewItem Content="Item 3"/>
+                <ListViewItem Content="Item 3"/>
+                <ListViewItem Content="Item 3"/>
+                <ListViewItem Content="Item 3"/>
+                <ListViewItem Content="Item 3"/>
+                <ListViewItem Content="Item 3"/>
+                <ListViewItem Content="Item 3"/>
+            </ListView>
+        </Grid>
     </Grid>
 </Page>

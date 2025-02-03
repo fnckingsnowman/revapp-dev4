@@ -115,26 +115,6 @@
 
             <AutoSuggestBox PlaceholderText="Search for Configurations" QueryIcon="Find" AutomationProperties.Name="Search" />
 
-            <NavigationViewItem Icon="GlobalNavigationButton"  Tag="ConfigPage1" >
-                <Grid>
-                    <TextBlock Margin="0,2.5,40,0">Config 1</TextBlock>
-
-                    <AppBarButton HorizontalAlignment="Right"
-                                  Margin="0,-10, -25,-25" 
-                                  Icon="More"
-                                  IsCompact="True" 
-                                  ToolTipService.ToolTip="More"
-                                  AutomationProperties.Name="More">
-                        <AppBarButton.Flyout>
-                            <MenuFlyout>
-                                <MenuFlyoutItem Icon="Delete" Text="Delete"  Tag="rating"/>
-                                <MenuFlyoutItem Icon="Rename" Text="Rename"  Tag="match"/>
-                            </MenuFlyout>
-                        </AppBarButton.Flyout>
-                    </AppBarButton>
-                </Grid>
-            </NavigationViewItem>
-
         </NavigationView.MenuItems>
 
         <NavigationView.FooterMenuItems>
