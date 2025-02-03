@@ -1,7 +1,6 @@
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml;
 using System;
-using System.Windows;
 using Microsoft.UI.Xaml.Input;
 using RevoluteConfigApp.Pages;
 
@@ -99,14 +98,73 @@ namespace RevoluteConfigApp
                 Content = $"Config {_configCounter}",
                 Tag = $"ConfigPage{_configCounter}", // Set a unique Tag for the new item
                 Icon = new FontIcon { Glyph = "\uE700" } // You can change the icon if needed
-
             };
+
+            // Add the RightTapped event handler
+            newConfigItem.RightTapped += ConfigItem_RightTapped;
 
             // Add the new item to the NavigationView
             nvSample.MenuItems.Add(newConfigItem);
 
             // Increment the counter for the next configuration
             _configCounter++;
+        }
+
+        private void ConfigItem_RightTapped(object sender, RightTappedRoutedEventArgs e)
+        {
+            var configItem = sender as NavigationViewItem;
+            if (configItem != null)
+            {
+                var flyout = new MenuFlyout();
+
+                var renameItem = new MenuFlyoutItem { Text = "Rename" };
+                renameItem.Click += (s, args) => RenameConfigItem(configItem);
+
+                var deleteItem = new MenuFlyoutItem { Text = "Delete" };
+                deleteItem.Click += (s, args) => DeleteConfigItem(configItem);
+
+                flyout.Items.Add(renameItem);
+                flyout.Items.Add(deleteItem);
+
+                flyout.ShowAt(configItem, e.GetPosition(configItem));
+            }
+        }
+
+        private void RenameConfigItem(NavigationViewItem configItem)
+        {
+            var textBox = new TextBox
+            {
+                Text = configItem.Content.ToString(),
+                Width = 200
+            };
+
+            textBox.LostFocus += (s, e) => ConfirmRename(configItem, textBox);
+            textBox.KeyDown += (s, e) =>
+            {
+                if (e.Key == Windows.System.VirtualKey.Enter)
+                {
+                    ConfirmRename(configItem, textBox);
+                }
+            };
+
+            configItem.Content = textBox;
+            textBox.Focus(FocusState.Programmatic);
+        }
+
+        private void ConfirmRename(NavigationViewItem configItem, TextBox textBox)
+        {
+            configItem.Content = textBox.Text;
+        }
+
+        private void DeleteConfigItem(NavigationViewItem configItem)
+        {
+            // Check if the current content is the page associated with the configItem
+            if (contentFrame.Content is Page currentPage && currentPage.Tag?.ToString() == configItem.Tag?.ToString())
+            {
+                contentFrame.Content = null; // Clear the content
+            }
+
+            nvSample.MenuItems.Remove(configItem);
         }
 
         private void DisconnectButton_Click(object sender, RoutedEventArgs e)
