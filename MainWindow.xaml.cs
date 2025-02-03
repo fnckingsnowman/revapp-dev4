@@ -20,6 +20,9 @@ namespace RevoluteConfigApp
         public MainWindow()
         {
             InitializeComponent();
+
+            this.ExtendsContentIntoTitleBar = true;
+            this.SetTitleBar(null);
             nvSample.ItemInvoked += NvSample_ItemInvoked;
             BLEPage.DeviceConnected += OnDeviceConnected;
             BLEPage.DeviceDisconnected += OnDeviceDisconnected;
