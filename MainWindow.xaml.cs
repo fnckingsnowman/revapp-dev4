@@ -6,12 +6,15 @@ using System.IO;
 using System.Text.Json;
 using Microsoft.UI.Xaml.Input;
 using RevoluteConfigApp.Pages;
+using RevoluteConfigApp.Pages.ConfigPages;
 
 namespace RevoluteConfigApp
 {
     public partial class MainWindow : Window
     {
-        private const string ConfigFilePath = "configurations.json"; // JSON storage file
+        private int _configCounter = 1; // Counter for configurations
+        private Dictionary<string, string> configNames = new(); // Stores config names
+        private static readonly string ConfigFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RevoluteConfigApp", "configurations.json");
         private List<ConfigData> _configPages = new();
 
         public MainWindow()
@@ -24,8 +27,7 @@ namespace RevoluteConfigApp
             LoadConfigurations();
 
             // Attach event to "Add Configuration" button
-            var addConfigItem = nvSample.FooterMenuItems[0] as NavigationViewItem;
-            if (addConfigItem != null)
+            if (nvSample.FooterMenuItems.Count > 0 && nvSample.FooterMenuItems[0] is NavigationViewItem addConfigItem)
             {
                 addConfigItem.Tapped += AddConfigItem_Tapped;
             }
@@ -36,57 +38,62 @@ namespace RevoluteConfigApp
             if (File.Exists(ConfigFilePath))
             {
                 string json = File.ReadAllText(ConfigFilePath);
-                _configPages = JsonSerializer.Deserialize<List<ConfigData>>(json) ?? new List<ConfigData>();
+                configNames = JsonSerializer.Deserialize<Dictionary<string, string>>(json) ?? new();
 
-                foreach (var config in _configPages)
+                nvSample.MenuItems.Clear(); //  Clear existing items to prevent duplicates
+                _configPages.Clear();       //  Reset list to match saved data
+
+                foreach (var entry in configNames)
                 {
-                    AddConfigTab(config, false); // Load saved tabs without modifying JSON
+                    var configData = new ConfigData { Name = entry.Value, Tag = entry.Key };
+                    _configPages.Add(configData);
+                    AddConfigTab(configData); //  Re-add items properly with updated names
                 }
+
+                _configCounter = configNames.Count + 1;
             }
         }
 
         private void SaveConfigurations()
         {
-            string json = JsonSerializer.Serialize(_configPages, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText(ConfigFilePath, json);
+            string configDirectory = Path.GetDirectoryName(ConfigFilePath);
+
+            if (!Directory.Exists(configDirectory))
+            {
+                Directory.CreateDirectory(configDirectory); // Ensure directory exists
+            }
+
+            configNames.Clear();
+            foreach (var config in _configPages)
+            {
+                configNames[config.Tag] = config.Name;
+            }
+
+            File.WriteAllText(ConfigFilePath, JsonSerializer.Serialize(configNames));
         }
+
 
         private void NvSample_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
             if (args.IsSettingsInvoked) return;
 
-            var selectedItem = args.InvokedItemContainer as NavigationViewItem;
-            if (selectedItem != null && selectedItem.Tag != null)
+            if (args.InvokedItemContainer is NavigationViewItem selectedItem && selectedItem.Tag != null)
             {
                 string pageTag = selectedItem.Tag.ToString();
 
-                Type pageType = null;
-                object pageParameter = null; // Store unique config info
-
-                switch (pageTag)
+                Type pageType = pageTag switch
                 {
-                    case "Discover":
-                        pageType = typeof(Pages.DiscoverPage);
-                        break;
-                    case "BLEPage":
-                        pageType = typeof(Pages.BLEPage);
-                        break;
-                    default:
-                        if (pageTag.StartsWith("ConfigPage"))
-                        {
-                            pageType = typeof(Pages.ConfigPages.ConfigPage1); // Use a single template page
-                            pageParameter = pageTag; // Pass the unique identifier to the page
-                        }
-                        break;
-                }
+                    "Discover" => typeof(Pages.DiscoverPage),
+                    "BLEPage" => typeof(Pages.BLEPage),
+                    _ => pageTag.StartsWith("ConfigPage") ? typeof(ConfigPage1) : null
+                };
 
                 if (pageType != null)
                 {
-                    contentFrame.Navigate(pageType, pageParameter);
+                    contentFrame.Navigate(pageType, new ConfigPageParameters(pageTag, selectedItem.Content.ToString()));
                 }
             }
         }
-
 
         private void AddConfigItem_Tapped(object sender, TappedRoutedEventArgs e)
         {
@@ -100,7 +107,7 @@ namespace RevoluteConfigApp
             AddConfigTab(configData);
         }
 
-        private void AddConfigTab(ConfigData config, bool save = true)
+        private void AddConfigTab(ConfigData config)
         {
             var newConfigItem = new NavigationViewItem
             {
@@ -111,17 +118,11 @@ namespace RevoluteConfigApp
 
             newConfigItem.RightTapped += ConfigItem_RightTapped;
             nvSample.MenuItems.Add(newConfigItem);
-
-            if (save)
-            {
-                SaveConfigurations();
-            }
         }
 
         private void ConfigItem_RightTapped(object sender, RightTappedRoutedEventArgs e)
         {
-            var configItem = sender as NavigationViewItem;
-            if (configItem != null)
+            if (sender is NavigationViewItem configItem)
             {
                 var flyout = new MenuFlyout();
 
@@ -161,20 +162,37 @@ namespace RevoluteConfigApp
 
         private void ConfirmRename(NavigationViewItem configItem, TextBox textBox)
         {
-            string newName = textBox.Text;
+            string newName = textBox.Text.Trim();
             configItem.Content = newName;
+            string configId = configItem.Tag.ToString();
 
-            var config = _configPages.Find(c => c.Tag == configItem.Tag.ToString());
-            if (config != null)
+            if (configNames.ContainsKey(configId))
             {
-                config.Name = newName;
-                SaveConfigurations();
+                configNames[configId] = newName; //  Update the dictionary
+            }
+
+            // Update the corresponding ConfigData object in _configPages
+            var configData = _configPages.Find(c => c.Tag == configId);
+            if (configData != null)
+            {
+                configData.Name = newName;
+            }
+
+            SaveConfigurations(); //  Ensure the new name persists after restart
+
+            // Notify ConfigPage1 to update title dynamically
+            if (contentFrame.Content is ConfigPage1 currentPage && currentPage.ConfigId == configId)
+            {
+                currentPage.UpdateConfigName(newName);
             }
         }
 
+
         private void DeleteConfigItem(NavigationViewItem configItem)
         {
-            _configPages.RemoveAll(c => c.Tag == configItem.Tag.ToString());
+            string configId = configItem.Tag.ToString();
+            _configPages.RemoveAll(c => c.Tag == configId);
+            configNames.Remove(configId);
             SaveConfigurations();
 
             if (contentFrame.Content is Page currentPage && currentPage.Tag?.ToString() == configItem.Tag?.ToString())
@@ -193,8 +211,7 @@ namespace RevoluteConfigApp
         private void OnDeviceDisconnected(object sender, EventArgs e)
         {
             ConnectedDeviceNameTextBlock.Text = "No device connected";
-            var blePage = contentFrame.Content as BLEPage;
-            if (blePage != null)
+            if (contentFrame.Content is BLEPage blePage)
             {
                 blePage.UpdateOutputText("Device has disconnected.");
             }
@@ -207,9 +224,15 @@ namespace RevoluteConfigApp
         }
     }
 
-    public class ConfigData
+    public class ConfigPageParameters
     {
-        public string Name { get; set; }
-        public string Tag { get; set; }
+        public string ConfigId { get; }
+        public string ConfigName { get; }
+
+        public ConfigPageParameters(string id, string name)
+        {
+            ConfigId = id;
+            ConfigName = name;
+        }
     }
 }

@@ -19,7 +19,7 @@
 
         <!-- Left side (empty for now) -->
         <Grid Grid.Column="0">
-            <!-- Add more elements here later -->
+            <TextBlock x:Name="ConfigTitle" Text="Default Config Name" FontSize="30" Margin="20,10,0,0"/>
         </Grid>
 
         <!-- Right side Grid -->
