@@ -36,30 +36,33 @@
             <!-- Top Controls -->
             <Grid x:Name="top" Grid.Row="1" Margin="10" HorizontalAlignment="Center">
                 <StackPanel HorizontalAlignment="Center">
-                    <TextBlock HorizontalAlignment="Center" x:Name="Clockwise" Text="Clockwise"/>
+                    <TextBlock HorizontalAlignment="Center" x:Name="ActionsHeader" Text="Actions"/>
 
-                    <RelativePanel x:Name="ActSens" RelativePanel.Below="Clockwise" HorizontalAlignment="Center" MinWidth="200" MaxWidth="1000">
-                        <RelativePanel x:Name="Action" Margin="0,0,10,0" MinWidth="100" MaxWidth="200">
-                            <TextBlock x:Name="ActionHeader" Margin="0,10,0,0" Text="Action" FontSize="20"/>
-                            <TextBlock x:Name="Act" RelativePanel.Below="ActionHeader" Margin="0,10,0,0" Text="---"/>
+                    <RelativePanel x:Name="Acts" RelativePanel.Below="Clockwise" HorizontalAlignment="Center" MinWidth="300" MaxWidth="1000">
+                        <RelativePanel Width="150" RelativePanel.AlignLeftWithPanel="True">
+                            <TextBlock x:Name="AnticlockwiseHeader" Margin="0,0,0,0" Text="Anticlockwise" FontSize="20" RelativePanel.AlignHorizontalCenterWithPanel="True"/>
+                            <Button x:Name="AnticlockwiseActDisplay" RelativePanel.Below="AnticlockwiseHeader" MaxWidth="130" MinWidth="50" RelativePanel.AlignHorizontalCenterWith="AnticlockwiseHeader" Margin="0,10,0,0" >
+                                <TextBlock>
+                                    ---
+                                </TextBlock>
+                            </Button>
                         </RelativePanel>
-                        <Grid RelativePanel.RightOf="Action" MinWidth="100" MaxWidth="200">
-                            <NumberBox 
-                        Margin="0,10,0,0"
-                        x:Name="NumberBoxSpinButtonPlacementExample"
-                        Header="Sensitivity"
-                        FontSize="20"
-                        Value="1"
-                        SpinButtonPlacementMode="Compact"
-                        SmallChange="10"
-                        LargeChange="100"/>
-                        </Grid>
+
+                        <RelativePanel Width="150" RelativePanel.AlignRightWithPanel="True">
+                            <TextBlock x:Name="ClockwiseHeader" Margin="0,0,0,0" Text="Clockwise" FontSize="20" RelativePanel.AlignHorizontalCenterWithPanel="True"/>
+                            <Button x:Name="ClockwiseActDisplay" RelativePanel.Below="ClockwiseHeader" MaxWidth="130" MinWidth="50" RelativePanel.AlignHorizontalCenterWith="ClockwiseHeader" Margin="0,10,0,0">
+                                <TextBlock>
+                                    ---
+                                </TextBlock>
+                            </Button>
+                        </RelativePanel>
                     </RelativePanel>
+                    
                 </StackPanel>
             </Grid>
 
             <!-- Image -->
-            <Image Grid.Row="2" MinHeight="200" MaxHeight="700" Margin="0,-20,0,-20" Stretch="Uniform">
+            <Image Grid.Row="2" MinHeight="200" MaxHeight="700" Margin="0,-20,0,0" Stretch="Uniform">
                 <Image.Source>
                     <BitmapImage UriSource="/Assets/Rev/rev1.png" DecodePixelHeight="400"/>
                 </Image.Source>
@@ -67,13 +70,44 @@
 
             <!-- Bottom Controls -->
             <Grid x:Name="bottom" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                <StackPanel HorizontalAlignment="Center">
-                    <RelativePanel x:Name="ActSens1" RelativePanel.Above="Anticlockwise" HorizontalAlignment="Center" MinWidth="200" MaxWidth="1000">
-                        <RelativePanel x:Name="Action1" Margin="0,0,10,0" MinWidth="100" MaxWidth="200">
-                            <TextBlock x:Name="ActionHeader1" Margin="0,10,0,0" Text="Action" FontSize="20"/>
-                            <TextBlock x:Name="Act1" RelativePanel.Below="ActionHeader1" Margin="0,10,0,0" Text="---"/>
-                        </RelativePanel>
-                        <Grid RelativePanel.RightOf="Action1" MinWidth="100" MaxWidth="200">
+                <Button x:Name="SensitivityButton" Content="Sensitivity and more" FontSize="20" Margin="0,0,0,30">
+                    <Button.Flyout>
+                        <Flyout Placement="Bottom">
+                            <StackPanel Padding="10">
+                                <NumberBox 
+                    x:Name="ClockwiseSens"
+                    Header="Clockwise Sens"
+                    Value="1"
+                    SpinButtonPlacementMode="Inline"
+                    SmallChange="10"
+                    LargeChange="100" />
+
+                                <NumberBox
+                                    Margin="0,10,0,0"
+                    x:Name="AnticlockwiseSens"
+                    Header="Anticlockwise Sens"
+                    Value="1"
+                    SpinButtonPlacementMode="Inline"
+                    SmallChange="10"
+                    LargeChange="100" />
+
+                                <NumberBox
+                                    Margin="0,10,0,0"
+                    x:Name="DeadzoneSens"
+                    Header="Deadzone"
+                    Value="1"
+                    SpinButtonPlacementMode="Inline"
+                    SmallChange="10"
+                    LargeChange="100" />
+                            </StackPanel>
+                        </Flyout>
+                    </Button.Flyout>
+                </Button>
+            </Grid>
+        </Grid>
+        
+        <!--
+        <Grid RelativePanel.RightOf="Action1" MinWidth="100" MaxWidth="200">
                             <NumberBox 
                         Margin="0,10,0,0"
                         x:Name="NumberBoxSpinButtonPlacementExample1"
@@ -84,11 +118,8 @@
                         SmallChange="10"
                         LargeChange="100"/>
                         </Grid>
-                    </RelativePanel>
-                    <TextBlock HorizontalAlignment="Center" x:Name="Anticlockwise" Text="Anticlockwise" Margin="20"/>
-                </StackPanel>
-            </Grid>
-        </Grid>
+        -->
+        
 
 
 
