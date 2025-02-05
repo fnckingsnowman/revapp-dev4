@@ -123,10 +123,5 @@ namespace RevoluteConfigApp.Pages.ConfigPages
                 ClockwiseActDisplay.Content = new TextBlock { Text = report.Description, FontSize = 16 };
             }
         }
-
-        private void OnRightToggleButtonClicked(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
-        {
-
-        }
     }
 }
