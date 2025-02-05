@@ -49,6 +49,9 @@
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.6.250108002" />
   </ItemGroup>
   <ItemGroup>
+    <Content Update="Assets\report.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Update="Assets\Rev\rev1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
