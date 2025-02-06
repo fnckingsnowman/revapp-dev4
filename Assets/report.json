@@ -1254,82 +1254,82 @@
         "description": "Consumer - Decreases the volume"
     },
     {
-      "name": "HID_USAGE_CONSUMER_KEYBOARD_BRIGHTNESS_INCREMENT",
-      "report": [0, 0, 0, 0, 0, 0, 0, 121],
-      "transport": "9",
-      "description": "Consumer - Keyboard Brightness Increment"
+        "name": "HID_USAGE_CONSUMER_KEYBOARD_BRIGHTNESS_INCREMENT",
+        "report": [121, 0, 0, 0, 0, 0, 0, 0],
+        "transport": "9",
+        "description": "Consumer - Keyboard Brightness Increment"
     },
     {
-      "name": "HID_USAGE_CONSUMER_KEYBOARD_BRIGHTNESS_DECREMENT",
-      "report": [0, 0, 0, 0, 0, 0, 0, 122],
-      "transport": "9",
-      "description": "Consumer - Keyboard Brightness Decrement"
+        "name": "HID_USAGE_CONSUMER_KEYBOARD_BRIGHTNESS_DECREMENT",
+        "report": [122, 0, 0, 0, 0, 0, 0, 0],
+        "transport": "9",
+        "description": "Consumer - Keyboard Brightness Decrement"
     },
     {
-      "name": "HID_USAGE_CONSUMER_DISPLAY_BRIGHTNESS_INCREMENT",
-      "report": [0, 0, 0, 0, 0, 0, 0, 111],
-      "transport": "9",
-      "description": "Consumer - Display Brightness Increment"
+        "name": "HID_USAGE_CONSUMER_DISPLAY_BRIGHTNESS_INCREMENT",
+        "report": [111, 0, 0, 0, 0, 0, 0, 0],
+        "transport": "9",
+        "description": "Consumer - Display Brightness Increment"
     },
     {
-      "name": "HID_USAGE_CONSUMER_DISPLAY_BRIGHTNESS_DECREMENT",
-      "report": [0, 0, 0, 0, 0, 0, 0, 112],
-      "transport": "9",
-      "description": "Consumer - Display Brightness Decrement"
+        "name": "HID_USAGE_CONSUMER_DISPLAY_BRIGHTNESS_DECREMENT",
+        "report": [112, 0, 0, 0, 0, 0, 0, 0],
+        "transport": "9",
+        "description": "Consumer - Display Brightness Decrement"
     },
     {
-      "name": "HID_USAGE_CONSUMER_PLAY",
-      "report": [0, 0, 0, 0, 0, 0, 0, 176],
-      "transport": "9",
-      "description": "Consumer - Play"
+        "name": "HID_USAGE_CONSUMER_PLAY",
+        "report": [176, 0, 0, 0, 0, 0, 0, 0],
+        "transport": "9",
+        "description": "Consumer - Play"
     },
     {
-      "name": "HID_USAGE_CONSUMER_PAUSE",
-      "report": [0, 0, 0, 0, 0, 0, 0, 177],
-      "transport": "9",
-      "description": "Consumer - Pause"
+        "name": "HID_USAGE_CONSUMER_PAUSE",
+        "report": [177, 0, 0, 0, 0, 0, 0, 0],
+        "transport": "9",
+        "description": "Consumer - Pause"
     },
     {
-      "name": "HID_USAGE_CONSUMER_RECORD",
-      "report": [0, 0, 0, 0, 0, 0, 0, 178],
-      "transport": "9",
-      "description": "Consumer - Record"
+        "name": "HID_USAGE_CONSUMER_RECORD",
+        "report": [178, 0, 0, 0, 0, 0, 0, 0],
+        "transport": "9",
+        "description": "Consumer - Record"
     },
     {
-      "name": "HID_USAGE_CONSUMER_FAST_FORWARD",
-      "report": [0, 0, 0, 0, 0, 0, 0, 179],
-      "transport": "9",
-      "description": "Consumer - Fast Forward"
+        "name": "HID_USAGE_CONSUMER_FAST_FORWARD",
+        "report": [179, 0, 0, 0, 0, 0, 0, 0],
+        "transport": "9",
+        "description": "Consumer - Fast Forward"
     },
     {
-      "name": "HID_USAGE_CONSUMER_REWIND",
-      "report": [0, 0, 0, 0, 0, 0, 0, 180],
-      "transport": "9",
-      "description": "Consumer - Rewind"
+        "name": "HID_USAGE_CONSUMER_REWIND",
+        "report": [180, 0, 0, 0, 0, 0, 0, 0],
+        "transport": "9",
+        "description": "Consumer - Rewind"
     },
     {
-      "name": "HID_USAGE_CONSUMER_SCAN_NEXT_TRACK",
-      "report": [0, 0, 0, 0, 0, 0, 0, 181],
-      "transport": "9",
-      "description": "Consumer - Scan Next Track"
+        "name": "HID_USAGE_CONSUMER_SCAN_NEXT_TRACK",
+        "report": [181, 0, 0, 0, 0, 0, 0, 0],
+        "transport": "9",
+        "description": "Consumer - Scan Next Track"
     },
     {
-      "name": "HID_USAGE_CONSUMER_SCAN_PREVIOUS_TRACK",
-      "report": [0, 0, 0, 0, 0, 0, 0, 182],
-      "transport": "9",
-      "description": "Consumer - Scan Previous Track"
+        "name": "HID_USAGE_CONSUMER_SCAN_PREVIOUS_TRACK",
+        "report": [182, 0, 0, 0, 0, 0, 0, 0],
+        "transport": "9",
+        "description": "Consumer - Scan Previous Track"
     },
     {
-      "name": "HID_USAGE_CONSUMER_STOP",
-      "report": [0, 0, 0, 0, 0, 0, 0, 183],
-      "transport": "9",
-      "description": "Consumer - Stop"
+        "name": "HID_USAGE_CONSUMER_STOP",
+        "report": [183, 0, 0, 0, 0, 0, 0, 0],
+        "transport": "9",
+        "description": "Consumer - Stop"
     },
     {
-      "name": "HID_USAGE_CONSUMER_RANDOM_PLAY",
-      "report": [0, 0, 0, 0, 0, 0, 0, 185],
-      "transport": "9",
-      "description": "Consumer - Random Play"
+        "name": "HID_USAGE_CONSUMER_RANDOM_PLAY",
+        "report": [185, 0, 0, 0, 0, 0, 0, 0],
+        "transport": "9",
+        "description": "Consumer - Random Play"
     }
 ]
 
