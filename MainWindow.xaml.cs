@@ -13,7 +13,7 @@ namespace RevoluteConfigApp
     public partial class MainWindow : Window
     {
         private int _configCounter = 1; // Counter for configurations
-        private Dictionary<string, string> configNames = new(); // Stores config names
+        private Dictionary<string, ConfigData> configNames = new(); // Stores config names and reports
         private static readonly string ConfigFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RevoluteConfigApp", "configurations.json");
         private List<ConfigData> _configPages = new();
 
@@ -41,7 +41,7 @@ namespace RevoluteConfigApp
             if (File.Exists(ConfigFilePath))
             {
                 string json = File.ReadAllText(ConfigFilePath);
-                configNames = JsonSerializer.Deserialize<Dictionary<string, string>>(json) ?? new();
+                configNames = JsonSerializer.Deserialize<Dictionary<string, ConfigData>>(json) ?? new();
 
                 //  Remove only the config-related items, keeping Discover, BLE, Search, etc.
                 var itemsToRemove = new List<NavigationViewItem>();
@@ -63,15 +63,14 @@ namespace RevoluteConfigApp
 
                 foreach (var entry in configNames)
                 {
-                    var configData = new ConfigData { Name = entry.Value, Tag = entry.Key };
+                    var configData = entry.Value;
                     _configPages.Add(configData);
                     AddConfigTab(configData); //  Re-add items properly with updated names
                 }
 
-                _configCounter = configNames.Count + 1;
+                _configCounter = _configPages.Count + 1;
             }
         }
-
 
         private void SaveConfigurations()
         {
@@ -82,15 +81,15 @@ namespace RevoluteConfigApp
                 Directory.CreateDirectory(configDirectory); // Ensure directory exists
             }
 
-            configNames.Clear();
+            var configDataDict = new Dictionary<string, ConfigData>();
             foreach (var config in _configPages)
             {
-                configNames[config.Tag] = config.Name;
+                configDataDict[config.Tag] = config;
             }
 
-            File.WriteAllText(ConfigFilePath, JsonSerializer.Serialize(configNames));
+            string jsonString = JsonSerializer.Serialize(configDataDict, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(ConfigFilePath, jsonString);
         }
-
 
         private void NvSample_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
@@ -109,7 +108,22 @@ namespace RevoluteConfigApp
 
                 if (pageType != null)
                 {
+                    var page = Activator.CreateInstance(pageType) as ConfigPage1;
                     contentFrame.Navigate(pageType, new ConfigPageParameters(pageTag, selectedItem.Content.ToString()));
+
+                    // Subscribe to the ReportSelected event
+                    if (page != null)
+                    {
+                        page.ReportSelected += (string side, List<byte> report) =>
+                        {
+                            if (side == "Left")
+                                configNames[pageTag].LeftReport = report.ToArray();
+                            else if (side == "Right")
+                                configNames[pageTag].RightReport = report.ToArray();
+
+                            SaveConfigurations();
+                        };
+                    }
                 }
             }
         }
@@ -187,7 +201,7 @@ namespace RevoluteConfigApp
 
             if (configNames.ContainsKey(configId))
             {
-                configNames[configId] = newName; //  Update the dictionary
+                configNames[configId].Name = newName; // Update the dictionary
             }
 
             // Update the corresponding ConfigData object in _configPages
@@ -197,7 +211,7 @@ namespace RevoluteConfigApp
                 configData.Name = newName;
             }
 
-            SaveConfigurations(); //  Ensure the new name persists after restart
+            SaveConfigurations(); // Ensure the new name persists after restart
 
             // Notify ConfigPage1 to update title dynamically
             if (contentFrame.Content is ConfigPage1 currentPage && currentPage.ConfigId == configId)
@@ -205,7 +219,6 @@ namespace RevoluteConfigApp
                 currentPage.UpdateConfigName(newName);
             }
         }
-
 
         private void DeleteConfigItem(NavigationViewItem configItem)
         {

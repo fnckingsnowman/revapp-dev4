@@ -30,10 +30,10 @@ namespace RevoluteConfigApp.Pages.ConfigPages
 
     public sealed partial class ConfigPage1 : Page
     {
+        public event Action<string, List<byte>> ReportSelected; // Event for report selection
+
         public string ConfigId { get; private set; }
         public ObservableCollection<ReportModel> Reports { get; private set; } = new();
-        private ToggleButton lastLeftToggled;
-        private ToggleButton lastRightToggled;
 
         public ConfigPage1()
         {
@@ -87,7 +87,7 @@ namespace RevoluteConfigApp.Pages.ConfigPages
                 foreach (var report in reports)
                 {
                     Reports.Add(report);
-                    System.Diagnostics.Debug.WriteLine($"Loaded Report: {report.Name}, Description: {report.Description}");
+                    System.Diagnostics.Debug.WriteLine($"Loaded Report: {report.Name}, Description: {report.Description}, Transport: {report.Transport}, Report: {report.Report}");
                 }
 
                 System.Diagnostics.Debug.WriteLine($"Total reports loaded: {Reports.Count}");
@@ -98,29 +98,33 @@ namespace RevoluteConfigApp.Pages.ConfigPages
             }
         }
 
-        private void OnLeftToggleButtonClicked(object sender, object e)
+        private void OnLeftButtonClicked(object sender, object e)
         {
-            if (sender is ToggleButton button && button.DataContext is ReportModel report)
+            if (sender is Button button && button.DataContext is ReportModel report)
             {
-                if (lastLeftToggled != null && lastLeftToggled != button)
-                {
-                    lastLeftToggled.IsChecked = false;
-                }
-                lastLeftToggled = button;
                 AnticlockwiseActDisplay.Content = new TextBlock { Text = report.Description, FontSize = 16 };
+
+                // Log assignment to output console
+                string reportDataString = string.Join(", ", report.Report);
+                System.Diagnostics.Debug.WriteLine($"Report '{report.Name}' with data [{reportDataString}] was assigned to Left.");
+
+                // Notify MainWindow of the selected report data
+                ReportSelected?.Invoke("Left", report.Report);
             }
         }
 
-        private void OnRightToggleButtonClicked(object sender, object e)
+        private void OnRightButtonClicked(object sender, object e)
         {
-            if (sender is ToggleButton button && button.DataContext is ReportModel report)
+            if (sender is Button button && button.DataContext is ReportModel report)
             {
-                if (lastRightToggled != null && lastRightToggled != button)
-                {
-                    lastRightToggled.IsChecked = false;
-                }
-                lastRightToggled = button;
                 ClockwiseActDisplay.Content = new TextBlock { Text = report.Description, FontSize = 16 };
+
+                // Log assignment to output console
+                string reportDataString = string.Join(", ", report.Report);
+                System.Diagnostics.Debug.WriteLine($"Report '{report.Name}' with data [{reportDataString}] was assigned to Right.");
+
+                // Notify MainWindow of the selected report data
+                ReportSelected?.Invoke("Right", report.Report);
             }
         }
     }

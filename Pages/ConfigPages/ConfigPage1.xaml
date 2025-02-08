@@ -153,27 +153,23 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
 
-                            <!-- Left Toggle Button -->
-                            <ToggleButton Grid.Column="0" Padding="5" Click="OnLeftToggleButtonClicked">
+                            <!-- Left Button -->
+                            <Button Grid.Column="0" Padding="5" Click="OnLeftButtonClicked">
                                 <FontIcon Glyph="&#xE76B;"/>
-                            </ToggleButton>
+                            </Button>
 
                             <!-- Report Description -->
                             <TextBlock Grid.Column="1" Text="{Binding Description}" FontSize="16"
                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-                            <!-- Right Toggle Button -->
-                            <ToggleButton Grid.Column="2" Padding="5" Click="OnRightToggleButtonClicked">
+                            <!-- Right Button -->
+                            <Button Grid.Column="2" Padding="5" Click="OnRightButtonClicked">
                                 <FontIcon Glyph="&#xE76C;"/>
-                            </ToggleButton>
+                            </Button>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-
-
-
-
         </Grid>
     </Grid>
 </Page>
