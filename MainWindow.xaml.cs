@@ -89,6 +89,7 @@ namespace RevoluteConfigApp
                 configDataDict[config.Tag] = config;
             }
 
+            // Serialize using JSON options to maintain List<int> format
             string jsonString = JsonSerializer.Serialize(configDataDict, new JsonSerializerOptions { WriteIndented = true });
 
             System.Diagnostics.Debug.WriteLine($"[MainWindow] Writing UPDATED configurations to JSON:\n{jsonString}");
@@ -96,6 +97,7 @@ namespace RevoluteConfigApp
             File.WriteAllText(ConfigFilePath, jsonString);
             System.Diagnostics.Debug.WriteLine("[MainWindow] Successfully saved configurations.");
         }
+
 
 
 
@@ -143,16 +145,18 @@ namespace RevoluteConfigApp
 
                     if (side == "Left")
                     {
+                        // Convert byte[] to List<int> and set it in ConfigData
+                        configData.SetLeftReport(report.ToArray());
                         configData.LeftTransport = transport;
-                        configData.LeftReport = report.ToArray();
                     }
                     else if (side == "Right")
                     {
+                        // Convert byte[] to List<int> and set it in ConfigData
+                        configData.SetRightReport(report.ToArray());
                         configData.RightTransport = transport;
-                        configData.RightReport = report.ToArray();
                     }
 
-                    // Call SaveConfigurations to persist data
+                    // Save the updated configuration
                     SaveConfigurations();
 
                     System.Diagnostics.Debug.WriteLine($"[MainWindow] Successfully updated and saved {configId}");
