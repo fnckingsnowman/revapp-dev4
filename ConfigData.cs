@@ -11,11 +11,9 @@ namespace RevoluteConfigApp
     {
         public string Name { get; set; }
         public string Tag { get; set; }
-
-        [JsonPropertyName("LeftReport")]
         public byte[] LeftReport { get; set; }
-
-        [JsonPropertyName("RightReport")]
         public byte[] RightReport { get; set; }
+        public string LeftTransport { get; set; } // New property for LeftTransport
+        public string RightTransport { get; set; } // New property for RightTransport
     }
 }

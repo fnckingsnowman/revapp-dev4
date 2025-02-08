@@ -42,8 +42,9 @@ namespace RevoluteConfigApp
             {
                 string json = File.ReadAllText(ConfigFilePath);
                 configNames = JsonSerializer.Deserialize<Dictionary<string, ConfigData>>(json) ?? new();
+                System.Diagnostics.Debug.WriteLine("Loaded configurations from JSON.");
 
-                //  Remove only the config-related items, keeping Discover, BLE, Search, etc.
+                // Remove only the config-related items, keeping Discover, BLE, Search, etc.
                 var itemsToRemove = new List<NavigationViewItem>();
 
                 foreach (var item in nvSample.MenuItems)
@@ -59,16 +60,17 @@ namespace RevoluteConfigApp
                     nvSample.MenuItems.Remove(item);
                 }
 
-                _configPages.Clear(); //  Reset list to match saved data
+                _configPages.Clear(); // Reset list to match saved data
 
                 foreach (var entry in configNames)
                 {
                     var configData = entry.Value;
                     _configPages.Add(configData);
-                    AddConfigTab(configData); //  Re-add items properly with updated names
+                    AddConfigTab(configData); // Re-add items properly with updated names
                 }
 
                 _configCounter = _configPages.Count + 1;
+                System.Diagnostics.Debug.WriteLine($"Loaded {_configCounter - 1} configurations.");
             }
         }
 
@@ -78,7 +80,7 @@ namespace RevoluteConfigApp
 
             if (!Directory.Exists(configDirectory))
             {
-                Directory.CreateDirectory(configDirectory); // Ensure directory exists
+                Directory.CreateDirectory(configDirectory);
             }
 
             var configDataDict = new Dictionary<string, ConfigData>();
@@ -88,8 +90,14 @@ namespace RevoluteConfigApp
             }
 
             string jsonString = JsonSerializer.Serialize(configDataDict, new JsonSerializerOptions { WriteIndented = true });
+
+            System.Diagnostics.Debug.WriteLine($"[MainWindow] Writing UPDATED configurations to JSON:\n{jsonString}");
+
             File.WriteAllText(ConfigFilePath, jsonString);
+            System.Diagnostics.Debug.WriteLine("[MainWindow] Successfully saved configurations.");
         }
+
+
 
         private void NvSample_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
@@ -98,6 +106,7 @@ namespace RevoluteConfigApp
             if (args.InvokedItemContainer is NavigationViewItem selectedItem && selectedItem.Tag != null)
             {
                 string pageTag = selectedItem.Tag.ToString();
+                System.Diagnostics.Debug.WriteLine($"Item invoked with tag: {pageTag}");
 
                 Type pageType = pageTag switch
                 {
@@ -108,25 +117,56 @@ namespace RevoluteConfigApp
 
                 if (pageType != null)
                 {
-                    var page = Activator.CreateInstance(pageType) as ConfigPage1;
                     contentFrame.Navigate(pageType, new ConfigPageParameters(pageTag, selectedItem.Content.ToString()));
 
-                    // Subscribe to the ReportSelected event
-                    if (page != null)
+                    if (contentFrame.Content is ConfigPage1 page)
                     {
-                        page.ReportSelected += (string side, List<byte> report) =>
-                        {
-                            if (side == "Left")
-                                configNames[pageTag].LeftReport = report.ToArray();
-                            else if (side == "Right")
-                                configNames[pageTag].RightReport = report.ToArray();
+                        System.Diagnostics.Debug.WriteLine($"[MainWindow] Subscribed to ReportSelected event for {pageTag}");
 
-                            SaveConfigurations();
-                        };
+                        // Ensure no duplicate subscriptions
+                        page.ReportSelected -= OnReportSelected;
+                        page.ReportSelected += OnReportSelected;
                     }
                 }
             }
         }
+
+        private void OnReportSelected(string side, string transport, List<byte> report)
+        {
+            if (contentFrame.Content is ConfigPage1 currentPage)
+            {
+                string configId = currentPage.ConfigId;
+
+                if (configNames.TryGetValue(configId, out var configData))
+                {
+                    System.Diagnostics.Debug.WriteLine($"[MainWindow] Updating {side} for {configId}");
+
+                    if (side == "Left")
+                    {
+                        configData.LeftTransport = transport;
+                        configData.LeftReport = report.ToArray();
+                    }
+                    else if (side == "Right")
+                    {
+                        configData.RightTransport = transport;
+                        configData.RightReport = report.ToArray();
+                    }
+
+                    // Call SaveConfigurations to persist data
+                    SaveConfigurations();
+
+                    System.Diagnostics.Debug.WriteLine($"[MainWindow] Successfully updated and saved {configId}");
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine($"[MainWindow] ERROR: Config ID {configId} not found in configNames!");
+                }
+            }
+        }
+
+
+
+
 
         private void AddConfigItem_Tapped(object sender, TappedRoutedEventArgs e)
         {
@@ -135,6 +175,7 @@ namespace RevoluteConfigApp
 
             var configData = new ConfigData { Name = configName, Tag = pageTag };
             _configPages.Add(configData);
+            configNames[pageTag] = configData; // Ensure the new config is added to configNames dictionary
             SaveConfigurations();
 
             AddConfigTab(configData);
@@ -238,6 +279,7 @@ namespace RevoluteConfigApp
         private void OnDeviceConnected(object sender, string deviceName)
         {
             ConnectedDeviceNameTextBlock.Text = deviceName;
+            System.Diagnostics.Debug.WriteLine($"Device connected: {deviceName}");
         }
 
         private void OnDeviceDisconnected(object sender, EventArgs e)
@@ -247,12 +289,14 @@ namespace RevoluteConfigApp
             {
                 blePage.UpdateOutputText("Device has disconnected.");
             }
+            System.Diagnostics.Debug.WriteLine("Device disconnected.");
         }
 
         private void DisconnectButton_Click(object sender, RoutedEventArgs e)
         {
             BLEPage.DisconnectDevice();
             ConnectedDeviceNameTextBlock.Text = "No device connected";
+            System.Diagnostics.Debug.WriteLine("Device disconnected via DisconnectButton_Click.");
         }
     }
 
