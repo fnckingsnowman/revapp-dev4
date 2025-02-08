@@ -76,30 +76,34 @@
                             <StackPanel Padding="10">
                                 <NumberBox x:Name="ClockwiseSens"
            Header="Clockwise Sensitivity"
-           Value="36"                                
+           Value="30"
            Minimum="2"
            Maximum="360"
            SmallChange="3"
            AcceptsExpression="False"
-           SpinButtonPlacementMode="Inline" />
+           SpinButtonPlacementMode="Inline"
+           ValueChanged="OnSensitivityChanged"/>
 
-<NumberBox x:Name="AnticlockwiseSens"
-           Value="36"
+                                <NumberBox x:Name="AnticlockwiseSens"
+           Value="30"
            Header="Anticlockwise Sensitivity"
            Minimum="2"
            Maximum="360"
            SmallChange="3"
            AcceptsExpression="False"
-           SpinButtonPlacementMode="Inline" />
+           SpinButtonPlacementMode="Inline"
+           ValueChanged="OnSensitivityChanged"/>
 
-<NumberBox x:Name="DeadzoneSens"
+                                <NumberBox x:Name="DeadzoneSens"
            Value="1"
            Header="Deadzone Sensitivity"
            Minimum="1"
            Maximum="10"
-           SmallChange="3"
+           SmallChange="1"
            AcceptsExpression="False"
-           SpinButtonPlacementMode="Inline" />
+           SpinButtonPlacementMode="Inline"
+           ValueChanged="OnSensitivityChanged"/>
+
 
                             </StackPanel>
                         </Flyout>

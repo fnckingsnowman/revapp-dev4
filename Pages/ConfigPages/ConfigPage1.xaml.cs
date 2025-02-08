@@ -70,11 +70,16 @@ namespace RevoluteConfigApp.Pages.ConfigPages
 
                     if (configDataDict != null && configDataDict.TryGetValue(configId, out var configData))
                     {
-                        System.Diagnostics.Debug.WriteLine($"[ConfigPage1] Loaded descriptions: Left = {configData.LeftDescription}, Right = {configData.RightDescription}");
+                        System.Diagnostics.Debug.WriteLine($"[ConfigPage1] Loaded descriptions and sensitivity values for {configId}");
 
                         // Update UI with saved descriptions
                         AnticlockwiseActDisplay.Content = new TextBlock { Text = configData.LeftDescription ?? "---", FontSize = 16 };
                         ClockwiseActDisplay.Content = new TextBlock { Text = configData.RightDescription ?? "---", FontSize = 16 };
+
+                        // Load sensitivity values
+                        ClockwiseSens.Value = configData.ClockwiseSensitivity;
+                        AnticlockwiseSens.Value = configData.AnticlockwiseSensitivity;
+                        DeadzoneSens.Value = configData.DeadzoneSensitivity;
                     }
                     else
                     {
@@ -165,5 +170,47 @@ namespace RevoluteConfigApp.Pages.ConfigPages
                 ReportSelected?.Invoke("Right", report.Transport, report.Report, report.Description);
             }
         }
+
+        private void OnSensitivityChanged(NumberBox sender, NumberBoxValueChangedEventArgs args)
+        {
+            try
+            {
+                string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RevoluteConfigApp", "configurations.json");
+
+                if (File.Exists(filePath))
+                {
+                    string jsonText = File.ReadAllText(filePath);
+                    var configDataDict = JsonSerializer.Deserialize<Dictionary<string, ConfigData>>(jsonText);
+
+                    if (configDataDict != null && configDataDict.TryGetValue(ConfigId, out var configData))
+                    {
+                        // Update sensitivity values based on which NumberBox changed
+                        if (sender == ClockwiseSens)
+                        {
+                            configData.ClockwiseSensitivity = ClockwiseSens.Value;
+                        }
+                        else if (sender == AnticlockwiseSens)
+                        {
+                            configData.AnticlockwiseSensitivity = AnticlockwiseSens.Value;
+                        }
+                        else if (sender == DeadzoneSens)
+                        {
+                            configData.DeadzoneSensitivity = DeadzoneSens.Value;
+                        }
+
+                        // Save updated configurations
+                        string updatedJson = JsonSerializer.Serialize(configDataDict, new JsonSerializerOptions { WriteIndented = true });
+                        File.WriteAllText(filePath, updatedJson);
+
+                        System.Diagnostics.Debug.WriteLine($"[ConfigPage1] Updated sensitivity values for {ConfigId}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[ConfigPage1] Error saving sensitivity values: {ex.Message}");
+            }
+        }
+
     }
 }
