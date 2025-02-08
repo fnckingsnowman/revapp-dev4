@@ -50,9 +50,48 @@ namespace RevoluteConfigApp.Pages.ConfigPages
             {
                 ConfigId = parameters.ConfigId;
                 ConfigTitle.Text = parameters.ConfigName;
-                System.Diagnostics.Debug.WriteLine($"Navigated to ConfigPage1 with ConfigId: {ConfigId}, ConfigName: {parameters.ConfigName}");
+                System.Diagnostics.Debug.WriteLine($"[ConfigPage1] Navigated to {ConfigId} - {parameters.ConfigName}");
+
+                // Load saved descriptions
+                LoadSavedDescriptions(ConfigId);
             }
         }
+
+        private void LoadSavedDescriptions(string configId)
+        {
+            try
+            {
+                string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RevoluteConfigApp", "configurations.json");
+
+                if (File.Exists(filePath))
+                {
+                    string jsonText = File.ReadAllText(filePath);
+                    var configDataDict = JsonSerializer.Deserialize<Dictionary<string, ConfigData>>(jsonText);
+
+                    if (configDataDict != null && configDataDict.TryGetValue(configId, out var configData))
+                    {
+                        System.Diagnostics.Debug.WriteLine($"[ConfigPage1] Loaded descriptions: Left = {configData.LeftDescription}, Right = {configData.RightDescription}");
+
+                        // Update UI with saved descriptions
+                        AnticlockwiseActDisplay.Content = new TextBlock { Text = configData.LeftDescription ?? "---", FontSize = 16 };
+                        ClockwiseActDisplay.Content = new TextBlock { Text = configData.RightDescription ?? "---", FontSize = 16 };
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine($"[ConfigPage1] Config {configId} not found in configurations.json.");
+                    }
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine("[ConfigPage1] configurations.json not found.");
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[ConfigPage1] Error loading descriptions: {ex.Message}");
+            }
+        }
+
 
         public void UpdateConfigName(string newName)
         {
