@@ -133,7 +133,7 @@ namespace RevoluteConfigApp
             }
         }
 
-        private void OnReportSelected(string side, string transport, List<byte> report)
+        private void OnReportSelected(string side, string transport, List<byte> report, string description)
         {
             if (contentFrame.Content is ConfigPage1 currentPage)
             {
@@ -145,15 +145,17 @@ namespace RevoluteConfigApp
 
                     if (side == "Left")
                     {
-                        // Convert byte[] to List<int> and set it in ConfigData
+                        // Convert byte[] to List<int> and save separately
                         configData.SetLeftReport(report.ToArray());
                         configData.LeftTransport = transport;
+                        configData.LeftDescription = description; // Now stored separately
                     }
                     else if (side == "Right")
                     {
-                        // Convert byte[] to List<int> and set it in ConfigData
+                        // Convert byte[] to List<int> and save separately
                         configData.SetRightReport(report.ToArray());
                         configData.RightTransport = transport;
+                        configData.RightDescription = description; // Now stored separately
                     }
 
                     // Save the updated configuration
@@ -167,9 +169,6 @@ namespace RevoluteConfigApp
                 }
             }
         }
-
-
-
 
 
         private void AddConfigItem_Tapped(object sender, TappedRoutedEventArgs e)

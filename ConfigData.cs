@@ -6,13 +6,19 @@ public class ConfigData
     public string Name { get; set; }
     public string Tag { get; set; }
 
-    // Change byte[] to List<int> for serialization as integers
+    // Store reports as List<int> for correct JSON format
     public List<int> LeftReport { get; set; }
     public List<int> RightReport { get; set; }
+
+    // Store the transport type
     public string LeftTransport { get; set; }
     public string RightTransport { get; set; }
 
-    // Constructor to initialize List<int> from byte[] if necessary
+    // Store the description separately
+    public string LeftDescription { get; set; }
+    public string RightDescription { get; set; }
+
+    // Helper methods to convert byte[] to List<int> and save separately
     public void SetLeftReport(byte[] report)
     {
         LeftReport = report?.Select(b => (int)b).ToList();

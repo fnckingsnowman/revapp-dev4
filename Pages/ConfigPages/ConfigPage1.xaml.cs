@@ -30,7 +30,7 @@ namespace RevoluteConfigApp.Pages.ConfigPages
 
     public sealed partial class ConfigPage1 : Page
     {
-        public event Action<string, string, List<byte>> ReportSelected; // Updated event
+        public event Action<string, string, List<byte>, string> ReportSelected; // Updated event
 
         public string ConfigId { get; private set; }
         public ObservableCollection<ReportModel> Reports { get; private set; } = new();
@@ -109,11 +109,10 @@ namespace RevoluteConfigApp.Pages.ConfigPages
                 string reportDataString = string.Join(", ", report.Report);
                 System.Diagnostics.Debug.WriteLine($"[ConfigPage1] Report '{report.Name}' with data [{reportDataString}] was assigned to Left.");
 
-                System.Diagnostics.Debug.WriteLine($"[ConfigPage1] Invoking ReportSelected for Left with Transport: {report.Transport}, Report: {reportDataString}");
-                ReportSelected?.Invoke("Left", report.Transport, report.Report);
+                // Pass the description separately
+                ReportSelected?.Invoke("Left", report.Transport, report.Report, report.Description);
             }
         }
-
         private void OnRightButtonClicked(object sender, object e)
         {
             if (sender is Button button && button.DataContext is ReportModel report)
@@ -123,8 +122,8 @@ namespace RevoluteConfigApp.Pages.ConfigPages
                 string reportDataString = string.Join(", ", report.Report);
                 System.Diagnostics.Debug.WriteLine($"[ConfigPage1] Report '{report.Name}' with data [{reportDataString}] was assigned to Right.");
 
-                System.Diagnostics.Debug.WriteLine($"[ConfigPage1] Invoking ReportSelected for Right with Transport: {report.Transport}, Report: {reportDataString}");
-                ReportSelected?.Invoke("Right", report.Transport, report.Report);
+                // Pass the description separately
+                ReportSelected?.Invoke("Right", report.Transport, report.Report, report.Description);
             }
         }
     }
