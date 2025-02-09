@@ -9,6 +9,7 @@ using System;
 using System.Threading.Tasks;
 using Windows.Devices.Bluetooth.GenericAttributeProfile;
 using Windows.Storage.Streams;
+using Microsoft.UI.Xaml.Navigation;
 
 namespace RevoluteConfigApp.Pages
 {
@@ -27,6 +28,45 @@ namespace RevoluteConfigApp.Pages
         {
             this.InitializeComponent();
             this.DataContext = this;
+            BLEDataService.Instance.DataReadyToWrite += OnDataReadyToWrite;
+        }
+
+        private async void OnDataReadyToWrite(object sender, byte[] data)
+        {
+            if (_targetCharacteristic != null)
+            {
+                try
+                {
+                    var writer = new DataWriter();
+                    writer.WriteBytes(data);
+                    await _targetCharacteristic.WriteValueAsync(writer.DetachBuffer());
+                    DispatcherQueue.TryEnqueue(() =>
+                    {
+                        OutputTextBlock.Text = "Configuration data written successfully.";
+                    });
+                }
+                catch (Exception ex)
+                {
+                    DispatcherQueue.TryEnqueue(() =>
+                    {
+                        OutputTextBlock.Text = $"Error writing data: {ex.Message}";
+                    });
+                }
+            }
+            else
+            {
+                DispatcherQueue.TryEnqueue(() =>
+                {
+                    OutputTextBlock.Text = "No target characteristic found. Ensure the device is connected.";
+                });
+            }
+        }
+
+        // Unsubscribe from the event when the page is unloaded
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            BLEDataService.Instance.DataReadyToWrite -= OnDataReadyToWrite;
+            base.OnNavigatedFrom(e);
         }
 
         private void StartBLEScan_Click(object sender, RoutedEventArgs e)
@@ -211,6 +251,20 @@ namespace RevoluteConfigApp.Pages
         public void UpdateOutputText(string message)
         {
             OutputTextBlock.Text = message;
+        }
+    }
+    public class BLEDataService
+    {
+        private static BLEDataService _instance;
+        public static BLEDataService Instance => _instance ??= new BLEDataService();
+
+        public event EventHandler<byte[]> DataReadyToWrite;
+
+        private BLEDataService() { }
+
+        public void NotifyDataReady(byte[] data)
+        {
+            DataReadyToWrite?.Invoke(this, data);
         }
     }
 }

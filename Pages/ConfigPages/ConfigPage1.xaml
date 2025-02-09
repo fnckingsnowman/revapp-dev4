@@ -110,7 +110,7 @@
                             </Flyout>
                         </Button.Flyout>
                     </Button>
-                    <Button FontSize="20" Margin="10,0,0,30" Background="{ThemeResource SystemFillColorAttentionBrush}" Foreground="Black">
+                    <Button FontSize="20" Margin="10,0,0,30" Background="{ThemeResource SystemFillColorAttentionBrush}" Foreground="Black" Click="ConfigureButton_Click">
                         Configure
                     </Button>
                 </StackPanel>

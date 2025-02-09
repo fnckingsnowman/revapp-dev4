@@ -1,3 +1,4 @@
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Navigation;
@@ -209,6 +210,73 @@ namespace RevoluteConfigApp.Pages.ConfigPages
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"[ConfigPage1] Error saving sensitivity values: {ex.Message}");
+            }
+        }
+
+        private void ConfigureButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                // Step 1: Identify the current configuration
+                string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RevoluteConfigApp", "configurations.json");
+
+                if (File.Exists(filePath))
+                {
+                    string jsonText = File.ReadAllText(filePath);
+                    var configDataDict = JsonSerializer.Deserialize<Dictionary<string, ConfigData>>(jsonText);
+
+                    if (configDataDict != null && configDataDict.TryGetValue(ConfigId, out var configData))
+                    {
+                        // Step 2: Retrieve the relevant values
+                        var leftReport = configData.LeftReport?.Select(b => (byte)b).ToList() ?? new List<byte>();
+                        var rightReport = configData.RightReport?.Select(b => (byte)b).ToList() ?? new List<byte>();
+                        var leftTransport = configData.LeftTransport;
+                        var rightTransport = configData.RightTransport;
+                        var clockwiseSensitivity = configData.ClockwiseSensitivity;
+                        var anticlockwiseSensitivity = configData.AnticlockwiseSensitivity;
+                        var deadzoneSensitivity = configData.DeadzoneSensitivity;
+
+                        // Step 3: Convert values to hexadecimal format
+                        var deadzoneHex = Convert.ToByte(deadzoneSensitivity);
+                        var anticlockwiseIdentPerRev = Convert.ToByte(anticlockwiseSensitivity);
+                        var clockwiseIdentPerRev = Convert.ToByte(clockwiseSensitivity);
+                        var leftTransportByte = Convert.ToByte(leftTransport);
+                        var rightTransportByte = Convert.ToByte(rightTransport);
+
+                        // Step 4: Organize the values in the specified order
+                        var organizedByteArray = new List<byte>
+                {
+                    deadzoneHex // 0x01 - Deadzone
+                };
+
+                        organizedByteArray.AddRange(leftReport); // Anticlockwise/left_report
+                        organizedByteArray.Add(anticlockwiseIdentPerRev); // Anticlockwise/left_identPerRev
+                        organizedByteArray.Add(leftTransportByte); // Anticlockwise/left_transport
+
+                        organizedByteArray.AddRange(rightReport); // Clockwise/right_report
+                        organizedByteArray.Add(clockwiseIdentPerRev); // Clockwise/right_identPerRev
+                        organizedByteArray.Add(rightTransportByte); // Clockwise/right_transport
+
+                        // Step 5: Notify the shared service that data is ready to write
+                        BLEDataService.Instance.NotifyDataReady(organizedByteArray.ToArray());
+
+                        // Step 6: Print the organized byte array to the output console
+                        string byteArrayString = string.Join(", ", organizedByteArray.Select(b => $"0x{b:X2}"));
+                        System.Diagnostics.Debug.WriteLine($"Organized Byte Array: {byteArrayString}");
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine($"[ConfigPage1] Config {ConfigId} not found in configurations.json.");
+                    }
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine("[ConfigPage1] configurations.json not found.");
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[ConfigPage1] Error during configuration: {ex.Message}");
             }
         }
 
