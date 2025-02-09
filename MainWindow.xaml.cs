@@ -69,8 +69,7 @@ namespace RevoluteConfigApp
                     AddConfigTab(configData); // Re-add items properly with updated names
                 }
 
-                _configCounter = _configPages.Count + 1;
-                System.Diagnostics.Debug.WriteLine($"Loaded {_configCounter - 1} configurations.");
+                System.Diagnostics.Debug.WriteLine($"Loaded {_configPages.Count} configurations.");
             }
         }
 
@@ -174,9 +173,17 @@ namespace RevoluteConfigApp
         private void AddConfigItem_Tapped(object sender, TappedRoutedEventArgs e)
         {
             string configName = $"Config {_configPages.Count + 1}";
-            string pageTag = $"ConfigPage{_configPages.Count + 1}";
+            string pageTag = $"ConfigPage{Guid.NewGuid()}"; // Use GUID for unique tag
 
-            var configData = new ConfigData { Name = configName, Tag = pageTag };
+            var configData = new ConfigData
+            {
+                Name = configName,
+                Tag = pageTag,
+                ClockwiseSensitivity = 30, // Default value
+                AnticlockwiseSensitivity = 30, // Default value
+                DeadzoneSensitivity = 1 // Default value
+            };
+
             _configPages.Add(configData);
             configNames[pageTag] = configData; // Ensure the new config is added to configNames dictionary
             SaveConfigurations();
@@ -245,14 +252,17 @@ namespace RevoluteConfigApp
 
             if (configNames.ContainsKey(configId))
             {
-                configNames[configId].Name = newName; // Update the dictionary
+                // Preserve sensitivity values when renaming
+                var configData = configNames[configId];
+                configData.Name = newName; // Update the name
+                configNames[configId] = configData; // Update the dictionary
             }
 
             // Update the corresponding ConfigData object in _configPages
-            var configData = _configPages.Find(c => c.Tag == configId);
-            if (configData != null)
+            var configDataInList = _configPages.Find(c => c.Tag == configId);
+            if (configDataInList != null)
             {
-                configData.Name = newName;
+                configDataInList.Name = newName;
             }
 
             SaveConfigurations(); // Ensure the new name persists after restart
@@ -269,7 +279,7 @@ namespace RevoluteConfigApp
             string configId = configItem.Tag.ToString();
             _configPages.RemoveAll(c => c.Tag == configId);
             configNames.Remove(configId);
-            SaveConfigurations();
+            SaveConfigurations(); // Save the updated configurations
 
             if (contentFrame.Content is Page currentPage && currentPage.Tag?.ToString() == configItem.Tag?.ToString())
             {
