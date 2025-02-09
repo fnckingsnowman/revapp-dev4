@@ -19,24 +19,25 @@
             VerticalAlignment="Top"/>
 
         <!-- ListBox to display BLE devices -->
-        <ListBox 
+        <ListView 
             ItemsSource="{Binding Devices}"
             Margin="50,100,50,50"
             HorizontalAlignment="Stretch"
             x:Name="DevicesList">
-            <ListBox.ItemTemplate>
+            <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
+                    <Grid >
                         <TextBlock Text="{Binding}" VerticalAlignment="Center" Margin="0,0,10,0"/>
                         <Button 
+                            HorizontalAlignment="Right"
                             Content="Connect" 
                             Click="ConnectButton_Click"
                             Tag="{Binding}"
                             Margin="10,0,0,0"/>
-                    </StackPanel>
+                    </Grid>
                 </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+            </ListView.ItemTemplate>
+        </ListView>
 
         <!-- TextBlock to display output with scanned UUIDs -->
         <TextBlock 

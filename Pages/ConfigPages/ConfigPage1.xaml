@@ -41,7 +41,7 @@
                     <RelativePanel x:Name="Acts" RelativePanel.Below="Clockwise" HorizontalAlignment="Center" MinWidth="375" MaxWidth="1000">
                         <RelativePanel Width="200" RelativePanel.AlignLeftWithPanel="True">
                             <TextBlock x:Name="AnticlockwiseHeader" Margin="0,0,0,0" Text="Anticlockwise" FontSize="20" RelativePanel.AlignHorizontalCenterWithPanel="True"/>
-                            <Button x:Name="AnticlockwiseActDisplay" RelativePanel.Below="AnticlockwiseHeader" MaxWidth="175" MinWidth="50" RelativePanel.AlignHorizontalCenterWith="AnticlockwiseHeader" Margin="0,10,0,0" >
+                            <Button x:Name="AnticlockwiseActDisplay" RelativePanel.Below="AnticlockwiseHeader" MaxWidth="175" MinWidth="50" RelativePanel.AlignHorizontalCenterWith="AnticlockwiseHeader" Margin="0,10,0,0">
                                 <TextBlock>
                                     ---
                                 </TextBlock>
@@ -70,11 +70,12 @@
 
             <!-- Bottom Controls -->
             <Grid x:Name="bottom" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                <Button x:Name="SensitivityButton" Content="Sensitivity and more" FontSize="20" Margin="0,0,0,30">
-                    <Button.Flyout>
-                        <Flyout Placement="Bottom">
-                            <StackPanel Padding="10">
-                                <NumberBox x:Name="ClockwiseSens"
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="SensitivityButton" Content="Sensitivity and more" FontSize="20" Margin="0,0,0,30">
+                        <Button.Flyout>
+                            <Flyout Placement="Bottom">
+                                <StackPanel Padding="10">
+                                    <NumberBox x:Name="ClockwiseSens"
            Header="Clockwise Sensitivity"
            Value="30"
            Minimum="2"
@@ -84,7 +85,7 @@
            SpinButtonPlacementMode="Inline"
            ValueChanged="OnSensitivityChanged"/>
 
-                                <NumberBox x:Name="AnticlockwiseSens"
+                                    <NumberBox x:Name="AnticlockwiseSens"
            Value="30"
            Header="Anticlockwise Sensitivity"
            Minimum="2"
@@ -94,7 +95,7 @@
            SpinButtonPlacementMode="Inline"
            ValueChanged="OnSensitivityChanged"/>
 
-                                <NumberBox x:Name="DeadzoneSens"
+                                    <NumberBox x:Name="DeadzoneSens"
            Value="1"
            Header="Deadzone Sensitivity"
            Minimum="1"
@@ -105,10 +106,14 @@
            ValueChanged="OnSensitivityChanged"/>
 
 
-                            </StackPanel>
-                        </Flyout>
-                    </Button.Flyout>
-                </Button>
+                                </StackPanel>
+                            </Flyout>
+                        </Button.Flyout>
+                    </Button>
+                    <Button FontSize="20" Margin="10,0,0,30" Background="{ThemeResource SystemFillColorAttentionBrush}" Foreground="Black">
+                        Configure
+                    </Button>
+                </StackPanel>
             </Grid>
         </Grid>
         
