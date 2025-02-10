@@ -16,85 +16,40 @@
     <NavigationView PaneTitle="Revolute Configurator" x:Name="nvSample" IsBackButtonVisible="Collapsed">
         <NavigationView.Header>
             <Grid Margin="0,-45,0,0">
-                <TextBlock x:Name="ConnectedDeviceNameTextBlock" HorizontalAlignment="Center" Margin="0,19,15,0" Text="No device connected"/>
+                <Button HorizontalAlignment="Center" Margin="0,-10,15,0" Background="Transparent" Click="DeviceDisplayScan_Click">
+                    <TextBlock x:Name="ConnectedDeviceNameTextBlock"  Text="No device connected" FontSize="25"/>
+                    <Button.Flyout>
+                        <Flyout Placement="Bottom">
+                            <ListView x:Name="DevicesListView" Width="400">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <TextBlock Text="{Binding}" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                                            <Button 
+                                        HorizontalAlignment="Right"
+                                        Content="Connect" 
+                                        Click="ConnectButton_Click"
+                                        Tag="{Binding}"
+                                        Margin="10,0,0,0"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </Flyout>
+                    </Button.Flyout>
+                </Button>
+
                 <DropDownButton Margin="-6,0,0,0" AutomationProperties.Name="More">
                     <DropDownButton.Content>
                         <FontIcon Glyph="&#xE712;"/>
                     </DropDownButton.Content>
-                    <!-- DROPDOWN FOR DISCONNECTING AND RENAMING THE CONNECTED DEVICE -->
                     <DropDownButton.Flyout>
                         <MenuFlyout Placement="Bottom">
-                            <MenuFlyoutItem Icon="Cancel" Text="Disconnect" Click="DisconnectButton_Click">
-                            </MenuFlyoutItem>
-                            <MenuFlyoutItem Icon="Rename" Text="Rename">
-                            </MenuFlyoutItem>
+                            <MenuFlyoutItem Icon="Cancel" Text="Disconnect" Click="DisconnectButton_Click"/>
+                            <MenuFlyoutItem Icon="Rename" Text="Rename"/>
                         </MenuFlyout>
                     </DropDownButton.Flyout>
                 </DropDownButton>
-                <Button x:Name="ExpandButton" Content="&#xE70D;" FontFamily="Segoe MDL2 Assets" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,50,0">
-                    <Button.Flyout>
-                        <Flyout Placement="Bottom">
-                            <Grid>
-                                <!-- Use a StackPanel to display the list of devices -->
-                                <StackPanel>
-                                    <!-- Device 1 -->
-                                    <Grid Margin="0,5">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <!-- Icon aligned to the left -->
-                                        <FontIcon Glyph="&#xE8A7;" VerticalAlignment="Center" Grid.Column="0"/>
-
-                                        <!-- Name of the device next to the icon -->
-                                        <TextBlock Text="Device 1" VerticalAlignment="Center" Margin="10,0" Grid.Column="1"/>
-
-                                        <!-- Connect button aligned to the right -->
-                                        <Button Content="Connect" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="2"/>
-                                    </Grid>
-
-                                    <!-- Device 2 -->
-                                    <Grid Margin="0,5">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <!-- Icon aligned to the left -->
-                                        <FontIcon Glyph="&#xE8A7;" VerticalAlignment="Center" Grid.Column="0"/>
-
-                                        <!-- Name of the device next to the icon -->
-                                        <TextBlock Text="Device 2" VerticalAlignment="Center" Margin="10,0" Grid.Column="1"/>
-
-                                        <!-- Connect button aligned to the right -->
-                                        <Button Content="Connect" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="2"/>
-                                    </Grid>
-
-                                    <!-- Device 3 -->
-                                    <Grid Margin="0,5">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <!-- Icon aligned to the left -->
-                                        <FontIcon Glyph="&#xE8A7;" VerticalAlignment="Center" Grid.Column="0"/>
-
-                                        <!-- Name of the device next to the icon -->
-                                        <TextBlock Text="Device 3" VerticalAlignment="Center" Margin="10,0" Grid.Column="1"/>
-
-                                        <!-- Connect button aligned to the right -->
-                                        <Button Content="Connect" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="2"/>
-                                    </Grid>
-                                </StackPanel>
-                            </Grid>
-                        </Flyout>
-                    </Button.Flyout>
-                </Button>
             </Grid>
         </NavigationView.Header>
 

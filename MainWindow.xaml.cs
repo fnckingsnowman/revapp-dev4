@@ -7,6 +7,7 @@ using System.Text.Json;
 using Microsoft.UI.Xaml.Input;
 using RevoluteConfigApp.Pages;
 using RevoluteConfigApp.Pages.ConfigPages;
+using System.Diagnostics;
 
 namespace RevoluteConfigApp
 {
@@ -16,6 +17,7 @@ namespace RevoluteConfigApp
         private Dictionary<string, ConfigData> configNames = new(); // Stores config names and reports
         private static readonly string ConfigFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RevoluteConfigApp", "configurations.json");
         private List<ConfigData> _configPages = new();
+        private BLEFunctionalities _bleFunctionalities;
 
         public MainWindow()
         {
@@ -24,8 +26,14 @@ namespace RevoluteConfigApp
             this.ExtendsContentIntoTitleBar = true;
             this.SetTitleBar(null);
             nvSample.ItemInvoked += NvSample_ItemInvoked;
-            BLEPage.DeviceConnected += OnDeviceConnected;
-            BLEPage.DeviceDisconnected += OnDeviceDisconnected;
+            //BLEPage.DeviceConnected += OnDeviceConnected;
+            //BLEPage.DeviceDisconnected += OnDeviceDisconnected;
+            _bleFunctionalities = new BLEFunctionalities();
+            _bleFunctionalities.Devices.CollectionChanged += Devices_CollectionChanged;
+            BLEFunctionalities.DeviceConnected += OnDeviceConnected;
+            BLEFunctionalities.DeviceDisconnected += OnDeviceDisconnected;
+
+            DevicesListView.ItemsSource = _bleFunctionalities.Devices;
 
             LoadConfigurations();
 
@@ -289,28 +297,70 @@ namespace RevoluteConfigApp
             nvSample.MenuItems.Remove(configItem);
         }
 
+        //private void OnDeviceConnected(object sender, string deviceName)
+        //{
+        //    ConnectedDeviceNameTextBlock.Text = deviceName;
+        //    System.Diagnostics.Debug.WriteLine($"Device connected: {deviceName}");
+        //}
+        //
+        //private void OnDeviceDisconnected(object sender, EventArgs e)
+        //{
+        //    ConnectedDeviceNameTextBlock.Text = "No device connected";
+        //    if (contentFrame.Content is BLEPage blePage)
+        //    {
+        //        blePage.UpdateOutputText("Device has disconnected.");
+        //    }
+        //    System.Diagnostics.Debug.WriteLine("Device disconnected.");
+        //}
+        //
+        //private void DisconnectButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    BLEPage.DisconnectDevice();
+        //    ConnectedDeviceNameTextBlock.Text = "No device connected";
+        //    System.Diagnostics.Debug.WriteLine("Device disconnected via DisconnectButton_Click.");
+        //}
+
+
+
+        private void Devices_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            // Handle collection changes if needed
+        }
+
+        private void DeviceDisplayScan_Click(object sender, RoutedEventArgs e)
+        {
+            _bleFunctionalities.StartBLEScan();
+        }
+
+        private async void ConnectButton_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            if (button != null)
+            {
+                string deviceName = button.Tag as string;
+                await _bleFunctionalities.PairAndConnectToDeviceAsync(deviceName);
+            }
+        }
+
         private void OnDeviceConnected(object sender, string deviceName)
         {
             ConnectedDeviceNameTextBlock.Text = deviceName;
-            System.Diagnostics.Debug.WriteLine($"Device connected: {deviceName}");
+            Debug.WriteLine($"Device connected: {deviceName}");
         }
 
         private void OnDeviceDisconnected(object sender, EventArgs e)
         {
             ConnectedDeviceNameTextBlock.Text = "No device connected";
-            if (contentFrame.Content is BLEPage blePage)
-            {
-                blePage.UpdateOutputText("Device has disconnected.");
-            }
-            System.Diagnostics.Debug.WriteLine("Device disconnected.");
+            Debug.WriteLine("Device disconnected.");
         }
 
         private void DisconnectButton_Click(object sender, RoutedEventArgs e)
         {
-            BLEPage.DisconnectDevice();
+            BLEFunctionalities.DisconnectDevice();
             ConnectedDeviceNameTextBlock.Text = "No device connected";
-            System.Diagnostics.Debug.WriteLine("Device disconnected via DisconnectButton_Click.");
+            Debug.WriteLine("Device disconnected via DisconnectButton_Click.");
         }
+
     }
 
     public class ConfigPageParameters
