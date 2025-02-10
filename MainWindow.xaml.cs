@@ -32,6 +32,7 @@ namespace RevoluteConfigApp
             _bleFunctionalities.Devices.CollectionChanged += Devices_CollectionChanged;
             BLEFunctionalities.DeviceConnected += OnDeviceConnected;
             BLEFunctionalities.DeviceDisconnected += OnDeviceDisconnected;
+            _bleFunctionalities.StatusUpdated += OnStatusUpdated;
 
             DevicesListView.ItemsSource = _bleFunctionalities.Devices;
 
@@ -359,6 +360,15 @@ namespace RevoluteConfigApp
             BLEFunctionalities.DisconnectDevice();
             ConnectedDeviceNameTextBlock.Text = "No device connected";
             Debug.WriteLine("Device disconnected via DisconnectButton_Click.");
+        }
+
+        private void OnStatusUpdated(object sender, string message)
+        {
+            // Ensure the update happens on the UI thread
+            DispatcherQueue.TryEnqueue(() =>
+            {
+                StatusTextBlock.Text = message;
+            });
         }
 
     }

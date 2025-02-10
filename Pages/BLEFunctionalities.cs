@@ -22,6 +22,8 @@ namespace RevoluteConfigApp.Pages
         private GattCharacteristic _targetCharacteristic;
         private readonly Microsoft.UI.Dispatching.DispatcherQueue _dispatcherQueue;
 
+        public event EventHandler<string> StatusUpdated;
+
         public ObservableCollection<string> Devices { get; set; } = new ObservableCollection<string>();
 
         public BLEFunctionalities()
@@ -34,8 +36,17 @@ namespace RevoluteConfigApp.Pages
         {
             Devices.Clear();
             _watcher = new BluetoothLEAdvertisementWatcher();
+            UpdateStatus("Scanning for BLE devices...");
             _watcher.Received += Watcher_Received;
             _watcher.Start();
+        }
+
+        private void UpdateStatus(string message)
+        {
+            _dispatcherQueue?.TryEnqueue(() =>
+            {
+                StatusUpdated?.Invoke(this, message);
+            });
         }
 
         private void Watcher_Received(BluetoothLEAdvertisementWatcher sender, BluetoothLEAdvertisementReceivedEventArgs args)
@@ -89,6 +100,7 @@ namespace RevoluteConfigApp.Pages
             {
                 var deviceSelector = BluetoothLEDevice.GetDeviceSelectorFromDeviceName(deviceName);
                 var devices = await DeviceInformation.FindAllAsync(deviceSelector);
+                UpdateStatus($"Connecting to {deviceName}...");
 
                 if (devices.Count > 0)
                 {
@@ -100,6 +112,7 @@ namespace RevoluteConfigApp.Pages
                         var pairingResult = await bluetoothLeDevice.DeviceInformation.Pairing.PairAsync();
                         if (pairingResult.Status == DevicePairingResultStatus.Paired || pairingResult.Status == DevicePairingResultStatus.AlreadyPaired)
                         {
+                            UpdateStatus($"Successfully paired or already paired with {deviceName}.");
                             _connectedDevice = bluetoothLeDevice;
                             DeviceConnected?.Invoke(this, deviceName);
                             await DiscoverServicesAsync(bluetoothLeDevice);
@@ -107,21 +120,25 @@ namespace RevoluteConfigApp.Pages
                         else
                         {
                             Debug.WriteLine($"Failed to pair with {deviceName}. Status: {pairingResult.Status}");
+                            UpdateStatus($"Failed to pair with {deviceName}. Status: {pairingResult.Status}");
                         }
                     }
                     else
                     {
                         Debug.WriteLine($"Failed to connect to {deviceName}.");
+                        UpdateStatus($"Failed to connect to {deviceName}.");
                     }
                 }
                 else
                 {
                     Debug.WriteLine($"Device {deviceName} not found.");
+                    UpdateStatus($"Device {deviceName} not found.");
                 }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"Error connecting to {deviceName}: {ex.Message}");
+                UpdateStatus($"Error connecting to {deviceName}: {ex.Message}");
             }
         }
 

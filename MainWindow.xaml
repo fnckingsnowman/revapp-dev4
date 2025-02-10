@@ -20,21 +20,32 @@
                     <TextBlock x:Name="ConnectedDeviceNameTextBlock"  Text="No device connected" FontSize="25"/>
                     <Button.Flyout>
                         <Flyout Placement="Bottom">
-                            <ListView x:Name="DevicesListView" Width="400">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid>
-                                            <TextBlock Text="{Binding}" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                                            <Button 
+                            <StackPanel>
+                                <TextBlock 
+                                    x:Name="StatusTextBlock"
+                                    Margin="50,0,50,0"
+                                    Text="Scanned devices will appear here"
+                                    TextWrapping="Wrap"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"/>
+                                <ListView x:Name="DevicesListView" Width="400" SelectionMode="None" Margin="0,10,0,0">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <TextBlock Text="{Binding}" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                                                <Button 
                                         HorizontalAlignment="Right"
                                         Content="Connect" 
                                         Click="ConnectButton_Click"
                                         Tag="{Binding}"
                                         Margin="10,0,0,0"/>
-                                        </Grid>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                    <ListViewItem>
+                                    </ListViewItem>
+                                </ListView>
+                            </StackPanel>
                         </Flyout>
                     </Button.Flyout>
                 </Button>
