@@ -339,7 +339,16 @@ namespace RevoluteConfigApp
             if (button != null)
             {
                 string deviceName = button.Tag as string;
-                await _bleFunctionalities.PairAndConnectToDeviceAsync(deviceName);
+                Debug.WriteLine($"Connecting to device: {deviceName}");
+                StatusTextBlock.Text = $"Connecting to {deviceName}...";
+                if (!string.IsNullOrEmpty(deviceName))
+                {
+                    await _bleFunctionalities.PairAndConnectToDeviceAsync(deviceName);
+                }
+                else
+                {
+                    Debug.WriteLine("Device name is null or empty.");
+                }
             }
         }
 

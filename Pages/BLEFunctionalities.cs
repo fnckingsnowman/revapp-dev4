@@ -36,7 +36,7 @@ namespace RevoluteConfigApp.Pages
         {
             Devices.Clear();
             _watcher = new BluetoothLEAdvertisementWatcher();
-            UpdateStatus("Scanning for BLE devices...");
+            UpdateStatus("Scanning for devices...");
             _watcher.Received += Watcher_Received;
             _watcher.Start();
         }
