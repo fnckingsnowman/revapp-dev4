@@ -121,7 +121,7 @@ namespace RevoluteConfigApp
                 Type pageType = pageTag switch
                 {
                     "Discover" => typeof(Pages.DiscoverPage),
-                    "BLEPage" => typeof(Pages.BLEPage),
+                    //"BLEPage" => typeof(Pages.BLEPage),
                     _ => pageTag.StartsWith("ConfigPage") ? typeof(ConfigPage1) : null
                 };
 

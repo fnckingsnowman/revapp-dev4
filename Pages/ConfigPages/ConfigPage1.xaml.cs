@@ -33,6 +33,8 @@ namespace RevoluteConfigApp.Pages.ConfigPages
     {
         public event Action<string, string, List<byte>, string> ReportSelected; // Updated event
 
+        private BLEFunctionalities _bleFunctionalities;
+
         public string ConfigId { get; private set; }
         public ObservableCollection<ReportModel> Reports { get; private set; } = new();
 
@@ -40,6 +42,7 @@ namespace RevoluteConfigApp.Pages.ConfigPages
         {
             this.InitializeComponent();
             this.DataContext = this;
+            _bleFunctionalities = new BLEFunctionalities(); // Initialize BLEFunctionalities
             LoadReportsAsync();
         }
 
@@ -213,7 +216,7 @@ namespace RevoluteConfigApp.Pages.ConfigPages
             }
         }
 
-        private void ConfigureButton_Click(object sender, RoutedEventArgs e)
+        private async void ConfigureButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -245,9 +248,9 @@ namespace RevoluteConfigApp.Pages.ConfigPages
 
                         // Step 4: Organize the values in the specified order
                         var organizedByteArray = new List<byte>
-                {
-                    deadzoneHex // 0x01 - Deadzone
-                };
+                        {
+                            deadzoneHex // 0x01 - Deadzone
+                        };
 
                         organizedByteArray.AddRange(leftReport); // Anticlockwise/left_report
                         organizedByteArray.Add(anticlockwiseIdentPerRev); // Anticlockwise/left_identPerRev
@@ -257,8 +260,8 @@ namespace RevoluteConfigApp.Pages.ConfigPages
                         organizedByteArray.Add(clockwiseIdentPerRev); // Clockwise/right_identPerRev
                         organizedByteArray.Add(rightTransportByte); // Clockwise/right_transport
 
-                        // Step 5: Notify the shared service that data is ready to write
-                        BLEDataService.Instance.NotifyDataReady(organizedByteArray.ToArray());
+                        // Step 5: Write the organized byte array to the BLE device
+                        await _bleFunctionalities.WriteDataAsync(organizedByteArray.ToArray());
 
                         // Step 6: Print the organized byte array to the output console
                         string byteArrayString = string.Join(", ", organizedByteArray.Select(b => $"0x{b:X2}"));

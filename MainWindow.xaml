@@ -70,12 +70,13 @@
                     <FontIcon Glyph="&#xE721;"/>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
+            <!--
             <NavigationViewItem Content="BLE connect (for testing)" Tag="BLEPage">
                 <NavigationViewItem.Icon>
                     <FontIcon Glyph="&#xE702;"/>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
-
+            -->
             <NavigationViewItemSeparator/>
 
             <AutoSuggestBox PlaceholderText="Search for Configurations" QueryIcon="Find" AutomationProperties.Name="Search" />
