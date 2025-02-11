@@ -43,7 +43,7 @@ namespace RevoluteConfigApp.Pages.ConfigPages
         {
             this.InitializeComponent();
             this.DataContext = this;
-            _bleFunctionalities = new BLEFunctionalities(); // Initialize BLEFunctionalities
+            _bleFunctionalities = BLEFunctionalities.Instance; // Initialize BLEFunctionalities
             LoadReportsAsync();
         }
 
@@ -221,6 +221,12 @@ namespace RevoluteConfigApp.Pages.ConfigPages
         {
             try
             {
+
+                if (_bleFunctionalities.IsDeviceConnected() && _bleFunctionalities.IsTargetCharacteristicNull())
+                {
+                    await _bleFunctionalities.ReassignTargetCharacteristicAsync();
+                }
+
                 string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RevoluteConfigApp", "configurations.json");
 
                 if (File.Exists(filePath))

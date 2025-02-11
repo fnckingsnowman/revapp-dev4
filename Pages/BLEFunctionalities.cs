@@ -207,6 +207,7 @@ namespace RevoluteConfigApp.Pages
                 Debug.WriteLine("Target characteristic is null. Cannot write data.");
                 Debug.WriteLine($"Is device connected? {IsDeviceConnected()}");
                 Debug.WriteLine($"Current connected device: {_connectedDevice?.Name ?? "null"}");
+                Debug.WriteLine($"Was target characteristic ever assigned? {_targetCharacteristic != null}");
                 return;
             }
 
@@ -236,6 +237,28 @@ namespace RevoluteConfigApp.Pages
             }
         }
 
+        public async Task ReassignTargetCharacteristicAsync()
+        {
+            if (_connectedDevice == null)
+            {
+                Debug.WriteLine("No device connected. Cannot reassign characteristic.");
+                return;
+            }
+
+            if (_targetCharacteristic != null)
+            {
+                Debug.WriteLine("Target characteristic is already assigned.");
+                return;
+            }
+
+            await DiscoverServicesAsync(_connectedDevice);
+        }
+
+        public bool IsTargetCharacteristicNull()
+        {
+            return _targetCharacteristic == null;
+        }
+
 
         public static void DisconnectDevice()
         {
@@ -244,6 +267,7 @@ namespace RevoluteConfigApp.Pages
                 Debug.WriteLine("Disconnecting device and clearing characteristics.");
                 _connectedDevice.Dispose();
                 _connectedDevice = null;
+                //_targetCharacteristic = null; // Ensure this is cleared
                 DeviceDisconnected?.Invoke(null, EventArgs.Empty);
             }
         }
