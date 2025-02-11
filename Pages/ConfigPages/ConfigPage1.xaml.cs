@@ -33,7 +33,8 @@ namespace RevoluteConfigApp.Pages.ConfigPages
     {
         public event Action<string, string, List<byte>, string> ReportSelected; // Updated event
 
-        private BLEFunctionalities _bleFunctionalities;
+        //private BLEFunctionalities _bleFunctionalities;
+        private BLEFunctionalities _bleFunctionalities = BLEFunctionalities.Instance;
 
         public string ConfigId { get; private set; }
         public ObservableCollection<ReportModel> Reports { get; private set; } = new();
@@ -220,7 +221,6 @@ namespace RevoluteConfigApp.Pages.ConfigPages
         {
             try
             {
-                // Step 1: Identify the current configuration
                 string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RevoluteConfigApp", "configurations.json");
 
                 if (File.Exists(filePath))
@@ -230,7 +230,6 @@ namespace RevoluteConfigApp.Pages.ConfigPages
 
                     if (configDataDict != null && configDataDict.TryGetValue(ConfigId, out var configData))
                     {
-                        // Step 2: Retrieve the relevant values
                         var leftReport = configData.LeftReport?.Select(b => (byte)b).ToList() ?? new List<byte>();
                         var rightReport = configData.RightReport?.Select(b => (byte)b).ToList() ?? new List<byte>();
                         var leftTransport = configData.LeftTransport;
@@ -239,18 +238,16 @@ namespace RevoluteConfigApp.Pages.ConfigPages
                         var anticlockwiseSensitivity = configData.AnticlockwiseSensitivity;
                         var deadzoneSensitivity = configData.DeadzoneSensitivity;
 
-                        // Step 3: Convert values to hexadecimal format
                         var deadzoneHex = Convert.ToByte(deadzoneSensitivity);
                         var anticlockwiseIdentPerRev = Convert.ToByte(anticlockwiseSensitivity);
                         var clockwiseIdentPerRev = Convert.ToByte(clockwiseSensitivity);
                         var leftTransportByte = Convert.ToByte(leftTransport);
                         var rightTransportByte = Convert.ToByte(rightTransport);
 
-                        // Step 4: Organize the values in the specified order
                         var organizedByteArray = new List<byte>
-                        {
-                            deadzoneHex // 0x01 - Deadzone
-                        };
+                {
+                    deadzoneHex // 0x01 - Deadzone
+                };
 
                         organizedByteArray.AddRange(leftReport); // Anticlockwise/left_report
                         organizedByteArray.Add(anticlockwiseIdentPerRev); // Anticlockwise/left_identPerRev
@@ -260,12 +257,19 @@ namespace RevoluteConfigApp.Pages.ConfigPages
                         organizedByteArray.Add(clockwiseIdentPerRev); // Clockwise/right_identPerRev
                         organizedByteArray.Add(rightTransportByte); // Clockwise/right_transport
 
-                        // Step 5: Write the organized byte array to the BLE device
-                        await _bleFunctionalities.WriteDataAsync(organizedByteArray.ToArray());
-
-                        // Step 6: Print the organized byte array to the output console
                         string byteArrayString = string.Join(", ", organizedByteArray.Select(b => $"0x{b:X2}"));
                         System.Diagnostics.Debug.WriteLine($"Organized Byte Array: {byteArrayString}");
+
+                        // Ensure BLEFunctionalities instance is valid before writing
+                        if (_bleFunctionalities == null)
+                        {
+                            System.Diagnostics.Debug.WriteLine($"[ConfigPage1] BLEFunctionalities instance is null. Unable to send data.");
+                            return;
+                        }
+
+                        // Write the organized byte array to the BLE device
+                        await _bleFunctionalities.WriteDataAsync(organizedByteArray.ToArray());
+                        System.Diagnostics.Debug.WriteLine($"[ConfigPage1] Sent byte array to BLE device.");
                     }
                     else
                     {
@@ -282,6 +286,7 @@ namespace RevoluteConfigApp.Pages.ConfigPages
                 System.Diagnostics.Debug.WriteLine($"[ConfigPage1] Error during configuration: {ex.Message}");
             }
         }
+
 
     }
 }
