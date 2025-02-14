@@ -111,7 +111,11 @@ namespace RevoluteConfigApp
 
         private void NvSample_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
-            if (args.IsSettingsInvoked) return;
+            if (args.IsSettingsInvoked) 
+            {
+                contentFrame.Navigate(typeof(Pages.SettingsPage));
+                return; 
+            }
 
             if (args.InvokedItemContainer is NavigationViewItem selectedItem && selectedItem.Tag != null)
             {
@@ -139,6 +143,11 @@ namespace RevoluteConfigApp
                     }
                 }
             }
+        }
+
+        private void DeviceSettings_Click(object sender, RoutedEventArgs e)
+        {
+            contentFrame.Navigate(typeof(Pages.DeviceSettingsPage));
         }
 
         private void OnReportSelected(string side, string transport, List<byte> report, string description)

@@ -58,6 +58,7 @@
                         <MenuFlyout Placement="Bottom">
                             <MenuFlyoutItem Icon="Cancel" Text="Disconnect" Click="DisconnectButton_Click"/>
                             <MenuFlyoutItem Icon="Rename" Text="Rename"/>
+                            <MenuFlyoutItem Icon="Setting" Text="Device Settings" Click="DeviceSettings_Click"/>
                         </MenuFlyout>
                     </DropDownButton.Flyout>
                 </DropDownButton>
