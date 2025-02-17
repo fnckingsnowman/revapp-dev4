@@ -16,6 +16,7 @@ namespace RevoluteConfigApp.Pages
     {
         public static event EventHandler<string> DeviceConnected;
         public static event EventHandler DeviceDisconnected;
+        public static BLEFunctionalities Instance { get; } = new BLEFunctionalities();
 
         private static BluetoothLEDevice _connectedDevice;
         private BluetoothLEAdvertisementWatcher _watcher;
@@ -151,19 +152,26 @@ namespace RevoluteConfigApp.Pages
                 if (gattServicesResult.Status == GattCommunicationStatus.Success)
                 {
                     Debug.WriteLine($"Discovered services for {bluetoothLeDevice.Name}:");
+
                     foreach (var service in gattServicesResult.Services)
                     {
                         Debug.WriteLine($"Service UUID: {service.Uuid}");
+
                         var gattCharacteristicsResult = await service.GetCharacteristicsAsync();
                         if (gattCharacteristicsResult.Status == GattCommunicationStatus.Success)
                         {
                             Debug.WriteLine($"Characteristics for service {service.Uuid}:");
+
                             foreach (var characteristic in gattCharacteristicsResult.Characteristics)
                             {
                                 Debug.WriteLine($"Characteristic UUID: {characteristic.Uuid}");
-                                if (characteristic.Uuid == Guid.Parse("00000000000000000000003323de1226"))
+
+                                if (characteristic.Uuid == Guid.Parse("00000000-0000-0000-0000-003323de1226"))
                                 {
                                     _targetCharacteristic = characteristic;
+                                    Debug.WriteLine("Target characteristic found and assigned.");
+                                    Debug.WriteLine($"Characteristic properties: {characteristic.CharacteristicProperties}");
+                                    return; // Stop searching once we find the characteristic
                                 }
                             }
                         }
@@ -180,22 +188,86 @@ namespace RevoluteConfigApp.Pages
             }
         }
 
+        public bool IsDeviceConnected()
+        {
+            return _connectedDevice != null && _connectedDevice.ConnectionStatus == BluetoothConnectionStatus.Connected;
+        }
+
+
         public async Task WriteDataAsync(byte[] data)
         {
-            if (_targetCharacteristic != null)
+            if (!IsDeviceConnected())
             {
+                Debug.WriteLine("Device is not connected. Cannot write data.");
+                return;
+            }
+
+            if (_targetCharacteristic == null)
+            {
+                Debug.WriteLine("Target characteristic is null. Cannot write data.");
+                Debug.WriteLine($"Is device connected? {IsDeviceConnected()}");
+                Debug.WriteLine($"Current connected device: {_connectedDevice?.Name ?? "null"}");
+                Debug.WriteLine($"Was target characteristic ever assigned? {_targetCharacteristic != null}");
+                return;
+            }
+
+            try
+            {
+                Debug.WriteLine($"Writing data to BLE device: {BitConverter.ToString(data)}");
+                Debug.WriteLine($"Target characteristic UUID: {_targetCharacteristic.Uuid}");
+                Debug.WriteLine($"Characteristic properties: {_targetCharacteristic.CharacteristicProperties}");
+
                 var writer = new DataWriter();
                 writer.WriteBytes(data);
-                await _targetCharacteristic.WriteValueAsync(writer.DetachBuffer());
+
+                var result = await _targetCharacteristic.WriteValueAsync(writer.DetachBuffer());
+
+                if (result == GattCommunicationStatus.Success)
+                {
+                    Debug.WriteLine("Data successfully written to BLE device.");
+                }
+                else
+                {
+                    Debug.WriteLine($"Failed to write data. Status: {result}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error writing to BLE device: {ex.Message}");
             }
         }
+
+        public async Task ReassignTargetCharacteristicAsync()
+        {
+            if (_connectedDevice == null)
+            {
+                Debug.WriteLine("No device connected. Cannot reassign characteristic.");
+                return;
+            }
+
+            if (_targetCharacteristic != null)
+            {
+                Debug.WriteLine("Target characteristic is already assigned.");
+                return;
+            }
+
+            await DiscoverServicesAsync(_connectedDevice);
+        }
+
+        public bool IsTargetCharacteristicNull()
+        {
+            return _targetCharacteristic == null;
+        }
+
 
         public static void DisconnectDevice()
         {
             if (_connectedDevice != null)
             {
+                Debug.WriteLine("Disconnecting device and clearing characteristics.");
                 _connectedDevice.Dispose();
                 _connectedDevice = null;
+                //_targetCharacteristic = null; // Ensure this is cleared
                 DeviceDisconnected?.Invoke(null, EventArgs.Empty);
             }
         }
