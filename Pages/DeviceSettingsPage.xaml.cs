@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -23,9 +24,23 @@ namespace RevoluteConfigApp.Pages
     /// </summary>
     public sealed partial class DeviceSettingsPage : Page
     {
+        private BLEFunctionalities _bleFunctionalities;
         public DeviceSettingsPage()
         {
             this.InitializeComponent();
+            _bleFunctionalities = new BLEFunctionalities();
+            //_bleFunctionalities.Devices.CollectionChanged += Devices_CollectionChanged;
+            BLEFunctionalities.DeviceConnected += OnDeviceConnected;
+            //BLEFunctionalities.DeviceDisconnected += OnDeviceDisconnected;
+            //_bleFunctionalities.StatusUpdated += OnStatusUpdated;
         }
+
+        private void OnDeviceConnected(object sender, string deviceName)
+        {
+            ConnectedDeviceNameTextBlock.Text = deviceName;
+            Debug.WriteLine($"Device connected: {deviceName}");
+        }
+
+
     }
 }
