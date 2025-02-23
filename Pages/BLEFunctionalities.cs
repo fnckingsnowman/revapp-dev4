@@ -61,14 +61,14 @@ namespace RevoluteConfigApp.Pages
                 }
 
                 string deviceName = args.Advertisement.LocalName ?? "Unknown Device";
-                Debug.WriteLine($"Device Address: {args.BluetoothAddress:X12}");
-                Debug.WriteLine($"Device Name: {deviceName}");
+                //Debug.WriteLine($"Device Address: {args.BluetoothAddress:X12}");
+                //Debug.WriteLine($"Device Name: {deviceName}");
 
                 if (args.Advertisement.ServiceUuids != null)
                 {
                     foreach (var serviceUuid in args.Advertisement.ServiceUuids)
                     {
-                        Debug.WriteLine($"Advertising Service UUID: {serviceUuid}");
+                        //Debug.WriteLine($"Advertising Service UUID: {serviceUuid}");
                     }
                 }
 
@@ -76,7 +76,7 @@ namespace RevoluteConfigApp.Pages
                 {
                     foreach (var manufacturerData in args.Advertisement.ManufacturerData)
                     {
-                        Debug.WriteLine($"Manufacturer ID: {manufacturerData.CompanyId}");
+                        //Debug.WriteLine($"Manufacturer ID: {manufacturerData.CompanyId}");
                     }
                 }
 

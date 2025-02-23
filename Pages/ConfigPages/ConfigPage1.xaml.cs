@@ -221,7 +221,12 @@ namespace RevoluteConfigApp.Pages.ConfigPages
         {
             try
             {
+                // First, we need to make sure we're working with the most up-to-date values
+                var deadzoneSensitivity = DeadzoneSens.Value;
+                var anticlockwiseSensitivity = AnticlockwiseSens.Value;
+                var clockwiseSensitivity = ClockwiseSens.Value;
 
+                // Now, let's make sure the BLE device is connected and the target characteristic is valid
                 if (_bleFunctionalities.IsDeviceConnected() && _bleFunctionalities.IsTargetCharacteristicNull())
                 {
                     await _bleFunctionalities.ReassignTargetCharacteristicAsync();
@@ -236,20 +241,21 @@ namespace RevoluteConfigApp.Pages.ConfigPages
 
                     if (configDataDict != null && configDataDict.TryGetValue(ConfigId, out var configData))
                     {
+                        // Now make sure the correct report data is being used
                         var leftReport = configData.LeftReport?.Select(b => (byte)b).ToList() ?? new List<byte>();
                         var rightReport = configData.RightReport?.Select(b => (byte)b).ToList() ?? new List<byte>();
                         var leftTransport = configData.LeftTransport;
                         var rightTransport = configData.RightTransport;
-                        var clockwiseSensitivity = configData.ClockwiseSensitivity;
-                        var anticlockwiseSensitivity = configData.AnticlockwiseSensitivity;
-                        var deadzoneSensitivity = configData.DeadzoneSensitivity;
 
+                        // Convert sensitivity values to bytes
                         var deadzoneHex = Convert.ToByte(deadzoneSensitivity);
                         var anticlockwiseIdentPerRev = Convert.ToByte(anticlockwiseSensitivity);
                         var clockwiseIdentPerRev = Convert.ToByte(clockwiseSensitivity);
+
                         var leftTransportByte = Convert.ToByte(leftTransport);
                         var rightTransportByte = Convert.ToByte(rightTransport);
 
+                        // Create the organized byte array with sensitivity values
                         var organizedByteArray = new List<byte>
                 {
                     deadzoneHex // 0x01 - Deadzone
