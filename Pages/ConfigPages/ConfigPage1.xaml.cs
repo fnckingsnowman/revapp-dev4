@@ -141,6 +141,13 @@ namespace RevoluteConfigApp.Pages.ConfigPages
                     System.Diagnostics.Debug.WriteLine($"Loaded Report: {report.Name}, Description: {report.Description}, Transport: {report.Transport}, Report: {report.Report}");
                 }
 
+                // Initialize the FilteredReports with all reports initially
+                FilteredReports.Clear();
+                foreach (var report in Reports)
+                {
+                    FilteredReports.Add(report);
+                }
+
                 System.Diagnostics.Debug.WriteLine($"Total reports loaded: {Reports.Count}");
             }
             catch (Exception ex)
@@ -298,7 +305,39 @@ namespace RevoluteConfigApp.Pages.ConfigPages
                 System.Diagnostics.Debug.WriteLine($"[ConfigPage1] Error during configuration: {ex.Message}");
             }
         }
+        private ObservableCollection<ReportModel> FilteredReports { get; set; } = new ObservableCollection<ReportModel>();
 
+        // Event handler for when the search text changes
+        private void OnSearchTextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs e)
+        {
+            string searchText = sender.Text.ToLower();
+            FilterReports(searchText);
+        }
+
+        // Method to filter reports based on the search query
+        private void FilterReports(string query)
+        {
+            FilteredReports.Clear();
+
+            // Filter reports based on the Name or Description
+            foreach (var report in Reports)
+            {
+                if (report.Name.ToLower().Contains(query) || report.Description.ToLower().Contains(query))
+                {
+                    FilteredReports.Add(report);
+                }
+            }
+
+            // Update the ItemsSource of the ListView to show filtered reports
+            ReportsListView.ItemsSource = FilteredReports;
+        }
+
+
+        private void OnSearchQuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        {
+            string searchText = args.QueryText.ToLower();
+            FilterReports(searchText);
+        }
 
     }
 }

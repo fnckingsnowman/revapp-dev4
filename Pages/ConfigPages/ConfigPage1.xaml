@@ -130,10 +130,6 @@
                         LargeChange="100"/>
                         </Grid>
         -->
-        
-
-
-
         <!-- Right side Grid -->
         <Grid Grid.Column="1" Padding="10">
             <Grid.RowDefinitions>
@@ -146,13 +142,18 @@
             <!-- Title or other elements (optional) -->
             <StackPanel>
                 <TextBlock Text="Actions" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
-                <AutoSuggestBox PlaceholderText="Search Action" QueryIcon="Find"/>
+                <AutoSuggestBox 
+                    x:Name="ActionSearchBox" 
+                    PlaceholderText="Search Action" 
+                    QueryIcon="Find" 
+                    QuerySubmitted="OnSearchQuerySubmitted" 
+                    TextChanged="OnSearchTextChanged" />
                 <Button HorizontalAlignment="Stretch" Margin="0,10,0,0">
                     Customize Action
                 </Button>
             </StackPanel>
 
-            <ListView ItemsSource="{x:Bind Reports, Mode=OneWay}" Grid.Row="1" Margin="-5,10,0,0" SelectionMode="None">
+            <ListView x:Name="ReportsListView" ItemsSource="{x:Bind FilteredReports, Mode=OneWay}" Grid.Row="1" Margin="-5,10,0,0" SelectionMode="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid Padding="10">
@@ -169,7 +170,7 @@
 
                             <!-- Report Description -->
                             <TextBlock Grid.Column="1" Text="{Binding Description}" FontSize="16"
-                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
                             <!-- Right Button -->
                             <Button x:Name="RightButton" Grid.Column="2" Padding="5" Click="OnRightButtonClicked">
