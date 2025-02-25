@@ -1,10 +1,12 @@
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
+using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -45,6 +47,8 @@ namespace RevoluteConfigApp.Pages.ConfigPages
             this.DataContext = this;
             _bleFunctionalities = BLEFunctionalities.Instance; // Initialize BLEFunctionalities
             LoadReportsAsync();
+
+            this.PointerPressed += MainWindow_PointerPressed;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -338,6 +342,102 @@ namespace RevoluteConfigApp.Pages.ConfigPages
             string searchText = args.QueryText.ToLower();
             FilterReports(searchText);
         }
+
+        // Event handler for Anticlockwise button click
+        private void AnticlockwiseButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Extract the text from the TextBlock inside the button
+            var buttonText = (AnticlockwiseActDisplay.Content as TextBlock)?.Text;
+
+            if (buttonText != null)
+            {
+                // Set the TeachingTip content
+                TeachingTipAnticlockwise.Content = buttonText;
+
+                // Set the target of the TeachingTip to the clicked button
+                TeachingTipAnticlockwise.Target = AnticlockwiseActDisplay;
+
+                // Open the TeachingTip near the button
+                TeachingTipAnticlockwise.IsOpen = true;
+            }
+            else
+            {
+                // Handle the case where the button text is not found
+                Debug.WriteLine("Error: Anticlockwise button text is null or not set.");
+            }
+        }
+
+        // Event handler for Clockwise button click
+        private void ClockwiseButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Extract the text from the TextBlock inside the button
+            var buttonText = (ClockwiseActDisplay.Content as TextBlock)?.Text;
+
+            if (buttonText != null)
+            {
+                // Set the TeachingTip content
+                TeachingTipClockwise.Content = buttonText;
+
+                // Set the target of the TeachingTip to the clicked button
+                TeachingTipClockwise.Target = ClockwiseActDisplay;
+
+                // Open the TeachingTip near the button
+                TeachingTipClockwise.IsOpen = true;
+            }
+            else
+            {
+                // Handle the case where the button text is not found
+                Debug.WriteLine("Error: Clockwise button text is null or not set.");
+            }
+        }
+
+        // Event handler for clicks anywhere on the window
+        private void MainWindow_PointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+            // Close the TeachingTip if it's open and the click is not on the TeachingTip or its target
+            if (TeachingTipAnticlockwise.IsOpen && !IsPointerOverTeachingTipOrTarget(e))
+            {
+                TeachingTipAnticlockwise.IsOpen = false;
+            }
+
+            if (TeachingTipClockwise.IsOpen && !IsPointerOverTeachingTipOrTarget(e))
+            {
+                TeachingTipClockwise.IsOpen = false;
+            }
+        }
+
+        // Helper method to check if the pointer is over the TeachingTip or its target
+        private bool IsPointerOverTeachingTipOrTarget(PointerRoutedEventArgs e)
+        {
+            var pointerPosition = e.GetCurrentPoint(this).Position;
+
+            // Check if the pointer is over the TeachingTip
+            if (TeachingTipAnticlockwise.IsOpen && IsPointerOverElement(TeachingTipAnticlockwise, pointerPosition))
+            {
+                return true;
+            }
+
+            if (TeachingTipClockwise.IsOpen && IsPointerOverElement(TeachingTipClockwise, pointerPosition))
+            {
+                return true;
+            }
+
+            // Check if the pointer is over the target (button)
+            if (IsPointerOverElement(AnticlockwiseActDisplay, pointerPosition) || IsPointerOverElement(ClockwiseActDisplay, pointerPosition))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        // Helper method to check if the pointer is over a given UI element
+        private bool IsPointerOverElement(UIElement element, Windows.Foundation.Point pointerPosition)
+        {
+            var bounds = element.TransformToVisual(null).TransformBounds(new Windows.Foundation.Rect(0, 0, element.RenderSize.Width, element.RenderSize.Height));
+            return bounds.Contains(pointerPosition);
+        }
+
 
     }
 }

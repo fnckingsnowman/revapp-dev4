@@ -36,28 +36,31 @@
             <!-- Top Controls -->
             <Grid x:Name="top" Grid.Row="1" Margin="10" HorizontalAlignment="Center">
                 <StackPanel HorizontalAlignment="Center">
-                    <TextBlock HorizontalAlignment="Center" x:Name="ActionsHeader" Text="Actions"/>
+                    <TextBlock HorizontalAlignment="Center" x:Name="ActionsHeader" Text="Actions" Foreground="{ThemeResource ControlStrongStrokeColorDefaultBrush}"/>
 
-                    <RelativePanel x:Name="Acts" RelativePanel.Below="Clockwise" HorizontalAlignment="Center" MinWidth="375" MaxWidth="1000">
+                    <RelativePanel x:Name="Acts" RelativePanel.Below="Clockwise" HorizontalAlignment="Stretch" MinWidth="400" MaxWidth="1000">
                         <RelativePanel Width="200" RelativePanel.AlignLeftWithPanel="True">
                             <TextBlock x:Name="AnticlockwiseHeader" Margin="0,0,0,0" Text="Anticlockwise" FontSize="20" RelativePanel.AlignHorizontalCenterWithPanel="True"/>
-                            <Button x:Name="AnticlockwiseActDisplay" RelativePanel.Below="AnticlockwiseHeader" MaxWidth="175" MinWidth="50" RelativePanel.AlignHorizontalCenterWith="AnticlockwiseHeader" Margin="0,10,0,0">
+                            <Button x:Name="AnticlockwiseActDisplay" RelativePanel.Below="AnticlockwiseHeader" MaxWidth="175" MinWidth="50" RelativePanel.AlignHorizontalCenterWith="AnticlockwiseHeader" Margin="0,10,0,0" Click="AnticlockwiseButton_Click">
                                 <TextBlock>
-                                    ---
+                        ---
                                 </TextBlock>
                             </Button>
                         </RelativePanel>
 
                         <RelativePanel Width="200" RelativePanel.AlignRightWithPanel="True">
                             <TextBlock x:Name="ClockwiseHeader" Margin="0,0,0,0" Text="Clockwise" FontSize="20" RelativePanel.AlignHorizontalCenterWithPanel="True"/>
-                            <Button x:Name="ClockwiseActDisplay" RelativePanel.Below="ClockwiseHeader" MaxWidth="175" MinWidth="50" RelativePanel.AlignHorizontalCenterWith="ClockwiseHeader" Margin="0,10,0,0">
+                            <Button x:Name="ClockwiseActDisplay" RelativePanel.Below="ClockwiseHeader" MaxWidth="175" MinWidth="50" RelativePanel.AlignHorizontalCenterWith="ClockwiseHeader" Margin="0,10,0,0" Click="ClockwiseButton_Click">
                                 <TextBlock>
-                                    ---
+                        ---
                                 </TextBlock>
                             </Button>
                         </RelativePanel>
                     </RelativePanel>
-                    
+
+                    <!-- Teaching Tips -->
+                    <TeachingTip x:Name="TeachingTipAnticlockwise" Title="Anticlockwise Info" Content="Anticlockwise Act Description" IsOpen="False" HorizontalAlignment="Center"/>
+                    <TeachingTip x:Name="TeachingTipClockwise" Title="Clockwise Info" Content="Clockwise Act Description" IsOpen="False" HorizontalAlignment="Center"/>
                 </StackPanel>
             </Grid>
 
@@ -141,7 +144,7 @@
 
             <!-- Title or other elements (optional) -->
             <StackPanel>
-                <TextBlock Text="Actions" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+                <TextBlock Text="Actions" FontSize="18" Margin="0,0,0,10"/>
                 <AutoSuggestBox 
                     x:Name="ActionSearchBox" 
                     PlaceholderText="Search Action" 
