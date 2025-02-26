@@ -340,20 +340,16 @@ namespace RevoluteConfigApp
         private bool _isScanning = false;
         private void DeviceDisplayScan_Click(object sender, RoutedEventArgs e)
         {
-            if (_isScanning)
-            {
-                // If already scanning, stop scanning
-                _bleFunctionalities.StopBLEScan();
-                StatusTextBlock.Text = "Scan stopped.";
-                _isScanning = false;
-            }
-            else
-            {
-                // If not scanning, start scanning
-                _bleFunctionalities.StartBLEScan();
-                StatusTextBlock.Text = "Scanning for devices...";
-                _isScanning = true;
-            }
+            // Start scanning when the button is clicked and the Flyout is shown
+            BLEFunctionalities.Instance.StartBLEScan();
+            StatusTextBlock.Text = "Scanning for devices..."; // Update UI with scanning message
+        }
+
+        private void Flyout_Closed(object sender, object e)
+        {
+            // Stop scanning when the Flyout is closed
+            BLEFunctionalities.Instance.StopBLEScan();
+            StatusTextBlock.Text = "Scan stopped."; // Update UI with scan stopped message
         }
 
         private async void ConnectButton_Click(object sender, RoutedEventArgs e)

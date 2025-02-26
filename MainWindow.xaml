@@ -19,7 +19,7 @@
                 <Button HorizontalAlignment="Center" Margin="0,-10,15,0" Background="Transparent" BorderBrush="Transparent" Click="DeviceDisplayScan_Click">
                     <TextBlock x:Name="ConnectedDeviceNameTextBlock"  Text="No device connected" FontSize="25"/>
                     <Button.Flyout>
-                        <Flyout Placement="Bottom">
+                        <Flyout Placement="Bottom" Closed="Flyout_Closed">
                             <StackPanel>
                                 <TextBlock 
                                     x:Name="StatusTextBlock"
