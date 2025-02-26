@@ -337,9 +337,23 @@ namespace RevoluteConfigApp
             // Handle collection changes if needed
         }
 
+        private bool _isScanning = false;
         private void DeviceDisplayScan_Click(object sender, RoutedEventArgs e)
         {
-            _bleFunctionalities.StartBLEScan();
+            if (_isScanning)
+            {
+                // If already scanning, stop scanning
+                _bleFunctionalities.StopBLEScan();
+                StatusTextBlock.Text = "Scan stopped.";
+                _isScanning = false;
+            }
+            else
+            {
+                // If not scanning, start scanning
+                _bleFunctionalities.StartBLEScan();
+                StatusTextBlock.Text = "Scanning for devices...";
+                _isScanning = true;
+            }
         }
 
         private async void ConnectButton_Click(object sender, RoutedEventArgs e)
@@ -363,6 +377,13 @@ namespace RevoluteConfigApp
 
         private void OnDeviceConnected(object sender, string deviceName)
         {
+            // Stop scanning once a device is connected
+            if (_isScanning)
+            {
+                _bleFunctionalities.StopBLEScan();
+                StatusTextBlock.Text = $"Connected to {deviceName}. Scan stopped.";
+                _isScanning = false;
+            }
             ConnectedDeviceNameTextBlock.Text = deviceName;
             Debug.WriteLine($"Device connected: {deviceName}");
         }

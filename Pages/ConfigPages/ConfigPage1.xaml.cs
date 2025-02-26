@@ -436,7 +436,7 @@ namespace RevoluteConfigApp.Pages.ConfigPages
         {
             var bounds = element.TransformToVisual(null).TransformBounds(new Windows.Foundation.Rect(0, 0, element.RenderSize.Width, element.RenderSize.Height));
             return bounds.Contains(pointerPosition);
-        }
+        } 
 
 
     }
