@@ -80,6 +80,8 @@
             <NavigationViewItemSeparator/>
 
             <AutoSuggestBox PlaceholderText="Search for Configurations" QueryIcon="Find" AutomationProperties.Name="Search" />
+            <TextBlock x:Name="ActiveAppTextBlock" FontSize="20" Text="Detecting..." />
+
 
         </NavigationView.MenuItems>
 

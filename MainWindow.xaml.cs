@@ -8,6 +8,8 @@ using Microsoft.UI.Xaml.Input;
 using RevoluteConfigApp.Pages;
 using RevoluteConfigApp.Pages.ConfigPages;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Text;
 
 namespace RevoluteConfigApp
 {
@@ -18,10 +20,12 @@ namespace RevoluteConfigApp
         private static readonly string ConfigFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RevoluteConfigApp", "configurations.json");
         private List<ConfigData> _configPages = new();
         private BLEFunctionalities _bleFunctionalities;
+        private DispatcherTimer timer;
 
         public MainWindow()
         {
             InitializeComponent();
+            StartActiveWindowTracking();
 
             this.ExtendsContentIntoTitleBar = true;
             this.SetTitleBar(null);
@@ -42,6 +46,47 @@ namespace RevoluteConfigApp
             if (nvSample.FooterMenuItems.Count > 0 && nvSample.FooterMenuItems[0] is NavigationViewItem addConfigItem)
             {
                 addConfigItem.Tapped += AddConfigItem_Tapped;
+            }
+        }
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetForegroundWindow();
+
+        [DllImport("user32.dll")]
+        private static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint processId);
+
+        private void StartActiveWindowTracking()
+        {
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1); // Update every second
+            timer.Tick += (sender, e) => UpdateActiveWindow();
+            timer.Start();
+        }
+
+        private void UpdateActiveWindow()
+        {
+            IntPtr hWnd = GetForegroundWindow(); // Get active window handle
+            if (hWnd == IntPtr.Zero)
+            {
+                ActiveAppTextBlock.Text = "No active window detected.";
+                return;
+            }
+
+            GetWindowThreadProcessId(hWnd, out uint processId); // Get process ID
+            if (processId == 0)
+            {
+                ActiveAppTextBlock.Text = "Could not retrieve process.";
+                return;
+            }
+
+            try
+            {
+                Process proc = Process.GetProcessById((int)processId); // Get process details
+                ActiveAppTextBlock.Text = $"Active App: {proc.ProcessName} - {proc.MainWindowTitle}";
+            }
+            catch
+            {
+                ActiveAppTextBlock.Text = "Could not retrieve process name.";
             }
         }
 
