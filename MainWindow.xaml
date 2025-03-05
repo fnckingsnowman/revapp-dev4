@@ -80,7 +80,11 @@
             <NavigationViewItemSeparator/>
 
             <AutoSuggestBox PlaceholderText="Search for Configurations" QueryIcon="Find" AutomationProperties.Name="Search" />
-            <TextBlock x:Name="ActiveAppTextBlock" FontSize="20" Text="Detecting..." />
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
+                <Button x:Name="SelectAppButton" Content="Select an App" Click="SelectAppButton_Click"/>
+                <TextBlock x:Name="SelectedAppTextBlock" FontSize="18" Text="No app selected"/>
+                <TextBlock x:Name="ActiveAppTextBlock" FontSize="20" Text="Detecting..." />
+            </StackPanel>
 
 
         </NavigationView.MenuItems>

@@ -10,6 +10,9 @@ using RevoluteConfigApp.Pages.ConfigPages;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
+using Windows.Storage.Pickers;
+using Windows.Storage;
+using WinRT.Interop;
 
 namespace RevoluteConfigApp
 {
@@ -21,6 +24,7 @@ namespace RevoluteConfigApp
         private List<ConfigData> _configPages = new();
         private BLEFunctionalities _bleFunctionalities;
         private DispatcherTimer timer;
+        private string selectedAppName = "";
 
         public MainWindow()
         {
@@ -65,28 +69,42 @@ namespace RevoluteConfigApp
 
         private void UpdateActiveWindow()
         {
-            IntPtr hWnd = GetForegroundWindow(); // Get active window handle
-            if (hWnd == IntPtr.Zero)
-            {
-                ActiveAppTextBlock.Text = "No active window detected.";
-                return;
-            }
+            if (string.IsNullOrEmpty(selectedAppName)) return; // Skip checking if no app is selected
 
-            GetWindowThreadProcessId(hWnd, out uint processId); // Get process ID
-            if (processId == 0)
-            {
-                ActiveAppTextBlock.Text = "Could not retrieve process.";
-                return;
-            }
+            IntPtr hWnd = GetForegroundWindow();
+            if (hWnd == IntPtr.Zero) return;
+
+            GetWindowThreadProcessId(hWnd, out uint processId);
+            if (processId == 0) return;
 
             try
             {
-                Process proc = Process.GetProcessById((int)processId); // Get process details
-                ActiveAppTextBlock.Text = $"Active App: {proc.ProcessName} - {proc.MainWindowTitle}";
+                Process proc = Process.GetProcessById((int)processId);
+                string activeApp = proc.ProcessName + ".exe"; // Get full app name
+
+                if (activeApp.Equals(selectedAppName, StringComparison.OrdinalIgnoreCase))
+                {
+                    System.Diagnostics.Debug.WriteLine($"The selected app '{selectedAppName}' is now active!");
+                }
+
+                ActiveAppTextBlock.Text = $"Active App: {activeApp}"; // Update UI
             }
-            catch
+            catch { }
+        }
+
+        private async void SelectAppButton_Click(object sender, RoutedEventArgs e)
+        {
+            var picker = new FileOpenPicker();
+            var hwnd = WindowNative.GetWindowHandle(this);
+            InitializeWithWindow.Initialize(picker, hwnd);
+            picker.ViewMode = PickerViewMode.List;
+            picker.FileTypeFilter.Add(".exe");
+
+            StorageFile file = await picker.PickSingleFileAsync();
+            if (file != null)
             {
-                ActiveAppTextBlock.Text = "Could not retrieve process name.";
+                selectedAppName = file.Name; // Store the chosen app name (e.g., "chrome.exe")
+                SelectedAppTextBlock.Text = $"Selected App: {selectedAppName}";
             }
         }
 
