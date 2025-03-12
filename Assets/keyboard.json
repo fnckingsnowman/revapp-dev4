@@ -1,0 +1,66 @@
+[
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_G",
+    "value": 10
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_H",
+    "value": 11
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_I",
+    "value": 12
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_J",
+    "value": 13
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_K",
+    "value": 14
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_L",
+    "value": 15
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_M",
+    "value": 16
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_N",
+    "value": 17
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_O",
+    "value": 18
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_P",
+    "value": 19
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_Q",
+    "value": 20
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_R",
+    "value": 21
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_S",
+    "value": 22
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_T",
+    "value": 23
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_U",
+    "value": 24
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_V",
+    "value": 25
+  }
+]

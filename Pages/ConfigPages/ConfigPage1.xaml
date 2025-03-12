@@ -184,16 +184,175 @@
                 </ListView.ItemTemplate>
             </ListView>
         </Grid>
-        <ContentDialog x:Name="CustomActionDialog"
-                   Title="Custom Actions"
+        <!-- Custom actions Content dialog thing-->
+            <ContentDialog x:Name="CustomizeActionDialog"
+                   Title="Customize Action"
                    PrimaryButtonText="Save"
-                   SecondaryButtonText="Cancel"
-                   PrimaryButtonClick="CustomActionDialog_PrimaryButtonClick"
-                   SecondaryButtonClick="CustomActionDialog_SecondaryButtonClick">
-            <StackPanel>
-                <TextBox x:Name="CustomActionName" Header="Action Name" PlaceholderText="Enter action name"/>
-                <TextBox x:Name="CustomActionDescription" Header="Action Description" PlaceholderText="Enter action description"/>
-            </StackPanel>
-        </ContentDialog>
+                   SecondaryButtonText="Cancel">
+                <StackPanel>
+                    <TextBox PlaceholderText="Name of action">
+                    </TextBox>
+                    <Pivot>
+                    <!-- Keyboard PivotItem -->
+                    <PivotItem Header="Keyboard">
+                    <ListView SelectionMode="None">
+                            <!-- Section 2: Modifier RadioButtons -->
+                            <TextBlock Text="Modifier" FontSize="16" Margin="0,10,0,5"/>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Top Row of RadioButtons -->
+                                <RadioButton Content="Left Ctrl" Grid.Row="0" Grid.Column="0" Margin="5"/>
+                                <RadioButton Content="Left Shift" Grid.Row="0" Grid.Column="1" Margin="5"/>
+                                <RadioButton Content="Left Alt" Grid.Row="0" Grid.Column="2" Margin="5"/>
+                                <RadioButton Content="Left Win" Grid.Row="0" Grid.Column="3" Margin="5"/>
+
+                                <!-- Bottom Row of RadioButtons -->
+                                <RadioButton Content="Right Ctrl" Grid.Row="1" Grid.Column="0" Margin="5"/>
+                                <RadioButton Content="Right Shift" Grid.Row="1" Grid.Column="1" Margin="5"/>
+                                <RadioButton Content="Right Alt" Grid.Row="1" Grid.Column="2" Margin="5"/>
+                                <RadioButton Content="Right Win" Grid.Row="1" Grid.Column="3" Margin="5"/>
+                            </Grid>
+
+                            <!-- Section 3-8: Expander inside ListView -->
+                            <ListView x:Name="KeyboardExpanderListView" Margin="0,10,0,0" SelectionMode="None">
+                                <Expander Header="Placeholder List 1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                                    <ListView>
+                                        <TextBlock Text="Item 1"/>
+                                        <TextBlock Text="Item 2"/>
+                                        <TextBlock Text="Item 3"/>
+                                    </ListView>
+                                </Expander>
+                                <Expander Header="Placeholder List 2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                                    <ListView>
+                                        <TextBlock Text="Item 1"/>
+                                        <TextBlock Text="Item 2"/>
+                                        <TextBlock Text="Item 3"/>
+                                    </ListView>
+                                </Expander>
+                                <Expander Header="Placeholder List 3" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                                    <ListView>
+                                        <TextBlock Text="Item 1"/>
+                                        <TextBlock Text="Item 2"/>
+                                        <TextBlock Text="Item 3"/>
+                                    </ListView>
+                                </Expander>
+                                <Expander Header="Placeholder List 4" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                                    <ListView>
+                                        <TextBlock Text="Item 1"/>
+                                        <TextBlock Text="Item 2"/>
+                                        <TextBlock Text="Item 3"/>
+                                    </ListView>
+                                </Expander>
+                                <Expander Header="Placeholder List 5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                                    <ListView>
+                                        <TextBlock Text="Item 1"/>
+                                        <TextBlock Text="Item 2"/>
+                                        <TextBlock Text="Item 3"/>
+                                    </ListView>
+                                </Expander>
+                                <Expander Header="Placeholder List 6" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                                    <ListView>
+                                        <TextBlock Text="Item 1"/>
+                                        <TextBlock Text="Item 2"/>
+                                        <TextBlock Text="Item 3"/>
+                                    </ListView>
+                                </Expander>
+                            </ListView>
+                        </ListView>
+                    </PivotItem>
+
+                    <!-- Consumer PivotItem -->
+                    <PivotItem Header="Consumer">
+                        <ListView SelectionMode="None">
+                            <!-- Section 2-7: Expander inside ListView -->
+                            <ListView x:Name="ConsumerExpanderListView" Margin="0,10,0,0" SelectionMode="None">
+                                <Expander Header="Placeholder List 1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                                    <ListView>
+                                        <TextBlock Text="Item 1"/>
+                                        <TextBlock Text="Item 2"/>
+                                        <TextBlock Text="Item 3"/>
+                                    </ListView>
+                                </Expander>
+                                <Expander Header="Placeholder List 2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                                    <ListView>
+                                        <TextBlock Text="Item 1"/>
+                                        <TextBlock Text="Item 2"/>
+                                        <TextBlock Text="Item 3"/>
+                                    </ListView>
+                                </Expander>
+                                <Expander Header="Placeholder List 3" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                                    <ListView>
+                                        <TextBlock Text="Item 1"/>
+                                        <TextBlock Text="Item 2"/>
+                                        <TextBlock Text="Item 3"/>
+                                    </ListView>
+                                </Expander>
+                                <Expander Header="Placeholder List 4" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                                    <ListView>
+                                        <TextBlock Text="Item 1"/>
+                                        <TextBlock Text="Item 2"/>
+                                        <TextBlock Text="Item 3"/>
+                                    </ListView>
+                                </Expander>
+                                <Expander Header="Placeholder List 5" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                                    <ListView>
+                                        <TextBlock Text="Item 1"/>
+                                        <TextBlock Text="Item 2"/>
+                                        <TextBlock Text="Item 3"/>
+                                    </ListView>
+                                </Expander>
+                                <Expander Header="Placeholder List 6" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                                    <ListView>
+                                        <TextBlock Text="Item 1"/>
+                                        <TextBlock Text="Item 2"/>
+                                        <TextBlock Text="Item 3"/>
+                                    </ListView>
+                                </Expander>
+                            </ListView>
+                        </ListView>
+                    </PivotItem>
+
+                    <!-- Mouse PivotItem -->
+            <!-- Mouse PivotItem -->
+            <PivotItem Header="Mouse">
+                <ListView SelectionMode="None">
+                    <StackPanel>
+                        <!-- Section 2: Mouse Button Select (RadioButtons) -->
+                        <TextBlock Text="Mouse Button Select" FontSize="16" Margin="0,10,0,5"/>
+                        <StackPanel>
+                            <RadioButton Content="Mouse 1" Margin="5" GroupName="MouseButtons"/>
+                            <RadioButton Content="Mouse 2" Margin="5" GroupName="MouseButtons"/>
+                            <RadioButton Content="Mouse 3" Margin="5" GroupName="MouseButtons"/>
+                            <RadioButton Content="Mouse 4" Margin="5" GroupName="MouseButtons"/>
+                            <RadioButton Content="Mouse 5" Margin="5" GroupName="MouseButtons"/>
+                            <RadioButton Content="Mouse 6" Margin="5" GroupName="MouseButtons"/>
+                        </StackPanel>
+
+                        <!-- Section 3: Mouse Axis Select (RadioButtons) -->
+                        <TextBlock Text="Mouse Axis Select" FontSize="16" Margin="0,10,0,5"/>
+                        <StackPanel>
+                            <RadioButton Content="Mouse X" Margin="5" GroupName="MouseAxes"/>
+                            <RadioButton Content="Mouse Y" Margin="5" GroupName="MouseAxes"/>
+                            <RadioButton Content="Scroll X" Margin="5" GroupName="MouseAxes"/>
+                            <RadioButton Content="Scroll Y" Margin="5" GroupName="MouseAxes"/>
+                        </StackPanel>
+                    </StackPanel>
+                </ListView>
+            </PivotItem>
+            </Pivot>
+                </StackPanel>
+                
+                
+            </ContentDialog>
     </Grid>
 </Page>

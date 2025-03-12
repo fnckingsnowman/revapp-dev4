@@ -440,49 +440,27 @@ namespace RevoluteConfigApp.Pages.ConfigPages
 
         private async void CustomizeActionButton_Click(object sender, RoutedEventArgs e)
         {
-            // Clear any previous input
-            CustomActionName.Text = string.Empty;
-            CustomActionDescription.Text = string.Empty;
-
             // Show the ContentDialog
-            ContentDialogResult result = await CustomActionDialog.ShowAsync();
+            var result = await CustomizeActionDialog.ShowAsync();
 
-            // Handle the result
+            // Handle the result if needed
             if (result == ContentDialogResult.Primary)
             {
-                // Save the custom action
-                string actionName = CustomActionName.Text;
-                string actionDescription = CustomActionDescription.Text;
-
-                // Add your logic to save the custom action
-                // For example, add it to the Reports collection
-                Reports.Add(new ReportModel
-                {
-                    Name = actionName,
-                    Description = actionDescription,
-                    Report = new List<byte>(), // Add your report data here
-                    Transport = "Custom" // Set the transport type
-                });
-
-                // Optionally, refresh the ListView
-                FilterReports(ActionSearchBox.Text);
+                // User clicked "Save"
+                Debug.WriteLine("Save clicked");
             }
-        }
-
-        private void CustomActionDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
-        {
-            // Perform any validation if needed
-            if (string.IsNullOrEmpty(CustomActionName.Text) || string.IsNullOrEmpty(CustomActionDescription.Text))
+            else if (result == ContentDialogResult.Secondary)
             {
-                args.Cancel = true; // Prevent the dialog from closing
-                                    // Optionally, show a message to the user
+                // User clicked "Cancel"
+                Debug.WriteLine("Cancel clicked");
+            }
+            else
+            {
+                // User clicked "Close" or pressed the escape key
+                Debug.WriteLine("Dialog closed");
             }
         }
 
-        private void CustomActionDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
-        {
-            // Handle the cancel action if needed
-        }
 
     }
 }

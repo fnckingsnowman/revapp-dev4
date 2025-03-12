@@ -17,6 +17,9 @@
 	  
   </PropertyGroup>
   <ItemGroup>
+    <Content Remove="Assets\keyboard.json" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="Assets\report.json" />
     <None Remove="Assets\Rev\rev1.png" />
     <None Remove="Pages\BLEPage.xaml" />
