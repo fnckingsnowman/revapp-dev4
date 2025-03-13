@@ -461,6 +461,27 @@ namespace RevoluteConfigApp.Pages.ConfigPages
             }
         }
 
+        private Expander _currentlyExpandedExpander;
 
+        private void OnExpanderExpanding(object sender, ExpanderExpandingEventArgs e)
+        {
+            if (_currentlyExpandedExpander != null && _currentlyExpandedExpander != sender)
+            {
+                // Collapse the previously expanded Expander
+                _currentlyExpandedExpander.IsExpanded = false;
+            }
+
+            // Update the currently expanded Expander
+            _currentlyExpandedExpander = sender as Expander;
+        }
+
+        private void OnExpanderCollapsed(object sender, ExpanderCollapsedEventArgs e)
+        {
+            if (_currentlyExpandedExpander == sender)
+            {
+                // Clear the currently expanded Expander
+                _currentlyExpandedExpander = null;
+            }
+        }
     }
 }
