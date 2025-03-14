@@ -1,5 +1,45 @@
 [
   {
+    "name": "None",
+    "value": 0
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_ERRORROLLOVER",
+    "value": 1
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_POSTFAIL",
+    "value": 2
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_ERRORUNDEFINED",
+    "value": 3
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_A",
+    "value": 4
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_B",
+    "value": 5
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_C",
+    "value": 6
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_D",
+    "value": 7
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_E",
+    "value": 8
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_F",
+    "value": 9
+  },
+  {
     "name": "HID_USAGE_KEY_KEYBOARD_G",
     "value": 10
   },
@@ -62,5 +102,777 @@
   {
     "name": "HID_USAGE_KEY_KEYBOARD_V",
     "value": 25
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_W",
+    "value": 26
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_X",
+    "value": 27
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_Y",
+    "value": 28
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_Z",
+    "value": 29
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_1_AND_EXCLAMATION",
+    "value": 30
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_2_AND_AT",
+    "value": 31
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_3_AND_HASH",
+    "value": 32
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_4_AND_DOLLAR",
+    "value": 33
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_5_AND_PERCENT",
+    "value": 34
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_6_AND_CARET",
+    "value": 35
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_7_AND_AMPERSAND",
+    "value": 36
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_8_AND_ASTERISK",
+    "value": 37
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_9_AND_LEFT_PARENTHESIS",
+    "value": 38
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_0_AND_RIGHT_PARENTHESIS",
+    "value": 39
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_RETURN_ENTER",
+    "value": 40
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_ESCAPE",
+    "value": 41
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_DELETE_BACKSPACE",
+    "value": 42
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_TAB",
+    "value": 43
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_SPACEBAR",
+    "value": 44
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_MINUS_AND_UNDERSCORE",
+    "value": 45
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_EQUAL_AND_PLUS",
+    "value": 46
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_LEFT_BRACKET_AND_LEFT_BRACE",
+    "value": 47
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_RIGHT_BRACKET_AND_RIGHT_BRACE",
+    "value": 48
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_BACKSLASH_AND_PIPE",
+    "value": 49
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_NON_US_HASH_AND_TILDE",
+    "value": 50
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_SEMICOLON_AND_COLON",
+    "value": 51
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_APOSTROPHE_AND_QUOTE",
+    "value": 52
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_GRAVE_ACCENT_AND_TILDE",
+    "value": 53
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_COMMA_AND_LESS_THAN",
+    "value": 54
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_PERIOD_AND_GREATER_THAN",
+    "value": 55
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_SLASH_AND_QUESTION_MARK",
+    "value": 56
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_CAPS_LOCK",
+    "value": 57
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_F1",
+    "value": 58
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_F2",
+    "value": 59
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_F3",
+    "value": 60
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_F4",
+    "value": 61
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_F5",
+    "value": 62
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_F6",
+    "value": 63
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_F7",
+    "value": 64
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_F8",
+    "value": 65
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_F9",
+    "value": 66
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_F10",
+    "value": 67
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_F11",
+    "value": 68
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_F12",
+    "value": 69
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_PRINTSCREEN",
+    "value": 70
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_SCROLL_LOCK",
+    "value": 71
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_PAUSE",
+    "value": 72
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_INSERT",
+    "value": 73
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_HOME",
+    "value": 74
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_PAGEUP",
+    "value": 75
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_DELETE_FORWARD",
+    "value": 76
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_END",
+    "value": 77
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_PAGEDOWN",
+    "value": 78
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_RIGHTARROW",
+    "value": 79
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_LEFTARROW",
+    "value": 80
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_DOWNARROW",
+    "value": 81
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_UPARROW",
+    "value": 82
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_NUM_LOCK_AND_CLEAR",
+    "value": 83
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_SLASH",
+    "value": 84
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_ASTERISK",
+    "value": 85
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_MINUS",
+    "value": 86
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_PLUS",
+    "value": 87
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_ENTER",
+    "value": 88
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_1_AND_END",
+    "value": 89
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_2_AND_DOWN_ARROW",
+    "value": 90
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_3_AND_PAGEDN",
+    "value": 91
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_4_AND_LEFT_ARROW",
+    "value": 92
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_5",
+    "value": 93
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_6_AND_RIGHT_ARROW",
+    "value": 94
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_7_AND_HOME",
+    "value": 95
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_8_AND_UP_ARROW",
+    "value": 96
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_9_AND_PAGEUP",
+    "value": 97
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_0_AND_INSERT",
+    "value": 98
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_PERIOD_AND_DELETE",
+    "value": 99
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_NON_US_BACKSLASH_AND_PIPE",
+    "value": 100
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_APPLICATION",
+    "value": 101
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_POWER",
+    "value": 102
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_EQUAL",
+    "value": 103
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_F13",
+    "value": 104
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_F14",
+    "value": 105
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_F15",
+    "value": 106
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_F16",
+    "value": 107
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_F17",
+    "value": 108
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_F18",
+    "value": 109
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_F19",
+    "value": 110
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_F20",
+    "value": 111
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_F21",
+    "value": 112
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_F22",
+    "value": 113
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_F23",
+    "value": 114
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_F24",
+    "value": 115
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_EXECUTE",
+    "value": 116
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_HELP",
+    "value": 117
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_MENU",
+    "value": 118
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_SELECT",
+    "value": 119
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_STOP",
+    "value": 120
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_AGAIN",
+    "value": 121
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_UNDO",
+    "value": 122
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_CUT",
+    "value": 123
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_COPY",
+    "value": 124
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_PASTE",
+    "value": 125
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_FIND",
+    "value": 126
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_MUTE",
+    "value": 127
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_VOLUME_UP",
+    "value": 128
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_VOLUME_DOWN",
+    "value": 129
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_LOCKING_CAPS_LOCK",
+    "value": 130
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_LOCKING_NUM_LOCK",
+    "value": 131
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_LOCKING_SCROLL_LOCK",
+    "value": 132
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_COMMA",
+    "value": 133
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_EQUAL_SIGN",
+    "value": 134
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_INTERNATIONAL1",
+    "value": 135
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_INTERNATIONAL2",
+    "value": 136
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_INTERNATIONAL3",
+    "value": 137
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_INTERNATIONAL4",
+    "value": 138
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_INTERNATIONAL5",
+    "value": 139
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_INTERNATIONAL6",
+    "value": 140
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_INTERNATIONAL7",
+    "value": 141
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_INTERNATIONAL8",
+    "value": 142
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_INTERNATIONAL9",
+    "value": 143
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_LANG1",
+    "value": 144
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_LANG2",
+    "value": 145
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_LANG3",
+    "value": 146
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_LANG4",
+    "value": 147
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_LANG5",
+    "value": 148
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_LANG6",
+    "value": 149
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_LANG7",
+    "value": 150
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_LANG8",
+    "value": 151
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_LANG9",
+    "value": 152
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_ALTERNATE_ERASE",
+    "value": 153
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_SYSREQ_ATTENTION",
+    "value": 154
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_CANCEL",
+    "value": 155
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_CLEAR",
+    "value": 156
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_PRIOR",
+    "value": 157
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_RETURN",
+    "value": 158
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_SEPARATOR",
+    "value": 159
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_OUT",
+    "value": 160
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_OPER",
+    "value": 161
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_CLEAR_AGAIN",
+    "value": 162
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_CRSEL_PROPS",
+    "value": 163
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_EXSEL",
+    "value": 164
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_00",
+    "value": 176
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_000",
+    "value": 177
+  },
+  {
+    "name": "HID_USAGE_KEY_THOUSANDS_SEPARATOR",
+    "value": 178
+  },
+  {
+    "name": "HID_USAGE_KEY_DECIMAL_SEPARATOR",
+    "value": 179
+  },
+  {
+    "name": "HID_USAGE_KEY_CURRENCY_UNIT",
+    "value": 180
+  },
+  {
+    "name": "HID_USAGE_KEY_CURRENCY_SUB_UNIT",
+    "value": 181
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_LEFT_PARENTHESIS",
+    "value": 182
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_RIGHT_PARENTHESIS",
+    "value": 183
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_LEFT_BRACE",
+    "value": 184
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_RIGHT_BRACE",
+    "value": 185
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_TAB",
+    "value": 186
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_BACKSPACE",
+    "value": 187
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_A",
+    "value": 188
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_B",
+    "value": 189
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_C",
+    "value": 190
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_D",
+    "value": 191
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_E",
+    "value": 192
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_F",
+    "value": 193
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_XOR",
+    "value": 194
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_CARET",
+    "value": 195
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_PERCENT",
+    "value": 196
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_LESS_THAN",
+    "value": 197
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_GREATER_THAN",
+    "value": 198
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_AMPERSAND",
+    "value": 199
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_AMPERSAND_AMPERSAND",
+    "value": 200
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_PIPE",
+    "value": 201
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_PIPE_PIPE",
+    "value": 202
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_COLON",
+    "value": 203
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_HASH",
+    "value": 204
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_SPACE",
+    "value": 205
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_AT",
+    "value": 206
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_EXCLAMATION",
+    "value": 207
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_MEMORY_STORE",
+    "value": 208
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_MEMORY_RECALL",
+    "value": 209
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_MEMORY_CLEAR",
+    "value": 210
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_MEMORY_ADD",
+    "value": 211
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_MEMORY_SUBTRACT",
+    "value": 212
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_MEMORY_MULTIPLY",
+    "value": 213
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_MEMORY_DIVIDE",
+    "value": 214
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_PLUS_MINUS",
+    "value": 215
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_CLEAR",
+    "value": 216
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_CLEAR_ENTRY",
+    "value": 217
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_BINARY",
+    "value": 218
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_OCTAL",
+    "value": 219
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_DECIMAL",
+    "value": 220
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYPAD_HEXADECIMAL",
+    "value": 221
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_LEFTCONTROL",
+    "value": 224
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_LEFTSHIFT",
+    "value": 225
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_LEFTALT",
+    "value": 226
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_LEFT_GUI",
+    "value": 227
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_RIGHTCONTROL",
+    "value": 228
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_RIGHTSHIFT",
+    "value": 229
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_RIGHTALT",
+    "value": 230
+  },
+  {
+    "name": "HID_USAGE_KEY_KEYBOARD_RIGHT_GUI",
+    "value": 231
   }
 ]

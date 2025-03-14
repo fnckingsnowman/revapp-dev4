@@ -17,9 +17,8 @@
 	  
   </PropertyGroup>
   <ItemGroup>
-    <Content Remove="Assets\keyboard.json" />
-  </ItemGroup>
-  <ItemGroup>
+    <None Remove="Assets\consumer.json" />
+    <None Remove="Assets\keyboard.json" />
     <None Remove="Assets\report.json" />
     <None Remove="Assets\Rev\rev1.png" />
     <None Remove="Pages\BLEPage.xaml" />
@@ -55,6 +54,12 @@
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.6.250108002" />
   </ItemGroup>
   <ItemGroup>
+    <Content Update="Assets\consumer.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Assets\keyboard.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Update="Assets\Rev\rev1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

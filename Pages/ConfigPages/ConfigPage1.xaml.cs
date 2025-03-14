@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net.Http.Json;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
@@ -41,6 +42,15 @@ namespace RevoluteConfigApp.Pages.ConfigPages
         public string ConfigId { get; private set; }
         public ObservableCollection<ReportModel> Reports { get; private set; } = new();
 
+        private string _name;
+        private string _desc;
+        private List<int> _report;
+        private short _transport;
+        private List<KeyMapping> _keyboardMappings;
+        private List<KeyMapping> _consumerMappings;
+
+        private Expander _currentlyExpandedExpander;
+
         public ConfigPage1()
         {
             this.InitializeComponent();
@@ -49,6 +59,15 @@ namespace RevoluteConfigApp.Pages.ConfigPages
             LoadReportsAsync();
 
             this.PointerPressed += MainWindow_PointerPressed;
+
+            // Initialize state variables
+            _name = string.Empty;
+            _desc = string.Empty;
+            _report = new List<int> { 0, 0, 0, 0, 0, 0, 0, 0 };
+            _transport = 5; // Default to Keyboard
+
+            // Load JSON files
+            LoadKeyMappings();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -461,7 +480,49 @@ namespace RevoluteConfigApp.Pages.ConfigPages
             }
         }
 
-        private Expander _currentlyExpandedExpander;
+        private async void LoadKeyMappings()
+        {
+            try
+            {
+                // Load keyboard.json
+                var keyboardJsonPath = Path.Combine(Directory.GetCurrentDirectory(), "Assets", "keyboard.json");
+                Debug.WriteLine($"Loading keyboard.json from: {keyboardJsonPath}");
+
+                if (File.Exists(keyboardJsonPath))
+                {
+                    var keyboardJson = await File.ReadAllTextAsync(keyboardJsonPath);
+                    Debug.WriteLine("keyboard.json content: " + keyboardJson);
+
+                    _keyboardMappings = JsonSerializer.Deserialize<List<KeyMapping>>(keyboardJson);
+                    Debug.WriteLine($"Loaded {_keyboardMappings?.Count} keyboard mappings.");
+                }
+                else
+                {
+                    Debug.WriteLine("keyboard.json not found.");
+                }
+
+                // Load consumer.json
+                var consumerJsonPath = Path.Combine(Directory.GetCurrentDirectory(), "Assets", "consumer.json");
+                Debug.WriteLine($"Loading consumer.json from: {consumerJsonPath}");
+
+                if (File.Exists(consumerJsonPath))
+                {
+                    var consumerJson = await File.ReadAllTextAsync(consumerJsonPath);
+                    Debug.WriteLine("consumer.json content: " + consumerJson);
+
+                    _consumerMappings = JsonSerializer.Deserialize<List<KeyMapping>>(consumerJson);
+                    Debug.WriteLine($"Loaded {_consumerMappings?.Count} consumer mappings.");
+                }
+                else
+                {
+                    Debug.WriteLine("consumer.json not found.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error loading JSON files: {ex.Message}");
+            }
+        }
 
         private void OnExpanderExpanding(object sender, ExpanderExpandingEventArgs e)
         {
@@ -473,6 +534,27 @@ namespace RevoluteConfigApp.Pages.ConfigPages
 
             // Update the currently expanded Expander
             _currentlyExpandedExpander = sender as Expander;
+
+            // Populate the ListView based on the expanded Expander
+            if (_currentlyExpandedExpander != null)
+            {
+                var listView = _currentlyExpandedExpander.Content as ListView;
+                if (listView != null)
+                {
+                    if (_currentlyExpandedExpander.Name.StartsWith("KeyboardExpander"))
+                    {
+                        // Populate with keyboard mappings
+                        listView.ItemsSource = _keyboardMappings;
+                        Debug.WriteLine("Populated KeyboardExpander with keyboard mappings.");
+                    }
+                    else if (_currentlyExpandedExpander.Name.StartsWith("ConsumerExpander"))
+                    {
+                        // Populate with consumer mappings
+                        listView.ItemsSource = _consumerMappings;
+                        Debug.WriteLine("Populated ConsumerExpander with consumer mappings.");
+                    }
+                }
+            }
         }
 
         private void OnExpanderCollapsed(object sender, ExpanderCollapsedEventArgs e)
@@ -483,5 +565,85 @@ namespace RevoluteConfigApp.Pages.ConfigPages
                 _currentlyExpandedExpander = null;
             }
         }
+
+        private void OnCheckBoxChecked(object sender, RoutedEventArgs e)
+        {
+            // Handle modifier or mouse button selection
+            var checkBox = sender as CheckBox;
+            if (checkBox != null)
+            {
+                string content = checkBox.Content.ToString();
+                int bitPosition = GetBitPositionFromContent(content);
+
+                if (bitPosition >= 0)
+                {
+                    // Update the report based on the transport type
+                    if (_transport == 5) // Keyboard
+                    {
+                        _report[0] |= (1 << bitPosition); // Set the bit
+                    }
+                    else if (_transport == 13) // Mouse
+                    {
+                        _report[1] |= (1 << bitPosition); // Set the bit
+                    }
+                }
+            }
+        }
+
+        private void OnCheckBoxUnchecked(object sender, RoutedEventArgs e)
+        {
+            // Handle modifier or mouse button deselection
+            var checkBox = sender as CheckBox;
+            if (checkBox != null)
+            {
+                string content = checkBox.Content.ToString();
+                int bitPosition = GetBitPositionFromContent(content);
+
+                if (bitPosition >= 0)
+                {
+                    // Update the report based on the transport type
+                    if (_transport == 5) // Keyboard
+                    {
+                        _report[0] &= ~(1 << bitPosition); // Clear the bit
+                    }
+                    else if (_transport == 13) // Mouse
+                    {
+                        _report[1] &= ~(1 << bitPosition); // Clear the bit
+                    }
+                }
+            }
+        }
+
+        private int GetBitPositionFromContent(string content)
+        {
+            // Map content to bit positions
+            switch (content)
+            {
+                case "Left Ctrl": return 0;
+                case "Left Shift": return 1;
+                case "Left Alt": return 2;
+                case "Left Win": return 3;
+                case "Right Ctrl": return 4;
+                case "Right Shift": return 5;
+                case "Right Alt": return 6;
+                case "Right Win": return 7;
+                case "Mouse 1": return 0;
+                case "Mouse 2": return 1;
+                case "Mouse 3": return 2;
+                case "Mouse 4": return 3;
+                case "Mouse 5": return 4;
+                default: return -1;
+            }
+        }
+
+
+    }
+    public class KeyMapping
+    {
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+
+        [JsonPropertyName("value")]
+        public int Value { get; set; }
     }
 }
