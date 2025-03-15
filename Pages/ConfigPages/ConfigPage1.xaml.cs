@@ -528,33 +528,32 @@ namespace RevoluteConfigApp.Pages.ConfigPages
         {
             if (_currentlyExpandedExpander != null && _currentlyExpandedExpander != sender)
             {
-                // Collapse the previously expanded Expander
                 _currentlyExpandedExpander.IsExpanded = false;
             }
 
-            // Update the currently expanded Expander
             _currentlyExpandedExpander = sender as Expander;
 
-            // Populate the ListView based on the expanded Expander
             if (_currentlyExpandedExpander != null)
             {
-                var listView = _currentlyExpandedExpander.Content as ListView;
+                var listView = FindListViewInExpander(_currentlyExpandedExpander);
                 if (listView != null)
                 {
                     if (_currentlyExpandedExpander.Name.StartsWith("KeyboardExpander"))
                     {
-                        // Populate with keyboard mappings
                         listView.ItemsSource = _keyboardMappings;
-                        Debug.WriteLine("Populated KeyboardExpander with keyboard mappings.");
                     }
                     else if (_currentlyExpandedExpander.Name.StartsWith("ConsumerExpander"))
                     {
-                        // Populate with consumer mappings
                         listView.ItemsSource = _consumerMappings;
-                        Debug.WriteLine("Populated ConsumerExpander with consumer mappings.");
                     }
                 }
             }
+        }
+
+        private ListView FindListViewInExpander(Expander expander)
+        {
+            var stackPanel = expander.Content as StackPanel;
+            return stackPanel?.Children.OfType<ListView>().FirstOrDefault();
         }
 
         private void OnExpanderCollapsed(object sender, ExpanderCollapsedEventArgs e)
@@ -633,6 +632,84 @@ namespace RevoluteConfigApp.Pages.ConfigPages
                 case "Mouse 4": return 3;
                 case "Mouse 5": return 4;
                 default: return -1;
+            }
+        }
+
+        private void OnConsumerSearchTextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+            {
+                string searchText = sender.Text.ToLower();
+                FilterConsumerMappings(searchText, sender.Name);
+            }
+        }
+
+        private void FilterConsumerMappings(string searchText, string searchBoxName)
+        {
+            var filteredMappings = _consumerMappings
+                .Where(mapping => mapping.Name.ToLower().Contains(searchText))
+                .ToList();
+
+            // Update the corresponding ListView based on the searchBoxName
+            switch (searchBoxName)
+            {
+                case "ConsumerSearchBox1":
+                    ConsumerListView1.ItemsSource = filteredMappings;
+                    break;
+                case "ConsumerSearchBox2":
+                    ConsumerListView2.ItemsSource = filteredMappings;
+                    break;
+                case "ConsumerSearchBox3":
+                    ConsumerListView3.ItemsSource = filteredMappings;
+                    break;
+                case "ConsumerSearchBox4":
+                    ConsumerListView4.ItemsSource = filteredMappings;
+                    break;
+                case "ConsumerSearchBox5":
+                    ConsumerListView5.ItemsSource = filteredMappings;
+                    break;
+                case "ConsumerSearchBox6":
+                    ConsumerListView6.ItemsSource = filteredMappings;
+                    break;
+            }
+        }
+
+        private void OnKeyboardSearchTextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+            {
+                string searchText = sender.Text.ToLower();
+                FilterKeyboardMappings(searchText, sender.Name);
+            }
+        }
+
+        private void FilterKeyboardMappings(string searchText, string searchBoxName)
+        {
+            var filteredMappings = _keyboardMappings
+                .Where(mapping => mapping.Name.ToLower().Contains(searchText))
+                .ToList();
+
+            // Update the corresponding ListView based on the searchBoxName
+            switch (searchBoxName)
+            {
+                case "KeyboardSearchBox1":
+                    KeyboardListView1.ItemsSource = filteredMappings;
+                    break;
+                case "KeyboardSearchBox2":
+                    KeyboardListView2.ItemsSource = filteredMappings;
+                    break;
+                case "KeyboardSearchBox3":
+                    KeyboardListView3.ItemsSource = filteredMappings;
+                    break;
+                case "KeyboardSearchBox4":
+                    KeyboardListView4.ItemsSource = filteredMappings;
+                    break;
+                case "KeyboardSearchBox5":
+                    KeyboardListView5.ItemsSource = filteredMappings;
+                    break;
+                case "KeyboardSearchBox6":
+                    KeyboardListView6.ItemsSource = filteredMappings;
+                    break;
             }
         }
 

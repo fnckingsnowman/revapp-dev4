@@ -228,59 +228,119 @@
                                 </Grid>
 
                                 <!-- Section 3-8: Expander with ListView -->
-                                <Expander x:Name="KeyboardExpander1" Header="Placeholder List 1" Margin="0,10,0,0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Expanding="OnExpanderExpanding" Collapsed="OnExpanderCollapsed">
-                                    <ListView Height="100" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                                        <ListView.ItemTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding Name}" />
-                                            </DataTemplate>
-                                        </ListView.ItemTemplate>
-                                    </ListView>
+                                <Expander x:Name="KeyboardExpander1" Header="Keyboard Keys 1" Margin="0,10,0,0" HorizontalAlignment="Stretch" Expanding="OnExpanderExpanding" Collapsed="OnExpanderCollapsed">
+                                    <StackPanel Width="440">
+                                        <!-- Search Bar -->
+                                        <AutoSuggestBox x:Name="KeyboardSearchBox1" 
+                        PlaceholderText="Search keyboard keys..." 
+                        QueryIcon="Find" 
+                        TextChanged="OnKeyboardSearchTextChanged" 
+                        Margin="0,0,0,10"/>
+
+                                        <!-- ListView for Keyboard Mappings -->
+                                        <ListView x:Name="KeyboardListView1" Height="100" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Name}" />
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                        </ListView>
+                                    </StackPanel>
                                 </Expander>
-                                <Expander x:Name="KeyboardExpander2" Header="Placeholder List 2" Margin="0,10,0,0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Expanding="OnExpanderExpanding" Collapsed="OnExpanderCollapsed">
-                                    <ListView Height="100" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                                        <ListView.ItemTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding Name}" />
-                                            </DataTemplate>
-                                        </ListView.ItemTemplate>
-                                    </ListView>
+                                <Expander x:Name="KeyboardExpander2" Header="Keyboard Keys 2" Margin="0,10,0,0" HorizontalAlignment="Stretch" Expanding="OnExpanderExpanding" Collapsed="OnExpanderCollapsed">
+                                    <StackPanel Width="440">
+                                        <!-- Search Bar -->
+                                        <AutoSuggestBox x:Name="KeyboardSearchBox2" 
+                        PlaceholderText="Search keyboard keys..." 
+                        QueryIcon="Find" 
+                        TextChanged="OnKeyboardSearchTextChanged" 
+                        Margin="0,0,0,10"/>
+
+                                        <!-- ListView for Keyboard Mappings -->
+                                        <ListView x:Name="KeyboardListView2" Height="100" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Name}" />
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                        </ListView>
+                                    </StackPanel>
                                 </Expander>
-                                <Expander x:Name="KeyboardExpander3" Header="Placeholder List 3" Margin="0,10,0,0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Expanding="OnExpanderExpanding" Collapsed="OnExpanderCollapsed">
-                                    <ListView Height="100" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                                        <ListView.ItemTemplate>
-    <DataTemplate>
-        <TextBlock Text="{Binding Name}" />
-    </DataTemplate>
-</ListView.ItemTemplate>
-                                    </ListView>
+                                <Expander x:Name="KeyboardExpander3" Header="Keyboard Keys 3" Margin="0,10,0,0" HorizontalAlignment="Stretch" Expanding="OnExpanderExpanding" Collapsed="OnExpanderCollapsed">
+                                    <StackPanel Width="440">
+                                        <!-- Search Bar -->
+                                        <AutoSuggestBox x:Name="KeyboardSearchBox3" 
+                        PlaceholderText="Search keyboard keys..." 
+                        QueryIcon="Find" 
+                        TextChanged="OnKeyboardSearchTextChanged" 
+                        Margin="0,0,0,10"/>
+
+                                        <!-- ListView for Keyboard Mappings -->
+                                        <ListView x:Name="KeyboardListView3" Height="100" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Name}" />
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                        </ListView>
+                                    </StackPanel>
                                 </Expander>
-                                <Expander x:Name="KeyboardExpander4" Header="Placeholder List 4" Margin="0,10,0,0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Expanding="OnExpanderExpanding" Collapsed="OnExpanderCollapsed">
-                                    <ListView Height="100" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                                        <ListView.ItemTemplate>
-    <DataTemplate>
-        <TextBlock Text="{Binding Name}" />
-    </DataTemplate>
-</ListView.ItemTemplate>
-                                    </ListView>
+                                <Expander x:Name="KeyboardExpander4" Header="Keyboard Keys 4" Margin="0,10,0,0" HorizontalAlignment="Stretch" Expanding="OnExpanderExpanding" Collapsed="OnExpanderCollapsed">
+                                    <StackPanel Width="440">
+                                        <!-- Search Bar -->
+                                        <AutoSuggestBox x:Name="KeyboardSearchBox4" 
+                        PlaceholderText="Search keyboard keys..." 
+                        QueryIcon="Find" 
+                        TextChanged="OnKeyboardSearchTextChanged" 
+                        Margin="0,0,0,10"/>
+
+                                        <!-- ListView for Keyboard Mappings -->
+                                        <ListView x:Name="KeyboardListView4" Height="100" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Name}" />
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                        </ListView>
+                                    </StackPanel>
                                 </Expander>
-                                <Expander x:Name="KeyboardExpander5" Header="Placeholder List 5" Margin="0,10,0,0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Expanding="OnExpanderExpanding" Collapsed="OnExpanderCollapsed">
-                                    <ListView Height="100" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                                        <ListView.ItemTemplate>
-    <DataTemplate>
-        <TextBlock Text="{Binding Name}" />
-    </DataTemplate>
-</ListView.ItemTemplate>
-                                    </ListView>
+                                <Expander x:Name="KeyboardExpander5" Header="Keyboard Keys 5" Margin="0,10,0,0" HorizontalAlignment="Stretch" Expanding="OnExpanderExpanding" Collapsed="OnExpanderCollapsed">
+                                    <StackPanel Width="440">
+                                        <!-- Search Bar -->
+                                        <AutoSuggestBox x:Name="KeyboardSearchBox5" 
+                        PlaceholderText="Search keyboard keys..." 
+                        QueryIcon="Find" 
+                        TextChanged="OnKeyboardSearchTextChanged" 
+                        Margin="0,0,0,10"/>
+
+                                        <!-- ListView for Keyboard Mappings -->
+                                        <ListView x:Name="KeyboardListView5" Height="100" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Name}" />
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                        </ListView>
+                                    </StackPanel>
                                 </Expander>
-                                <Expander x:Name="KeyboardExpander6" Header="Placeholder List 6" Margin="0,10,0,0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Expanding="OnExpanderExpanding" Collapsed="OnExpanderCollapsed">
-                                    <ListView Height="100" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                                        <ListView.ItemTemplate>
-    <DataTemplate>
-        <TextBlock Text="{Binding Name}" />
-    </DataTemplate>
-</ListView.ItemTemplate>
-                                    </ListView>
+                                <Expander x:Name="KeyboardExpander6" Header="Keyboard Keys 6" Margin="0,10,0,0" HorizontalAlignment="Stretch" Expanding="OnExpanderExpanding" Collapsed="OnExpanderCollapsed">
+                                    <StackPanel Width="440">
+                                        <!-- Search Bar -->
+                                        <AutoSuggestBox x:Name="KeyboardSearchBox6" 
+                        PlaceholderText="Search keyboard keys..." 
+                        QueryIcon="Find" 
+                        TextChanged="OnKeyboardSearchTextChanged" 
+                        Margin="0,0,0,10"/>
+
+                                        <!-- ListView for Keyboard Mappings -->
+                                        <ListView x:Name="KeyboardListView6" Height="100" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Name}" />
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                        </ListView>
+                                    </StackPanel>
                                 </Expander>
                             </StackPanel>
                         </PivotItem>
@@ -289,59 +349,119 @@
                         <PivotItem Header="Consumer">
                             <StackPanel>
                                 <!-- Section 2-7: Expander with ListView -->
-                                <Expander x:Name="ConsumerExpander1" Header="Placeholder List 1" Margin="0,10,0,0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Expanding="OnExpanderExpanding" Collapsed="OnExpanderCollapsed">
-                                    <ListView Height="100" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                                        <ListView.ItemTemplate>
-    <DataTemplate>
-        <TextBlock Text="{Binding Name}" />
-    </DataTemplate>
-</ListView.ItemTemplate>
-                                    </ListView>
+                                <Expander x:Name="ConsumerExpander1" Header="Consumer Keys 1" Margin="0,10,0,0" HorizontalAlignment="Stretch" Expanding="OnExpanderExpanding" Collapsed="OnExpanderCollapsed">
+                                    <StackPanel Width="440">
+                                        <!-- Search Bar -->
+                                        <AutoSuggestBox x:Name="ConsumerSearchBox1" 
+                        PlaceholderText="Search consumer keys..." 
+                        QueryIcon="Find" 
+                        TextChanged="OnConsumerSearchTextChanged" 
+                        Margin="0,0,0,10"/>
+
+                                        <!-- ListView for Consumer Mappings -->
+                                        <ListView x:Name="ConsumerListView1" Height="100" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Name}" />
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                        </ListView>
+                                    </StackPanel>
                                 </Expander>
-                                <Expander x:Name="ConsumerExpander2" Header="Placeholder List 2" Margin="0,10,0,0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Expanding="OnExpanderExpanding" Collapsed="OnExpanderCollapsed">
-                                    <ListView Height="100" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                                        <ListView.ItemTemplate>
-    <DataTemplate>
-        <TextBlock Text="{Binding Name}" />
-    </DataTemplate>
-</ListView.ItemTemplate>
-                                    </ListView>
+                                <Expander x:Name="ConsumerExpander2" Header="Consumer Keys 2" Margin="0,10,0,0" HorizontalAlignment="Stretch" Expanding="OnExpanderExpanding" Collapsed="OnExpanderCollapsed">
+                                    <StackPanel Width="440">
+                                        <!-- Search Bar -->
+                                        <AutoSuggestBox x:Name="ConsumerSearchBox2" 
+                        PlaceholderText="Search consumer keys..." 
+                        QueryIcon="Find" 
+                        TextChanged="OnConsumerSearchTextChanged" 
+                        Margin="0,0,0,10"/>
+
+                                        <!-- ListView for Consumer Mappings -->
+                                        <ListView x:Name="ConsumerListView2" Height="100" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Name}" />
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                        </ListView>
+                                    </StackPanel>
                                 </Expander>
-                                <Expander x:Name="ConsumerExpander3" Header="Placeholder List 3" Margin="0,10,0,0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Expanding="OnExpanderExpanding" Collapsed="OnExpanderCollapsed">
-                                    <ListView Height="100" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                                        <ListView.ItemTemplate>
-    <DataTemplate>
-        <TextBlock Text="{Binding Name}" />
-    </DataTemplate>
-</ListView.ItemTemplate>
-                                    </ListView>
+                                <Expander x:Name="ConsumerExpander3" Header="Consumer Keys 3" Margin="0,10,0,0" HorizontalAlignment="Stretch" Expanding="OnExpanderExpanding" Collapsed="OnExpanderCollapsed">
+                                    <StackPanel Width="440">
+                                        <!-- Search Bar -->
+                                        <AutoSuggestBox x:Name="ConsumerSearchBox3" 
+                        PlaceholderText="Search consumer keys..." 
+                        QueryIcon="Find" 
+                        TextChanged="OnConsumerSearchTextChanged" 
+                        Margin="0,0,0,10"/>
+
+                                        <!-- ListView for Consumer Mappings -->
+                                        <ListView x:Name="ConsumerListView3" Height="100" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Name}" />
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                        </ListView>
+                                    </StackPanel>
                                 </Expander>
-                                <Expander x:Name="ConsumerExpander4" Header="Placeholder List 4" Margin="0,10,0,0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Expanding="OnExpanderExpanding" Collapsed="OnExpanderCollapsed">
-                                    <ListView Height="100" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                                        <ListView.ItemTemplate>
-    <DataTemplate>
-        <TextBlock Text="{Binding Name}" />
-    </DataTemplate>
-</ListView.ItemTemplate>
-                                    </ListView>
+                                <Expander x:Name="ConsumerExpander4" Header="Consumer Keys 4" Margin="0,10,0,0" HorizontalAlignment="Stretch" Expanding="OnExpanderExpanding" Collapsed="OnExpanderCollapsed">
+                                    <StackPanel Width="440">
+                                        <!-- Search Bar -->
+                                        <AutoSuggestBox x:Name="ConsumerSearchBox4" 
+                        PlaceholderText="Search consumer keys..." 
+                        QueryIcon="Find" 
+                        TextChanged="OnConsumerSearchTextChanged" 
+                        Margin="0,0,0,10"/>
+
+                                        <!-- ListView for Consumer Mappings -->
+                                        <ListView x:Name="ConsumerListView4" Height="100" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Name}" />
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                        </ListView>
+                                    </StackPanel>
                                 </Expander>
-                                <Expander x:Name="ConsumerExpander5" Header="Placeholder List 5" Margin="0,10,0,0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Expanding="OnExpanderExpanding" Collapsed="OnExpanderCollapsed">
-                                    <ListView Height="100" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                                        <ListView.ItemTemplate>
-    <DataTemplate>
-        <TextBlock Text="{Binding Name}" />
-    </DataTemplate>
-</ListView.ItemTemplate>
-                                    </ListView>
+                                <Expander x:Name="ConsumerExpander5" Header="Consumer Keys 5" Margin="0,10,0,0" HorizontalAlignment="Stretch" Expanding="OnExpanderExpanding" Collapsed="OnExpanderCollapsed">
+                                    <StackPanel Width="440">
+                                        <!-- Search Bar -->
+                                        <AutoSuggestBox x:Name="ConsumerSearchBox5" 
+                        PlaceholderText="Search consumer keys..." 
+                        QueryIcon="Find" 
+                        TextChanged="OnConsumerSearchTextChanged" 
+                        Margin="0,0,0,10"/>
+
+                                        <!-- ListView for Consumer Mappings -->
+                                        <ListView x:Name="ConsumerListView5" Height="100" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Name}" />
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                        </ListView>
+                                    </StackPanel>
                                 </Expander>
-                                <Expander x:Name="ConsumerExpander6" Header="Placeholder List 6" Margin="0,10,0,0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Expanding="OnExpanderExpanding" Collapsed="OnExpanderCollapsed">
-                                    <ListView Height="100" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                                        <ListView.ItemTemplate>
-    <DataTemplate>
-        <TextBlock Text="{Binding Name}" />
-    </DataTemplate>
-</ListView.ItemTemplate>
-                                    </ListView>
+                                <Expander x:Name="ConsumerExpander6" Header="Consumer Keys 6" Margin="0,10,0,0" HorizontalAlignment="Stretch" Expanding="OnExpanderExpanding" Collapsed="OnExpanderCollapsed">
+                                    <StackPanel Width="440">
+                                        <!-- Search Bar -->
+                                        <AutoSuggestBox x:Name="ConsumerSearchBox6" 
+                        PlaceholderText="Search consumer keys..." 
+                        QueryIcon="Find" 
+                        TextChanged="OnConsumerSearchTextChanged" 
+                        Margin="0,0,0,10"/>
+
+                                        <!-- ListView for Consumer Mappings -->
+                                        <ListView x:Name="ConsumerListView6" Height="100" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Name}" />
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                        </ListView>
+                                    </StackPanel>
                                 </Expander>
                             </StackPanel>
                         </PivotItem>
