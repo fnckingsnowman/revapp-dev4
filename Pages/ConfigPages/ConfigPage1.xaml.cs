@@ -796,18 +796,30 @@ namespace RevoluteConfigApp.Pages.ConfigPages
                 string transportType = GetSelectedTransportType();
                 Debug.WriteLine($"Selected Transport: {transportType}");
 
-                // Get the configured report data
-                List<byte> report = GetConfiguredReport();
-                Debug.WriteLine($"Configured Report: {string.Join(", ", report)}");
-
                 // Create a new report object
                 var newReport = new ReportModel
                 {
                     Name = name,
                     Description = description,
-                    Report = report,
-                    Transport = transportType
+                    Transport = transportType,
+                    Report = new List<byte> { 0, 0, 0, 0, 0, 0, 0, 0 } // Initialize with default values
                 };
+
+                // Configure the report based on the transport type
+                switch (transportType)
+                {
+                    case "5": // Keyboard
+                        ConfigureKeyboardReport(newReport);
+                        break;
+
+                    case "9": // Consumer
+                        ConfigureConsumerReport(newReport);
+                        break;
+
+                    case "13": // Mouse
+                        ConfigureMouseReport(newReport);
+                        break;
+                }
 
                 // Debug: Verify new report
                 Debug.WriteLine($"New Report: {JsonSerializer.Serialize(newReport)}");
@@ -850,6 +862,77 @@ namespace RevoluteConfigApp.Pages.ConfigPages
             {
                 Debug.WriteLine($"Error saving report: {ex.Message}");
             }
+        }
+
+        private void ConfigureKeyboardReport(ReportModel report)
+        {
+            // Modifier Keys (byte 1)
+            report.Report[0] = GetModifierByte();
+
+            // Key Mappings (byte 3 to byte 8)
+            report.Report[2] = GetSelectedKeyValue(KeyboardListView1); // byte 3
+            report.Report[3] = GetSelectedKeyValue(KeyboardListView2); // byte 4
+            report.Report[4] = GetSelectedKeyValue(KeyboardListView3); // byte 5
+            report.Report[5] = GetSelectedKeyValue(KeyboardListView4); // byte 6
+            report.Report[6] = GetSelectedKeyValue(KeyboardListView5); // byte 7
+            report.Report[7] = GetSelectedKeyValue(KeyboardListView6); // byte 8
+        }
+
+        private byte GetModifierByte()
+        {
+            byte modifierByte = 0;
+
+            if (LeftCtrlCheckBox.IsChecked == true) modifierByte |= 1 << 0;
+            if (LeftShiftCheckBox.IsChecked == true) modifierByte |= 1 << 1;
+            if (LeftAltCheckBox.IsChecked == true) modifierByte |= 1 << 2;
+            if (LeftWinCheckBox.IsChecked == true) modifierByte |= 1 << 3;
+            if (RightCtrlCheckBox.IsChecked == true) modifierByte |= 1 << 4;
+            if (RightShiftCheckBox.IsChecked == true) modifierByte |= 1 << 5;
+            if (RightAltCheckBox.IsChecked == true) modifierByte |= 1 << 6;
+            if (RightWinCheckBox.IsChecked == true) modifierByte |= 1 << 7;
+
+            return modifierByte;
+        }
+
+        private byte GetSelectedKeyValue(ListView listView)
+        {
+            var selectedItem = listView.SelectedItem as KeyMapping;
+            return (byte)(selectedItem?.Value ?? 0);
+        }
+        private void ConfigureConsumerReport(ReportModel report)
+        {
+            // Consumer Mappings (byte 1 to byte 6)
+            report.Report[0] = GetSelectedKeyValue(ConsumerListView1); // byte 1
+            report.Report[1] = GetSelectedKeyValue(ConsumerListView2); // byte 2
+            report.Report[2] = GetSelectedKeyValue(ConsumerListView3); // byte 3
+            report.Report[3] = GetSelectedKeyValue(ConsumerListView4); // byte 4
+            report.Report[4] = GetSelectedKeyValue(ConsumerListView5); // byte 5
+            report.Report[5] = GetSelectedKeyValue(ConsumerListView6); // byte 6
+        }
+
+        private void ConfigureMouseReport(ReportModel report)
+        {
+            // Mouse Buttons (byte 1)
+            report.Report[0] = GetMouseButtonByte();
+
+            // Mouse Axes (byte 2 to byte 5)
+            report.Report[1] = MouseXCheckBox.IsChecked == true ? (byte)1 : (byte)0; // byte 2
+            report.Report[2] = MouseYCheckBox.IsChecked == true ? (byte)1 : (byte)0; // byte 3
+            report.Report[3] = ScrollXCheckBox.IsChecked == true ? (byte)1 : (byte)0; // byte 4
+            report.Report[4] = ScrollYCheckBox.IsChecked == true ? (byte)1 : (byte)0; // byte 5
+        }
+
+        private byte GetMouseButtonByte()
+        {
+            byte buttonByte = 0;
+
+            if (Mouse1CheckBox.IsChecked == true) buttonByte |= 1 << 0;
+            if (Mouse2CheckBox.IsChecked == true) buttonByte |= 1 << 1;
+            if (Mouse3CheckBox.IsChecked == true) buttonByte |= 1 << 2;
+            if (Mouse4CheckBox.IsChecked == true) buttonByte |= 1 << 3;
+            if (Mouse5CheckBox.IsChecked == true) buttonByte |= 1 << 4;
+
+            return buttonByte;
         }
 
         private async Task CopyReportJsonToLocalStorageAsync()

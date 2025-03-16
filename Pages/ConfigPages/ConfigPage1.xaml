@@ -216,17 +216,14 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <!-- Top Row of CheckBoxes -->
-                                    <CheckBox Content="Left Ctrl" Grid.Row="0" Grid.Column="0" Margin="5"/>
-                                    <CheckBox Content="Left Shift" Grid.Row="0" Grid.Column="1" Margin="5"/>
-                                    <CheckBox Content="Left Alt" Grid.Row="0" Grid.Column="2" Margin="5"/>
-                                    <CheckBox Content="Left Win" Grid.Row="0" Grid.Column="3" Margin="5"/>
-
-                                    <!-- Bottom Row of CheckBoxes -->
-                                    <CheckBox Content="Right Ctrl" Grid.Row="1" Grid.Column="0" Margin="5"/>
-                                    <CheckBox Content="Right Shift" Grid.Row="1" Grid.Column="1" Margin="5"/>
-                                    <CheckBox Content="Right Alt" Grid.Row="1" Grid.Column="2" Margin="5"/>
-                                    <CheckBox Content="Right Win" Grid.Row="1" Grid.Column="3" Margin="5"/>
+                                    <CheckBox x:Name="LeftCtrlCheckBox" Content="Left Ctrl" Grid.Row="0" Grid.Column="0" Margin="5"/>
+                                    <CheckBox x:Name="LeftShiftCheckBox" Content="Left Shift" Grid.Row="0" Grid.Column="1" Margin="5"/>
+                                    <CheckBox x:Name="LeftAltCheckBox" Content="Left Alt" Grid.Row="0" Grid.Column="2" Margin="5"/>
+                                    <CheckBox x:Name="LeftWinCheckBox" Content="Left Win" Grid.Row="0" Grid.Column="3" Margin="5"/>
+                                    <CheckBox x:Name="RightCtrlCheckBox" Content="Right Ctrl" Grid.Row="1" Grid.Column="0" Margin="5"/>
+                                    <CheckBox x:Name="RightShiftCheckBox" Content="Right Shift" Grid.Row="1" Grid.Column="1" Margin="5"/>
+                                    <CheckBox x:Name="RightAltCheckBox" Content="Right Alt" Grid.Row="1" Grid.Column="2" Margin="5"/>
+                                    <CheckBox x:Name="RightWinCheckBox" Content="Right Win" Grid.Row="1" Grid.Column="3" Margin="5"/>
                                 </Grid>
 
                                 <!-- Section 3-8: Expander with ListView -->
@@ -474,20 +471,20 @@
                                 <!-- Section 2: Mouse Button Select (CheckBoxes) -->
                                 <TextBlock Text="Mouse Button Select" FontSize="16" Margin="0,10,0,5"/>
                                 <StackPanel>
-                                    <CheckBox Content="Mouse 1" Margin="5"/>
-                                    <CheckBox Content="Mouse 2" Margin="5"/>
-                                    <CheckBox Content="Mouse 3" Margin="5"/>
-                                    <CheckBox Content="Mouse 4" Margin="5"/>
-                                    <CheckBox Content="Mouse 5" Margin="5"/>
+                                    <CheckBox x:Name="Mouse1CheckBox" Content="Mouse 1" Margin="5"/>
+                                    <CheckBox x:Name="Mouse2CheckBox" Content="Mouse 2" Margin="5"/>
+                                    <CheckBox x:Name="Mouse3CheckBox" Content="Mouse 3" Margin="5"/>
+                                    <CheckBox x:Name="Mouse4CheckBox" Content="Mouse 4" Margin="5"/>
+                                    <CheckBox x:Name="Mouse5CheckBox" Content="Mouse 5" Margin="5"/>
                                 </StackPanel>
 
                                 <!-- Section 3: Mouse Axis Select (CheckBoxes) -->
                                 <TextBlock Text="Mouse Axis Select" FontSize="16" Margin="0,10,0,5"/>
                                 <StackPanel>
-                                    <CheckBox Content="Mouse X" Margin="5"/>
-                                    <CheckBox Content="Mouse Y" Margin="5"/>
-                                    <CheckBox Content="Scroll X" Margin="5"/>
-                                    <CheckBox Content="Scroll Y" Margin="5"/>
+                                    <CheckBox x:Name="MouseXCheckBox" Content="Mouse X" Margin="5"/>
+                                    <CheckBox x:Name="MouseYCheckBox" Content="Mouse Y" Margin="5"/>
+                                    <CheckBox x:Name="ScrollXCheckBox" Content="Scroll X" Margin="5"/>
+                                    <CheckBox x:Name="ScrollYCheckBox" Content="Scroll Y" Margin="5"/>
                                 </StackPanel>
                             </StackPanel>
                         </PivotItem>
