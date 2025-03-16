@@ -60,6 +60,9 @@ namespace RevoluteConfigApp.Pages.ConfigPages
 
             this.PointerPressed += MainWindow_PointerPressed;
 
+            // Copy report.json to local storage
+            _ = CopyReportJsonToLocalStorageAsync();
+
             // Initialize state variables
             _name = string.Empty;
             _desc = string.Empty;
@@ -139,16 +142,20 @@ namespace RevoluteConfigApp.Pages.ConfigPages
         {
             try
             {
-                string filePath = Path.Combine(AppContext.BaseDirectory, "Assets", "report.json");
+                // Define the local storage path
+                string localAppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                string localReportFilePath = Path.Combine(localAppDataPath, "RevoluteConfigApp", "report.json");
 
-                if (!File.Exists(filePath))
+                // Check if the file exists
+                if (!File.Exists(localReportFilePath))
                 {
-                    System.Diagnostics.Debug.WriteLine($"report.json not found at {filePath}");
+                    Debug.WriteLine($"report.json not found at {localReportFilePath}");
                     return;
                 }
 
-                string jsonText = await File.ReadAllTextAsync(filePath);
-                System.Diagnostics.Debug.WriteLine($"report.json contents: {jsonText}");
+                // Load the file
+                string jsonText = await File.ReadAllTextAsync(localReportFilePath);
+                Debug.WriteLine($"report.json contents: {jsonText}");
 
                 var options = new JsonSerializerOptions
                 {
@@ -157,11 +164,12 @@ namespace RevoluteConfigApp.Pages.ConfigPages
 
                 var reports = JsonSerializer.Deserialize<List<ReportModel>>(jsonText, options);
 
+                // Clear the existing reports and add the new ones
                 Reports.Clear();
                 foreach (var report in reports)
                 {
                     Reports.Add(report);
-                    System.Diagnostics.Debug.WriteLine($"Loaded Report: {report.Name}, Description: {report.Description}, Transport: {report.Transport}, Report: {report.Report}");
+                    Debug.WriteLine($"Loaded Report: {report.Name}, Description: {report.Description}, Transport: {report.Transport}, Report: {report.Report}");
                 }
 
                 // Initialize the FilteredReports with all reports initially
@@ -171,11 +179,11 @@ namespace RevoluteConfigApp.Pages.ConfigPages
                     FilteredReports.Add(report);
                 }
 
-                System.Diagnostics.Debug.WriteLine($"Total reports loaded: {Reports.Count}");
+                Debug.WriteLine($"Total reports loaded: {Reports.Count}");
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Failed to load reports: {ex}");
+                Debug.WriteLine($"Failed to load reports: {ex}");
             }
         }
 
@@ -457,6 +465,13 @@ namespace RevoluteConfigApp.Pages.ConfigPages
             return bounds.Contains(pointerPosition);
         }
 
+
+        /// <summary>
+        /// ///////////////////////////////////////////////////below is hte code for the customize action button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
         private async void CustomizeActionButton_Click(object sender, RoutedEventArgs e)
         {
             // Show the ContentDialog
@@ -710,6 +725,169 @@ namespace RevoluteConfigApp.Pages.ConfigPages
                 case "KeyboardSearchBox6":
                     KeyboardListView6.ItemsSource = filteredMappings;
                     break;
+            }
+        }
+
+        private string GetSelectedTransportType()
+        {
+            switch (TransportPivot.SelectedIndex)
+            {
+                case 0: return "5"; // Keyboard
+                case 1: return "9"; // Consumer
+                case 2: return "13"; // Mouse
+                default: return "5"; // Default to Keyboard
+            }
+        }
+
+        private List<byte> GetConfiguredReport()
+        {
+            string transportType = GetSelectedTransportType();
+            List<byte> report = new List<byte> { 0, 0, 0, 0, 0, 0, 0, 0 };
+
+            switch (transportType)
+            {
+                case "5": // Keyboard
+                          // Capture modifier keys (e.g., Left Ctrl, Left Shift, etc.)
+                    report[0] = (byte)_report[0]; // Modifier byte
+                                                  // Capture selected keys from the ListView (e.g., KeyboardListView1, KeyboardListView2, etc.)
+                    for (int i = 1; i < 8; i++)
+                    {
+                        report[i] = (byte)_report[i];
+                    }
+                    break;
+
+                case "9": // Consumer
+                          // Capture selected consumer functionalities (e.g., ConsumerListView1, ConsumerListView2, etc.)
+                    for (int i = 0; i < 8; i++)
+                    {
+                        report[i] = (byte)_report[i];
+                    }
+                    break;
+
+                case "13": // Mouse
+                           // Capture mouse buttons and axes (e.g., Mouse 1, Mouse X, etc.)
+                    report[1] = (byte)_report[1]; // Mouse buttons byte
+                    report[2] = (byte)_report[2]; // Mouse axes byte
+                    break;
+            }
+
+            return report;
+        }
+
+        private async void OnSaveReportClicked(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        {
+            try
+            {
+                // Get the name and description from the TextBoxes
+                string name = ActionNameTextBox.Text;
+                string description = ActionDescriptionTextBox.Text;
+
+                // Debug: Verify inputs
+                Debug.WriteLine($"Name: {name}, Description: {description}");
+
+                // Validate inputs
+                if (string.IsNullOrWhiteSpace(name))
+                {
+                    Debug.WriteLine("Error: Name cannot be empty.");
+                    return;
+                }
+
+                // Get the selected transport type
+                string transportType = GetSelectedTransportType();
+                Debug.WriteLine($"Selected Transport: {transportType}");
+
+                // Get the configured report data
+                List<byte> report = GetConfiguredReport();
+                Debug.WriteLine($"Configured Report: {string.Join(", ", report)}");
+
+                // Create a new report object
+                var newReport = new ReportModel
+                {
+                    Name = name,
+                    Description = description,
+                    Report = report,
+                    Transport = transportType
+                };
+
+                // Debug: Verify new report
+                Debug.WriteLine($"New Report: {JsonSerializer.Serialize(newReport)}");
+
+                // Define the local storage path
+                string localAppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                string localReportFilePath = Path.Combine(localAppDataPath, "RevoluteConfigApp", "report.json");
+
+                // Load existing reports from local storage
+                List<ReportModel> reports = new List<ReportModel>();
+
+                if (File.Exists(localReportFilePath))
+                {
+                    string jsonText = await File.ReadAllTextAsync(localReportFilePath);
+                    Debug.WriteLine($"Existing JSON: {jsonText}");
+
+                    reports = JsonSerializer.Deserialize<List<ReportModel>>(jsonText) ?? new List<ReportModel>();
+                }
+                else
+                {
+                    Debug.WriteLine("report.json not found in local storage.");
+                }
+
+                // Insert the new report at the top of the list
+                reports.Insert(0, newReport);
+
+                // Save the updated list back to local storage
+                string updatedJson = JsonSerializer.Serialize(reports, new JsonSerializerOptions { WriteIndented = true });
+                Debug.WriteLine($"Updated JSON: {updatedJson}");
+
+                await File.WriteAllTextAsync(localReportFilePath, updatedJson);
+                Debug.WriteLine($"File written successfully to: {localReportFilePath}");
+
+                Debug.WriteLine("New report saved successfully.");
+
+                // Refresh the ListView
+                await LoadReportsAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error saving report: {ex.Message}");
+            }
+        }
+
+        private async Task CopyReportJsonToLocalStorageAsync()
+        {
+            try
+            {
+                // Define the local storage path
+                string localAppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                string localReportFilePath = Path.Combine(localAppDataPath, "RevoluteConfigApp", "report.json");
+
+                // Create the directory if it doesn't exist
+                Directory.CreateDirectory(Path.GetDirectoryName(localReportFilePath));
+
+                // Check if the file already exists in local storage
+                if (!File.Exists(localReportFilePath))
+                {
+                    // Define the source path (from Assets folder)
+                    string sourceFilePath = Path.Combine(AppContext.BaseDirectory, "Assets", "report.json");
+
+                    // Copy the file to local storage
+                    if (File.Exists(sourceFilePath))
+                    {
+                        await Task.Run(() => File.Copy(sourceFilePath, localReportFilePath));
+                        Debug.WriteLine($"Copied report.json to local storage: {localReportFilePath}");
+                    }
+                    else
+                    {
+                        Debug.WriteLine("Source report.json not found in Assets folder.");
+                    }
+                }
+                else
+                {
+                    Debug.WriteLine("report.json already exists in local storage.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error copying report.json to local storage: {ex.Message}");
             }
         }
 

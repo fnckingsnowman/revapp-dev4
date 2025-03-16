@@ -188,15 +188,17 @@
         <ContentDialog x:Name="CustomizeActionDialog"
                Title="Customize Action"
                PrimaryButtonText="Save"
-               SecondaryButtonText="Cancel">
+               SecondaryButtonText="Cancel"
+               PrimaryButtonClick="OnSaveReportClicked">
             <!-- Use ScrollViewer to handle overflow and enable scrolling -->
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                 <StackPanel>
                     <!-- TextBox for action name -->
-                    <TextBox PlaceholderText="Name of action" Margin="0,0,0,10"/>
-
+                    <TextBox x:Name="ActionNameTextBox" PlaceholderText="Name of action" Margin="0,0,0,10"/>
+                    <!-- TextBox for action description -->
+                    <TextBox x:Name="ActionDescriptionTextBox" PlaceholderText="Description of action" Margin="0,0,0,10"/>
                     <!-- Pivot for Keyboard, Consumer, and Mouse sections -->
-                    <Pivot>
+                    <Pivot x:Name="TransportPivot">
                         <!-- Keyboard PivotItem -->
                         <PivotItem Header="Keyboard">
                             <StackPanel>
@@ -477,7 +479,6 @@
                                     <CheckBox Content="Mouse 3" Margin="5"/>
                                     <CheckBox Content="Mouse 4" Margin="5"/>
                                     <CheckBox Content="Mouse 5" Margin="5"/>
-                                    <CheckBox Content="Mouse 6" Margin="5"/>
                                 </StackPanel>
 
                                 <!-- Section 3: Mouse Axis Select (CheckBoxes) -->

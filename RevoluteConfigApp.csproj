@@ -60,12 +60,10 @@
     <Content Update="Assets\keyboard.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="Assets\Rev\rev1.png">
+    <Content Update="Assets\report.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Update="Assets\report.json">
+    <Content Update="Assets\Rev\rev1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
