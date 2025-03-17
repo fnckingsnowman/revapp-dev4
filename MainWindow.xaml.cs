@@ -106,15 +106,12 @@ namespace RevoluteConfigApp
             System.Diagnostics.Debug.WriteLine("[MainWindow] Successfully saved configurations.");
         }
 
-
-
-
         private void NvSample_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
-            if (args.IsSettingsInvoked) 
+            if (args.IsSettingsInvoked)
             {
                 contentFrame.Navigate(typeof(Pages.SettingsPage));
-                return; 
+                return;
             }
 
             if (args.InvokedItemContainer is NavigationViewItem selectedItem && selectedItem.Tag != null)
@@ -186,7 +183,6 @@ namespace RevoluteConfigApp
                 }
             }
         }
-
 
         private void AddConfigItem_Tapped(object sender, TappedRoutedEventArgs e)
         {
@@ -341,15 +337,20 @@ namespace RevoluteConfigApp
         private void DeviceDisplayScan_Click(object sender, RoutedEventArgs e)
         {
             // Start scanning when the button is clicked and the Flyout is shown
-            BLEFunctionalities.Instance.StartBLEScan();
+            _bleFunctionalities.StartBLEScan();
             StatusTextBlock.Text = "Scanning for devices..."; // Update UI with scanning message
+            _isScanning = true;
         }
 
         private void Flyout_Closed(object sender, object e)
         {
             // Stop scanning when the Flyout is closed
-            BLEFunctionalities.Instance.StopBLEScan();
-            StatusTextBlock.Text = "Scan stopped."; // Update UI with scan stopped message
+            if (_isScanning)
+            {
+                _bleFunctionalities.StopBLEScan();
+                StatusTextBlock.Text = "Scan stopped."; // Update UI with scan stopped message
+                _isScanning = false;
+            }
         }
 
         private async void ConnectButton_Click(object sender, RoutedEventArgs e)
@@ -405,7 +406,6 @@ namespace RevoluteConfigApp
                 StatusTextBlock.Text = message;
             });
         }
-
     }
 
     public class ConfigPageParameters
