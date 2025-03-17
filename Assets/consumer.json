@@ -1,0 +1,606 @@
+[
+  {
+    "name": "None",
+    "value": 0
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_CONSUMER_CONTROL",
+    "value": 1
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_NUMERIC_KEY_PAD",
+    "value": 2
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_PROGRAMMABLE_BUTTONS",
+    "value": 3
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_MICROPHONE",
+    "value": 4
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_HEADPHONE",
+    "value": 5
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_GRAPHIC_EQUALIZER",
+    "value": 6
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_INCREMENT10",
+    "value": 32
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_INCREMENT100",
+    "value": 33
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_AM_PM",
+    "value": 34
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_POWER",
+    "value": 48
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_RESET",
+    "value": 49
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_SLEEP",
+    "value": 50
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_SLEEP_AFTER",
+    "value": 51
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_SLEEP_MODE",
+    "value": 52
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_ILLUMINATION",
+    "value": 53
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_FUNCTION_BUTTONS",
+    "value": 54
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_MENU",
+    "value": 64
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_MENU_PICK",
+    "value": 65
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_MENU_UP",
+    "value": 66
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_MENU_DOWN",
+    "value": 67
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_MENU_LEFT",
+    "value": 68
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_MENU_RIGHT",
+    "value": 69
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_MENU_ESCAPE",
+    "value": 70
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_MENU_VALUE_INCREASE",
+    "value": 71
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_MENU_VALUE_DECREASE",
+    "value": 72
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_DATA_ON_SCREEN",
+    "value": 96
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_CLOSED_CAPTION",
+    "value": 97
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_CLOSED_CAPTION_SELECT",
+    "value": 98
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_VCR_TV",
+    "value": 99
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_BROADCAST_MODE",
+    "value": 100
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_SNAPSHOT",
+    "value": 101
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_STILL",
+    "value": 102
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_PICTURE_IN_PICTURE_TOGGLE",
+    "value": 103
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_PICTURE_IN_PICTURE_SWAP",
+    "value": 104
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_RED_MENU_BUTTON",
+    "value": 105
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_GREEN_MENU_BUTTON",
+    "value": 106
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_BLUE_MENU_BUTTON",
+    "value": 107
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_YELLOW_MENU_BUTTON",
+    "value": 108
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_ASPECT",
+    "value": 109
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_3D_MODE_SELECT",
+    "value": 110
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_DISPLAY_BRIGHTNESS_INCREMENT",
+    "value": 111
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_DISPLAY_BRIGHTNESS_DECREMENT",
+    "value": 112
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_DISPLAY_BRIGHTNESS",
+    "value": 113
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_DISPLAY_BACKLIGHT_TOGGLE",
+    "value": 114
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_DISPLAY_SET_BRIGHTNESS_TO_MINIMUM",
+    "value": 115
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_DISPLAY_SET_BRIGHTNESS_TO_MAXIMUM",
+    "value": 116
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_DISPLAY_SET_AUTO_BRIGHTNESS",
+    "value": 117
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_CAMERA_ACCESS_ENABLED",
+    "value": 118
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_CAMERA_ACCESS_DISABLED",
+    "value": 119
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_CAMERA_ACCESS_TOGGLE",
+    "value": 120
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_KEYBOARD_BRIGHTNESS_INCREMENT",
+    "value": 121
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_KEYBOARD_BRIGHTNESS_DECREMENT",
+    "value": 122
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_KEYBOARD_BACKLIGHT_SET_LEVEL",
+    "value": 123
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_KEYBOARD_BACKLIGHT_OOC",
+    "value": 124
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_KEYBOARD_BACKLIGHT_SET_MINIMUM",
+    "value": 125
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_KEYBOARD_BACKLIGHT_SET_MAXIMUM",
+    "value": 126
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_KEYBOARD_BACKLIGHT_AUTO",
+    "value": 127
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_SELECTION",
+    "value": 128
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_ASSIGN_SELECTION",
+    "value": 129
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_MODE_STEP",
+    "value": 130
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_RECALL_LAST",
+    "value": 131
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_ENTER_CHANNEL",
+    "value": 132
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_ORDER_MOVIE",
+    "value": 133
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_CHANNEL",
+    "value": 134
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_MEDIA_SELECTION",
+    "value": 135
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_MEDIA_SELECT_COMPUTER",
+    "value": 136
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_MEDIA_SELECT_TV",
+    "value": 137
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_MEDIA_SELECT_WWW",
+    "value": 138
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_MEDIA_SELECT_DVD",
+    "value": 139
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_MEDIA_SELECT_TELEPHONE",
+    "value": 140
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_MEDIA_SELECT_PROGRAM_GUIDE",
+    "value": 141
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_MEDIA_SELECT_VIDEO_PHONE",
+    "value": 142
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_MEDIA_SELECT_GAMES",
+    "value": 143
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_MEDIA_SELECT_MESSAGES",
+    "value": 144
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_MEDIA_SELECT_CD",
+    "value": 145
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_MEDIA_SELECT_VCR",
+    "value": 146
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_MEDIA_SELECT_TUNER",
+    "value": 147
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_QUIT",
+    "value": 148
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_HELP",
+    "value": 149
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_MEDIA_SELECT_TAPE",
+    "value": 150
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_MEDIA_SELECT_CABLE",
+    "value": 151
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_MEDIA_SELECT_SATELLITE",
+    "value": 152
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_MEDIA_SELECT_SECURITY",
+    "value": 153
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_MEDIA_SELECT_HOME",
+    "value": 154
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_MEDIA_SELECT_CALL",
+    "value": 155
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_CHANNEL_INCREMENT",
+    "value": 156
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_CHANNEL_DECREMENT",
+    "value": 157
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_MEDIA_SELECT_SAP",
+    "value": 158
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_VCR_PLUS",
+    "value": 160
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_ONCE",
+    "value": 161
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_DAILY",
+    "value": 162
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_WEEKLY",
+    "value": 163
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_MONTHLY",
+    "value": 164
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_PLAY",
+    "value": 176
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_PAUSE",
+    "value": 177
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_RECORD",
+    "value": 178
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_FAST_FORWARD",
+    "value": 179
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_REWIND",
+    "value": 180
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_SCAN_NEXT_TRACK",
+    "value": 181
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_SCAN_PREVIOUS_TRACK",
+    "value": 182
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_STOP",
+    "value": 183
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_EJECT",
+    "value": 184
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_RANDOM_PLAY",
+    "value": 185
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_SELECT_DISC",
+    "value": 186
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_ENTER_DISC",
+    "value": 187
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_REPEAT",
+    "value": 188
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_TRACKING",
+    "value": 189
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_TRACK_NORMAL",
+    "value": 190
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_SLOW_TRACKING",
+    "value": 191
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_FRAME_FORWARD",
+    "value": 192
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_FRAME_BACK",
+    "value": 193
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_MARK",
+    "value": 194
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_CLEAR_MARK",
+    "value": 195
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_REPEAT_FROM_MARK",
+    "value": 196
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_RETURN_TO_MARK",
+    "value": 197
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_SEARCH_MARK_FORWARD",
+    "value": 198
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_SEARCH_MARK_BACKWARDS",
+    "value": 199
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_COUNTER_RESET",
+    "value": 200
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_SHOW_COUNTER",
+    "value": 201
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_TRACKING_INCREMENT",
+    "value": 202
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_TRACKING_DECREMENT",
+    "value": 203
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_STOP_EJECT",
+    "value": 204
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_PLAY_PAUSE",
+    "value": 205
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_PLAY_SKIP",
+    "value": 206
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_VOICE_COMMAND",
+    "value": 207
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_INVOKE_CAPTURE_INTERFACE",
+    "value": 208
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_START_OR_STOP_GAME_RECORDING",
+    "value": 209
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_HISTORICAL_GAME_CAPTURE",
+    "value": 210
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_CAPTURE_GAME_SCREENSHOT",
+    "value": 211
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_SHOW_OR_HIDE_RECORDING_INDICATOR",
+    "value": 212
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_START_OR_STOP_MICROPHONE_CAPTURE",
+    "value": 213
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_START_OR_STOP_CAMERA_CAPTURE",
+    "value": 214
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_START_OR_STOP_GAME_BROADCAST",
+    "value": 215
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_VOLUME",
+    "value": 224
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_BALANCE",
+    "value": 225
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_MUTE",
+    "value": 226
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_BASS",
+    "value": 227
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_TREBLE",
+    "value": 228
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_BASS_BOOST",
+    "value": 229
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_SURROUND_MODE",
+    "value": 230
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_LOUDNESS",
+    "value": 231
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_MPX",
+    "value": 232
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_VOLUME_INCREMENT",
+    "value": 233
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_VOLUME_DECREMENT",
+    "value": 234
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_SPEED_SELECT",
+    "value": 240
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_PLAYBACK_SPEED",
+    "value": 241
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_STANDARD_PLAY",
+    "value": 242
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_LONG_PLAY",
+    "value": 243
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_EXTENDED_PLAY",
+    "value": 244
+  },
+  {
+    "name": "HID_USAGE_CONSUMER_SLOW",
+    "value": 245
+  }
+]
